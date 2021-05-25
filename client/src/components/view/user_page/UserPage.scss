@@ -1,0 +1,130 @@
+$container-color : #f3f3f3;
+$container-width : 392px;
+$margin-left : 30px;
+$input-width : 300px;
+$password-input-padding : 14px 10px 10px 10px;
+$email-nickname-input-padding : 14px 35px 10px 10px;
+$font-size: 15px;
+
+.user-info-form{
+    //position: relative;
+    position: absolute;
+    margin: 55px 25px 0px 612px;
+    @media screen and (max-width: 1200px) {
+        margin-top: 55px;
+        margin-left: 10px;
+    }
+    @media screen and (max-width: 768px) {
+        margin-top: 49px;
+    }
+}
+.user-image-container{
+    position: relative;
+    background-color: $container-color;
+    width: $container-width;
+    height: 128px;
+    border-radius: 7px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    .user-img-des{
+        margin-left: $margin-left;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px 0px 0px 10px;
+    }
+    img{
+        background-color: #C3C3C3;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 20px 0px 0px $margin-left;
+    }
+    label{
+        position: absolute;
+        font-size: 12px;
+        margin: 25px 0px 0px 20px;
+        background-color: #101010;
+        color: #c5c5c5;
+        padding: 5px;
+        border-radius: 3px;
+        border: solid 1px #000000;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover{
+            background-color: #2e2e2e;
+            color: #ffffff;
+        }
+        &:active{
+            background-color: #101010;
+            color: #c5c5c5;
+        }
+    }
+    span{
+        position: absolute;
+        margin: 60px 0px 0px 20px;
+        font-size: 12px;
+    }
+}
+
+.user-info-container{
+    position: relative;
+    background-color: $container-color;
+    width: $container-width;
+    height: 612px;
+    margin-top: 32px;
+    border-radius: 7px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    .user-data-des{
+        margin-left: $margin-left;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px 0px 0px 10px;
+    }
+    .email-container{
+        margin: 15px 0px 10px $margin-left;
+        input{
+            font-size: $font-size;
+            margin-top: 5px;
+        }
+        .user-register{
+            padding: $email-nickname-input-padding;
+        }
+        .user-patch{
+            width: $input-width;
+            padding: $password-input-padding;
+        }
+    }
+    .nickname-container{
+        margin: 10px 0px 10px $margin-left;
+        input{
+            font-size: $font-size;
+            margin-top: 5px;
+            padding: $email-nickname-input-padding;
+        }
+    }
+    .duplicate-confirm{
+        font-size: $font-size;
+        padding: 12px 7px 9px 7px;
+        margin-left: 5px;
+    }
+    .password-container{
+        margin: 10px 0px 10px $margin-left;
+        input{
+            font-size: $font-size;
+            margin-top: 5px;
+            padding: $password-input-padding;
+            width: $input-width;
+        }
+    }
+    .btn-container{
+        margin-left: $margin-left;
+        button{
+            font-size: $font-size;
+            margin-top: 10px;
+            padding: 10px 10px;
+            width: 325px;
+        }
+    }
+    .warn-message{
+        font-size: 12.5px;
+    }
+}

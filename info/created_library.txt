@@ -1,0 +1,61 @@
+####################### Front-End #######################
+ ---- React ----
+//React프로젝트 생성(javascript)
+npx create-react-app client
+//React프로젝트 생성(typescript)
+npx --ignore-existing create-react-app test-client --template typescript // ---→ typescript 버전 react 설치인데 현재 정보가 없으므로 javascript로 개발할것.
+npm install @types/react @types/react-dom --save
+
+//router-dom 설치
+npm install react-router-dom @types/react-router-dom --save
+
+//server와 http 통신을 위한 axios 라이브러리
+npm install axios @types/axios --save
+//npm install http-proxy-middleware @types/http-proxy-middleware --save
+
+//CSS in JS
+npm install styled-components @types/styled-components
+
+//redux
+npm install redux react-redux redux-thunk @types/redux-thunk
+//redux ation을 더 깨끗하게 만들어주는 라이브러리
+npm install typesafe-actions
+
+//scss
+npm install node-sass   //react with scss
+npm install classnames  //className 동적할당 library
+
+//lodash, 함수 호출 시간 조정
+npm install loadash @types/loadash --save
+
+//formik, yup
+npm install formik yup --save
+
+//usehooks 참조
+https://usehooks-typescript.com/
+
+//부트스트랩 html, css
+https://getbootstrap.com/
+
+####################### Back-End #######################
+ ---- Nestjs ----
+//Nestjs 프로젝트 생성
+nest new server
+//mysql 연동시 필요한 라이브러리
+npm install mysql
+
+//jwt 생성시 필요한 라이브러리
+npm install --save @nestjs/passport passport passport-local
+npm install --save-dev @types/passport-local
+npm install @nestjs/jwt --save
+
+//cookie 인증
+npm install cookie-parser
+npm install -D @types/cookie-parser
+
+//파일 업로드
+npm install multer --save
+npm install @types/multer --save
+
+//eslint
+npm install --save-dev eslint-plugin-nestjs

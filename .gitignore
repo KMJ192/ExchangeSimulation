@@ -1,0 +1,10 @@
+.vscode/
+
+# test-server
+test-server/node_modules
+test-server/dist
+
+# test-client
+test-client/node_modules
+
+info/jira.txt

@@ -1,0 +1,257 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "Untitled",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAFF+qBtyKM79qY=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Main",
+					"defaultDiagram": true,
+					"ownedViews": [
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAF3ipORT0LHlvA=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;24;0",
+							"left": 528,
+							"top": 24,
+							"width": 281,
+							"height": 36,
+							"text": "NestJS Data Flow Chart"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3ipXT2ULQTTg=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 64,
+							"width": 233,
+							"height": 41,
+							"text": "NestJS Global install\nnpm i -g @nestjs/cli"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3ipavK0Ldumg=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 136,
+							"width": 233,
+							"height": 40,
+							"text": "Create new NestJS project\nnest new 프로젝트이름"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3ipku/ELr7B4=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 208,
+							"width": 233,
+							"height": 72,
+							"text": "NestJS entry point\nmain.ts\nmain.ts의 bootstrap function을 실행시키며 실행됨.\n\n"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3iq5QakMB/GY=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 384,
+							"width": 233,
+							"height": 102,
+							"text": "app.module.ts\n@Module 데코레이터 설정\n모든 module의 root module\n자식모듈 Import\ncontroller : app.controller.ts\nprovider : app.servise.ts\n"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3iq9CWUMOcn4=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 560,
+							"top": 296,
+							"width": 233,
+							"height": 73,
+							"text": "main.ts\nbootstrap function\napp.module 실행\n실행되는 port 설정"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irQQTUM/pzk=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 224,
+							"top": 592,
+							"width": 113.68505859375,
+							"height": 40,
+							"text": "자식1.module.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irR7VkNG5TY=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 528,
+							"top": 592,
+							"width": 113.68505859375,
+							"height": 40,
+							"text": "자식2.module.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irSWCkNN8N0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 960,
+							"top": 592,
+							"width": 161,
+							"height": 40,
+							"text": "자식n번째.module.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irg8iENvrq4=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 152,
+							"top": 640,
+							"width": 125.22509765625,
+							"height": 40,
+							"text": "자식1.controller.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irioU0N3PKs=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 280,
+							"top": 640,
+							"width": 123.314453125,
+							"height": 40,
+							"text": "자식1.service.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irktiUODe2Q=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 465,
+							"top": 640,
+							"width": 125.22509765625,
+							"height": 40,
+							"text": "자식2.controller.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irktiUOEqBk=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 592,
+							"top": 640,
+							"width": 123.314453125,
+							"height": 40,
+							"text": "자식2.service.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irm1BUOWSq0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 926,
+							"top": 643,
+							"width": 125.58056640625,
+							"height": 40,
+							"text": "자식n.controller.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irm1BUOX6vM=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 1053,
+							"top": 643,
+							"width": 123.314453125,
+							"height": 40,
+							"text": "자식n.service.ts"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irtIcUOtskU=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 808,
+							"top": 392,
+							"width": 249,
+							"height": 41,
+							"text": "app.contoller.ts\nURL을 가져오고 함수를 실행시킴"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF3irtx3UO3TWI=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 808,
+							"top": 440,
+							"width": 265,
+							"height": 41,
+							"text": "app.service.ts\n실질적인 Business logic을 작성하는 곳"
+						}
+					]
+				},
+				{
+					"_type": "UMLPackage",
+					"_id": "AAAAAAF3ipNHDEKcCeY=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "NestJs"
+				}
+			]
+		}
+	]
+}
