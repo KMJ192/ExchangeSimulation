@@ -1502,12 +1502,12 @@
         "affectsGlobalScope": false
       },
       "../src/switch/switch.ts": {
-        "version": "07b50be64a0620cb7f97ff379406b9376daf811f436e920204c7eccbb1204f54",
+        "version": "b12fc8d560fbf1d15535786c99a9345305614a1bbd02e25c8d6f4066fcda340a",
         "signature": "8733b2ee6f7c3e4bdb94066e34a2cd819d8f9cf5d4c3117043fa81eb138b1c76",
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "28ca1f0353ac06c778e7294c1b732abb7da32c3b3267593090657b0348fac583",
+        "version": "2f28e4ae03ca7b24ae5a81d7b2c314898b983dbed8c95c95e64ff748e0a0fa3b",
         "signature": "a77946970136b822449de97907ebac11ea98d663cc43569e9b6e63534d95756b",
         "affectsGlobalScope": false
       },

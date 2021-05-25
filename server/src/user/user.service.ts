@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
-import { NowTime } from 'src/function/NowTime';
+import { NowTime } from '../function/NowTime';
 import { switching } from '../switch/switch';
 
 const bcrypt = require("bcrypt");

@@ -1,10 +1,10 @@
 .vscode/
 
-# test-server
-test-server/node_modules
-test-server/dist
+# server
+server/node_modules
+server/dist
 
-# test-client
-test-client/node_modules
+# client
+client/node_modules
 
 info/jira.txt
