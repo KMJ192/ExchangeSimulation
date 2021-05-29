@@ -1,13 +1,13 @@
 .vscode/
 
 # server
-server/node_modules
+node_modules
 
-server/dist
+dist
 
-server/database/mongoDB/duizinda.ts
+duizinda.ts
 
 # client
-client/node_modules
+# client/node_modules
 
 info/jira.txt
