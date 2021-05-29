@@ -11,12 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
-const express_1 = require("express");
 const user_guard_1 = require("./user.guard");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
@@ -72,14 +70,14 @@ __decorate([
     __param(1, common_1.Body('password')),
     __param(2, common_1.Res({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, typeof (_a = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _a : Object]),
+    __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "login", null);
 __decorate([
     common_1.Get("/uimg/:path"),
     __param(0, common_1.Param("path")), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, typeof (_b = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "getUserImage", null);
 __decorate([
@@ -87,14 +85,14 @@ __decorate([
     common_1.Post("/logout"),
     __param(0, common_1.Res({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_c = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "logout", null);
 __decorate([
     common_1.Get("/user"),
     __param(0, common_1.Req()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_d = typeof express_1.Request !== "undefined" && express_1.Request) === "function" ? _d : Object]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "confirmUser", null);
 __decorate([
@@ -110,7 +108,7 @@ __decorate([
     })),
     __param(0, common_1.UploadedFile()), __param(1, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_f = typeof Express !== "undefined" && (_e = Express.Multer) !== void 0 && _e.File) === "function" ? _f : Object, Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "createUser", null);
 __decorate([
@@ -118,7 +116,7 @@ __decorate([
     common_1.Delete("/delete_user/:data"),
     __param(0, common_1.Param()), __param(1, common_1.Res({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, typeof (_g = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _g : Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "deleteUser", null);
 __decorate([
@@ -135,7 +133,7 @@ __decorate([
     })),
     __param(0, common_1.UploadedFile()), __param(1, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_j = typeof Express !== "undefined" && (_h = Express.Multer) !== void 0 && _h.File) === "function" ? _j : Object, Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "patchUser", null);
 __decorate([

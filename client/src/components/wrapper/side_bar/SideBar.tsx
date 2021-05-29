@@ -20,7 +20,7 @@ function SideBar({ toggle } : Props) {
                             </Span>
                         </A>
                     </li>
-                )
+                );
             })}
         </div>
     )

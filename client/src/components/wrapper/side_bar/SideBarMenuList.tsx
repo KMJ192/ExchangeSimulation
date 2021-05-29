@@ -1,3 +1,5 @@
+import { coin_exchange, coin_page } from "../../../path/PagePath";
+
 export const SideBarMenuList = [
     {
         title: "Home",
@@ -6,15 +8,15 @@ export const SideBarMenuList = [
         className: "side"
     },
     {
-        title: "Bitcoin",
+        title: "Coin",
         icon: <i className="fab fa-bitcoin side-icon"></i>,
-        path: "#",
+        path: coin_page,
         className: "side"
     },    
     {
-        title: "Stock",
+        title: "Chart",
         icon: <i className="fas fa-chart-line side-icon"></i>,
-        path: "#",
+        path: coin_exchange,
         className: "side"
     }
 ]

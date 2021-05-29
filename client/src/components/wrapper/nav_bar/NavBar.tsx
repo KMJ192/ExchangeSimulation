@@ -5,6 +5,7 @@ import BeforeLogin from './user_option/BeforeLogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState} from '../../../redux-module/RootReducer';
 import { getUserThunk } from '../../../redux-module/user';
+import { coin_exchange } from '../../../path/PagePath';
 import './NavBar.scss';
 
 function NavBar() {
@@ -37,11 +38,14 @@ function NavBar() {
             <Ul toggle={toggle} {...toggle} className="nav-menu">
                 <li>
                     <a href="/">
-                        <i className="fas fa-home"></i>&nbsp;home
+                        <i className="fas fa-home"/>&nbsp;home
                     </a>
                 </li>
-                <li><a href="/">menu1</a></li>
-                <li><a href="/">menu2</a></li>
+                <li>
+                    <a href={coin_exchange}>
+                        <i className="fas fa-coins"/>&nbsp;거래소
+                    </a>
+                </li>
             </Ul>
             <Ul toggle={toggle} {...toggle} className="search-container">
                 <li><input placeholder="검색" type="text"></input></li>

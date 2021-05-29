@@ -21,6 +21,9 @@ npm install redux react-redux redux-thunk @types/redux-thunk
 //redux ation을 더 깨끗하게 만들어주는 라이브러리
 npm install typesafe-actions
 
+//apexcharts 라이브러리
+npm install --save react-apexcharts apexcharts
+
 //scss
 npm install node-sass   //react with scss
 npm install classnames  //className 동적할당 library
@@ -43,6 +46,12 @@ https://getbootstrap.com/
 nest new server
 //mysql 연동시 필요한 라이브러리
 npm install mysql
+
+//mongodb
+npm install --save @nestjs/mongoose mongoose
+
+//typeorm
+npm install --save @nestjs/typeorm typeorm
 
 //jwt 생성시 필요한 라이브러리
 npm install --save @nestjs/passport passport passport-local

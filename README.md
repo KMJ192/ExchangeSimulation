@@ -1,4 +1,4 @@
-# 토이프로젝트 - 가상 자산 거래소 토이 프로잭트
+# 토이프로젝트 - 가상화폐 거래소 토이 프로잭트
 
 bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 
@@ -10,10 +10,13 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
   - Redux
   - scss
   - styled-components
+  - apexcharts
 
 ### Server
 
 - dev stack
   - typescript
-  - nestjs
+  - nest.js
   - mysql
+  - mongoDB
+  - typeorm
