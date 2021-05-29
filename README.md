@@ -20,3 +20,8 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
   - mysql
   - mongoDB
   - typeorm
+
+### 할일
+
+- mongoDB 연결
+- db 설계
