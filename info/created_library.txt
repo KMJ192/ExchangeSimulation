@@ -24,6 +24,9 @@ npm install typesafe-actions
 //apexcharts 라이브러리
 npm install --save react-apexcharts apexcharts
 
+//lightweight-charts 라이브러리
+npm install lightweight-charts
+
 //scss
 npm install node-sass   //react with scss
 npm install classnames  //className 동적할당 library

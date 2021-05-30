@@ -3,7 +3,6 @@
 bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 
 ### Client
-
 - dev stack
   - typescript
   - React
@@ -13,15 +12,21 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
   - apexcharts
 
 ### Server
-
 - dev stack
   - typescript
   - nest.js
   - mysql
-  - mongoDB
-  - typeorm
 
 ### 할일
+front-end
+ - light-weight chart 사용?
+<!-- - front-end
+  - 빗썸api -> Get Data
+  - candlestick chart 구현(Data 배열 최대길이 200)
+  - 1분단위 chart 배열 갱신 및 coin_data save request
+  - coin별 최초 데이터 저장 유무 local storage에 저장
+    + (```true``` : 저장완료, ```false``` : 미저장, request to server)
 
-- mongoDB 연결
-- db 설계
+- back-end
+  - data 전역저장
+  - coin table, coin_data table join -->

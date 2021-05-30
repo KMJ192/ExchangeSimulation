@@ -10,7 +10,7 @@ import DefaultPage from './view/default_page/DefaultPage';
 import LoginPage from './view/login/LoginPage';
 import UserPatchPage from './view/user_page/user_patch/UserPatchPage';
 import UserRegisterPage from './view/user_page/user_register/UserRegisterPage';
-import CoinPage from './view/coin_page/CoinPage';
+import CoinPage from './view/coin_page/coin_table/CoinTable';
 import CoinExchange from './view/coin_page/exchange_page/CoinExchange';
 
 import { coin_exchange, coin_page, login_page, user_patch_page, user_register_page } from '../path/PagePath';

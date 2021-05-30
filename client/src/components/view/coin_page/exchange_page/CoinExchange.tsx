@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
+import CoinChart from './CoinChart';
 import Wrapper from '../../../wrapper/Wrapper'
 
 function CoinExchange() {
     return (
         <Wrapper>
-            거래소
+            <CoinChart/>
         </Wrapper>
     )
 }
 
-export default CoinExchange
+export default React.memo(CoinExchange);

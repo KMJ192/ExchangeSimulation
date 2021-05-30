@@ -20,10 +20,7 @@ export class Coin{
 
     @Prop()
     time: string;
-
-    @Prop()
-    unit : string;
-
+    
     @Prop()
     open_price: string;
 

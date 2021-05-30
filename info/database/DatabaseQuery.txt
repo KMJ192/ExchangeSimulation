@@ -24,7 +24,25 @@ Select * from test.user;
 insert into test.user
 values("명준", "myeongjun@google.com", "1234", "", "", 10, "0", now(), "나", now(), "나")
 
-//이미지를 저장하는 테이블
-CREATE TABLE `test`.`default_image` (
-  `main_logo` BLOB NULL
+
+
+------------------------------------------------------------------------------------------------------
+//코인 테이블, 코인 데이터 테이블 생성
+//join
+CREATE TABLE `exchange1`.`coin` (
+  `coinName` VARCHAR(20) NOT NULL,
+  `date` VARCHAR(10) NOT NULL,
+  `open_price` VARCHAR(50) NOT NULL,
+  `close_price` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`coinName`)
 );
+CREATE TABLE `exchange1`.`coin_data` (
+  `coin_name` VARCHAR(20) NOT NULL,
+  `time` VARCHAR(45) NULL,
+  `high_price` VARCHAR(45) NULL,
+  `low_price` VARCHAR(45) NULL,
+  `open_price` VARCHAR(45) NULL,
+  `close_price` VARCHAR(45) NULL,
+  PRIMARY KEY (`coin_name`)
+);
+------------------------------------------------------------------------------------------------------
