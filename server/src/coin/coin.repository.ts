@@ -18,7 +18,6 @@ export class CoinRepository{
 
     async create(coin: Coin): Promise<Coin>{
         const newCoin = new this.coinModel(coin);
-        console.log(coin);
         return newCoin.save();
     }
 }
