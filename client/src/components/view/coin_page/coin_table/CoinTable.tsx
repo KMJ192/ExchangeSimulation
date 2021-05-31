@@ -40,7 +40,7 @@ function CoinTable() {
 
     useEffect(() => {
         debounce(async () => {
-            const response = await axios.get(reqURL_krw, {
+            const response : ApiType = await axios.get(reqURL_krw, {
                 headers: {
                     'Content-Type' : 'application/json'
                 }
