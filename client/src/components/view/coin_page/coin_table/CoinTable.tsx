@@ -41,13 +41,13 @@ function CoinTable() {
     useEffect(() => {
         debounce(async () => {
             const response : ApiType = await axios.get(reqURL_krw, {
-                headers: {
-                    'Content-Type' : 'application/json'
-                }
+                withCredentials: false
             })
-            .then(response => response.data.data.BTC)
-            .catch(err => err);
+                .then(response => response.data.data.BTC)
+                .catch(err => err);
+
             console.log(response);
+
             setAllData({
                 acc_trade_value: response.acc_trade_value,
                 acc_trade_value_24H: response.acc_trade_value_24H,
@@ -62,7 +62,7 @@ function CoinTable() {
                 units_traded_24H: response.units_traded_24H
             });
         }, 1000)();
-    }, []);
+    }, [/* allData */]);
 
     return (
         <Wrapper>
