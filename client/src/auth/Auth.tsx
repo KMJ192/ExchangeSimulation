@@ -3,26 +3,27 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { paceCaseUserPatch, pageCaseLogined } from './PageCase';
 
+interface ResponseData{
+    useremail : string;
+    message : string;
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function(
-        Component : React.ComponentType, 
-        option : boolean,
-        pageCase : string | null = null
-    ) {
+export default function(Component : React.ComponentType, option : boolean,pageCase : string | null = null) {
     function Authentication(props : any){
         useEffect(() => {
             if(option){                
                 (async () => {
-                    const request = await axios.get('/user')
+                    const request : ResponseData = await axios.get('/user')
                         .then((response : AxiosResponse) => response.data)
                         .catch((err : AxiosError) => err);
                     
                     if(pageCase === pageCaseLogined 
-                        && request["useremail"] 
-                        && request["message"] === "success"){
+                        && request.useremail
+                        && request.message === "success"){
                             props.history.push('/');
                     }else if(pageCase === paceCaseUserPatch
-                        && request["message"] === "none jwt"){
+                        && request.message === "none jwt"){
                             props.history.push('/');
                         }
                 })();

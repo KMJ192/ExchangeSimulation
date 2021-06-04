@@ -1,73 +1,68 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { debounce } from 'lodash';
+import { debounce, first } from 'lodash';
 import Wrapper from '../../../wrapper/Wrapper'
 
-const bitsum_url = "https://api.bithumb.com/public/ticker/all_KRW";
-let reqURL_krw : string = bitsum_url;
-// reqURL_krw = reqURL_krw.replace("{order_currency}", "all");
-// reqURL_krw = reqURL_krw.replace("{payment_currency}", "KRW");
+const up_bit_url = "https://api.upbit.com/v1/candles/minutes/1?market=KRW-BTC&count=1";
+let reqURL_krw : string = up_bit_url;
 
-interface ApiType {
-    acc_trade_value: string,
-    acc_trade_value_24H: string,
-    closing_price: string,
-    fluctate_24H: string,
-    fluctate_rate_24H: string,
-    max_price: string,
-    min_price: string,
-    opening_price: string,
-    prev_closing_price: string,
-    units_traded: string,
-    units_traded_24H: string
+interface UpbitResponseType{
+    market: string;
+    trade_date_utc: string;
+    trade_time_utc: string;
+    timestamp: number;
+    trade_price: number;
+    trade_volume: number;
+    prev_closing_price: number;
+    chane_price: number;
+    ask_bid: string;
 }
 
 function CoinTable() {
-    const [allData, setAllData] = useState<ApiType>({
-        acc_trade_value: "",
-        acc_trade_value_24H: "",
-        closing_price: "",
-        fluctate_24H: "",
-        fluctate_rate_24H: "",
-        max_price: "",
-        min_price: "",
-        opening_price: "",
-        prev_closing_price: "",
-        units_traded: "",
-        units_traded_24H: ""
-    });
-
+    const [firstSearch, setFristSearch] = useState<boolean>(true);
+    const [searchDelay, setSearchDelay] = useState<number>(1000);
+    const [coinData, setCoinData] = useState<UpbitResponseType>({
+        market: "",
+        trade_date_utc: "",
+        trade_time_utc: "",
+        timestamp: 0,
+        trade_price: 0,
+        trade_volume: 0,
+        prev_closing_price: 0,
+        chane_price: 0,
+        ask_bid: ""
+    })
 
     useEffect(() => {
         debounce(async () => {
-            const response : ApiType = await axios.get(reqURL_krw, {
+            const response: UpbitResponseType = await axios.get(reqURL_krw, {
                 withCredentials: false
             })
-                .then(response => response.data.data.BTC)
+                .then(response => response.data[0])
                 .catch(err => err);
-
-            console.log(response);
-
-            setAllData({
-                acc_trade_value: response.acc_trade_value,
-                acc_trade_value_24H: response.acc_trade_value_24H,
-                closing_price: response.closing_price,
-                fluctate_24H: response.fluctate_24H,
-                fluctate_rate_24H: response.fluctate_rate_24H,
-                max_price: response.max_price,
-                min_price: response.min_price,
-                opening_price: response.opening_price,
+            setCoinData({
+                market: response.market,
+                trade_date_utc: response.trade_date_utc,
+                trade_time_utc: response.trade_time_utc,
+                timestamp: response.timestamp,
+                trade_price: response.trade_price,
+                trade_volume: response.trade_volume,
                 prev_closing_price: response.prev_closing_price,
-                units_traded: response.units_traded,
-                units_traded_24H: response.units_traded_24H
+                chane_price: response.chane_price,
+                ask_bid: response.ask_bid
             });
-        }, 1000)();
-    }, [/* allData */]);
+            console.log(response);
+        }, searchDelay)();
+
+        if(firstSearch === true) {
+            setFristSearch(false);
+            setSearchDelay(100000);
+        }
+    }, [coinData, firstSearch, searchDelay]);
 
     return (
         <Wrapper>
             will Coin Table
-            {allData.acc_trade_value}
         </Wrapper>
     );
 }
