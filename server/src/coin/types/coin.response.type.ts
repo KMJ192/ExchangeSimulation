@@ -11,3 +11,9 @@ export interface ResponseCType{
     candle_acc_trade_volume: number;
     unit: number;
 }
+
+export interface MarketType{
+    market: string;
+    korean_name: string;
+    english_name: string;
+}

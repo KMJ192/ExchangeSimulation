@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+// import { AppController } from './app.controller';
+// import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { CoinModule } from './coin/coin.module';
 // import { MongooseModule } from '@nestjs/mongoose';
@@ -12,7 +12,7 @@ import { CoinModule } from './coin/coin.module';
     UserModule, 
     CoinModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

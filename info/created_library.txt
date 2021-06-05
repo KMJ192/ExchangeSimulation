@@ -71,3 +71,6 @@ npm install @types/multer --save
 
 //eslint
 npm install --save-dev eslint-plugin-nestjs
+
+//web socket
+npm install --save ws @types/ws
