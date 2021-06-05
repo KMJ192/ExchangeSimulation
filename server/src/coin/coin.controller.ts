@@ -1,29 +1,26 @@
 import { Controller, Post, Get, Body, Param } from '@nestjs/common';
 import { CoinService } from './coin.service';
+import axios from 'axios';
 
 @Controller()
 export class CoinController {
     constructor(private readonly coinService : CoinService){}
 
     //저장
-    // @Post('/save_coin')
-    // coinRegist(@Body() data: CoinType){
-    //     return this.coinService.CoinDataRegist(data);
-    // }
+    @Get("/real_time_coin_price")
+    getRealTimeCoinPrice(){
+        // while(1){
+        //     // const data = axios.get("").then(response => response).catch(err => err);
+        //     // console.log(data);
+        //     let minute : number = 0;
+        //     console.log(minute);
 
-    // @Post('/save_coin_data')
-    // coinDataRegist(){
-        
-    // }
-
-    // //coin이름으로 시간별 dataGet
-    // @Post('/get_coin/:coin_name')
-    // getCoinData(@Param("coin_name") coinName: string, @Body() data: CoinType){
-    //     return this.coinService.GetCoinData(coinName, data);
-    // }
-
-    // @Get('/get_all_coin_data')
-    // getAllCoinData(){
-    //     return this.coinService.GetAllCoinData();
-    // }
+        // }
+        for(let i = 0; i < 5; i++){
+            console.log("?");
+        } 
+        return {
+            test : "test"
+        }
+    }
 }

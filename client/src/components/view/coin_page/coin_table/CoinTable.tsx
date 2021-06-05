@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { debounce, first } from 'lodash';
-import Wrapper from '../../../wrapper/Wrapper'
+import Wrapper from '../../../wrapper/Wrapper';
+
+const bitCoinUnit: string = "BTC";
 
 const up_bit_url = "https://api.upbit.com/v1/candles/minutes/1?market=KRW-BTC&count=1";
 let reqURL_krw : string = up_bit_url;
 
+//마켓명, 캔들기준시간UTC/KST, 시가, 고가, 저가, 종가, 마지막 틱이저장시간, 누적거래금액,누적거래량, 분
 interface UpbitResponseType{
     market: string;
-    trade_date_utc: string;
-    trade_time_utc: string;
+    candle_date_time_utc: string;
+    candle_date_time_kst: string;
     timestamp: number;
     trade_price: number;
     trade_volume: number;
@@ -23,8 +26,8 @@ function CoinTable() {
     const [searchDelay, setSearchDelay] = useState<number>(1000);
     const [coinData, setCoinData] = useState<UpbitResponseType>({
         market: "",
-        trade_date_utc: "",
-        trade_time_utc: "",
+        candle_date_time_utc: "",
+        candle_date_time_kst: "",
         timestamp: 0,
         trade_price: 0,
         trade_volume: 0,
@@ -42,8 +45,8 @@ function CoinTable() {
                 .catch(err => err);
             setCoinData({
                 market: response.market,
-                trade_date_utc: response.trade_date_utc,
-                trade_time_utc: response.trade_time_utc,
+                candle_date_time_utc: response.candle_date_time_utc,
+                candle_date_time_kst: response.candle_date_time_kst,
                 timestamp: response.timestamp,
                 trade_price: response.trade_price,
                 trade_volume: response.trade_volume,
@@ -52,6 +55,10 @@ function CoinTable() {
                 ask_bid: response.ask_bid
             });
             console.log(response);
+            // const minuteCandle = await axios.get("https://api.upbit.com/v1/candles/minutes/1", {
+            //     withCredentials: false
+            // });
+            // console.log(minuteCandle);
         }, searchDelay)();
 
         if(firstSearch === true) {
@@ -62,7 +69,9 @@ function CoinTable() {
 
     return (
         <Wrapper>
-            will Coin Table
+            <div className="hoga-table">
+
+            </div>
         </Wrapper>
     );
 }

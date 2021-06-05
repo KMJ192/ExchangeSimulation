@@ -20,7 +20,7 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 ### 할일
 front-end
  - light-weight chart 사용?
-<!-- - front-end
+- front-end
   - 빗썸api -> Get Data
   - candlestick chart 구현(Data 배열 최대길이 200)
   - 1분단위 chart 배열 갱신 및 coin_data save request
@@ -29,4 +29,7 @@ front-end
 
 - back-end
   - data 전역저장
-  - coin table, coin_data table join -->
+  - coin table, coin_data table join
+### 설계
+  - Server side에서 api를 받아서 DB에 저장하고, 
+  - Client에서는 Server로 받아본다.
