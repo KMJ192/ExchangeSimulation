@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { debounce, first } from 'lodash';
+import { debounce } from 'lodash';
 import Wrapper from '../../../wrapper/Wrapper';
-
-const bitCoinUnit: string = "BTC";
 
 const up_bit_url = "https://api.upbit.com/v1/candles/minutes/1?market=KRW-BTC&count=1";
 let reqURL_krw : string = up_bit_url;
@@ -55,10 +53,6 @@ function CoinTable() {
                 ask_bid: response.ask_bid
             });
             console.log(response);
-            // const minuteCandle = await axios.get("https://api.upbit.com/v1/candles/minutes/1", {
-            //     withCredentials: false
-            // });
-            // console.log(minuteCandle);
         }, searchDelay)();
 
         if(firstSearch === true) {

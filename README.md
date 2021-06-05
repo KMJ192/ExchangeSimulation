@@ -20,16 +20,15 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 ### 할일
 front-end
  - light-weight chart 사용?
-- front-end
-  - 빗썸api -> Get Data
-  - candlestick chart 구현(Data 배열 최대길이 200)
-  - 1분단위 chart 배열 갱신 및 coin_data save request
-  - coin별 최초 데이터 저장 유무 local storage에 저장
-    + (```true``` : 저장완료, ```false``` : 미저장, request to server)
+ - Upbit api -> Get Data
+ - candlestick chart 구현(Data 배열 최대길이 200)
+ - 1분단위 chart 배열 갱신 및 coin_data save request
+back-end
+ - data 전역저장
+ - DBTable 설계
 
-- back-end
-  - data 전역저장
-  - coin table, coin_data table join
-### 설계
-  - Server side에서 api를 받아서 DB에 저장하고, 
-  - Client에서는 Server로 받아본다.
+<!-- Server에서 가동시 Upbit api 요청(1분 단위)
+상위 50개
+응답받은 데이터 DB에 저장
+Client에서 1분 단위로 Server에 요청 및 응답받음
+응답받은 Data 출력 테이블/차트 -->
