@@ -5,7 +5,7 @@ import BeforeLogin from './user_option/BeforeLogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState} from '../../../redux-module/RootReducer';
 import { getUserThunk } from '../../../redux-module/user';
-import { coin_exchange } from '../../../path/PagePath';
+import { coin_page } from '../../../path/PagePath';
 import './NavBar.scss';
 
 function NavBar() {
@@ -42,7 +42,7 @@ function NavBar() {
                     </a>
                 </li>
                 <li>
-                    <a href={coin_exchange}>
+                    <a href={coin_page}>
                         <i className="fas fa-coins"/>&nbsp;거래소
                     </a>
                 </li>

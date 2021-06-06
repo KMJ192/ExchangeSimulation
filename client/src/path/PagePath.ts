@@ -3,4 +3,3 @@ export const user_register_page : string = "/user_register_page";
 export const user_patch_page : string = "/user_patch_page";
 
 export const coin_page : string = "/coin_page";
-export const coin_exchange : string = "/coin_exchange";

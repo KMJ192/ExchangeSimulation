@@ -10,10 +10,9 @@ import DefaultPage from './view/default_page/DefaultPage';
 import LoginPage from './view/login/LoginPage';
 import UserPatchPage from './view/user_page/user_patch/UserPatchPage';
 import UserRegisterPage from './view/user_page/user_register/UserRegisterPage';
-import CoinPage from './view/coin_page/coin_table/CoinTable';
-import CoinExchange from './view/coin_page/exchange_page/CoinExchange';
+import CoinPage from './view/coin_page/CoinPage';
 
-import { coin_exchange, coin_page, login_page, user_patch_page, user_register_page } from '../path/PagePath';
+import { coin_page, login_page, user_patch_page, user_register_page } from '../path/PagePath';
 import { paceCaseUserPatch, pageCaseLogined } from '../auth/PageCase';
 
 import '../global_style/button.scss';
@@ -45,7 +44,6 @@ function App() {
           <Route path={user_register_page} exact component={Auth(UserRegisterPage, true, pageCaseLogined)}/>
           <Route path={user_patch_page} exact component={Auth(UserPatchPage, true, paceCaseUserPatch)}/>
           <Route path={coin_page} exact component={CoinPage}/>
-          <Route path={coin_exchange} exact component={CoinExchange} />
           <Route exact component={NotFound}/>
         </Switch>
       </BrowserRouter>

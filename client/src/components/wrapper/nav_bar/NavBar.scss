@@ -10,9 +10,9 @@ $display-state: none;
   align-items: center;
   justify-content: space-between;
   box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
+  position: relative;
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    position: relative;
   }
 }
 

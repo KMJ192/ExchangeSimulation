@@ -1,22 +1,25 @@
-import { coin_exchange, coin_page } from "../../../path/PagePath";
+import { coin_page } from "../../../path/PagePath";
 
 export const SideBarMenuList = [
     {
         title: "Home",
-        icon: <i className="fas fa-home side-icon"></i>,
+        icon: <i className="fas fa-home side-icon"/>,
         path: "/",
-        className: "side"
+        className: "side",
+        message: ""
     },
     {
         title: "Coin",
-        icon: <i className="fab fa-bitcoin side-icon"></i>,
+        icon: <i className="fas fa-coins"/>,
         path: coin_page,
-        className: "side"
+        className: "side",
+        message: ""
     },    
     {
-        title: "Chart",
-        icon: <i className="fas fa-chart-line side-icon"></i>,
-        path: coin_exchange,
-        className: "side"
+        title: "Stock",
+        icon: <i className="fas fa-chart-line side-icon"/>,
+        path: "",
+        className: "side",
+        message: "준비중입니다."
     }
 ]
