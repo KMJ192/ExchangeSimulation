@@ -10,7 +10,7 @@ import { CoinModule } from './coin/coin.module';
   imports: [
     //MongooseModule.forRoot(connect_mongodb),
     UserModule, 
-    CoinModule
+    //CoinModule
   ],
   controllers: [],
   providers: [],

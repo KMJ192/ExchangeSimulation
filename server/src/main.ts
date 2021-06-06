@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
-import { GetRealTimeData } from './coin/get_data/GetCoinData';
+//import { GetRealTimeData } from './coin/get_data/GetCoinData';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,4 +15,4 @@ async function bootstrap() {
 }
 bootstrap();
 
-GetRealTimeData();
+//GetRealTimeData();
