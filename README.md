@@ -9,7 +9,6 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
   - Redux
   - scss
   - styled-components
-  - apexcharts
 
 ### Server
 - dev stack
@@ -22,5 +21,8 @@ front-end
  - light-weight chart 사용?
  - Upbit api -> Get Data
  - react-finacial-chart 사용
+ - upbit api CORS block 시간대 확인
+ - upbit api candle socket data return 타입 확인
+ - upbit api redux 작성(thunk, saga)
 back-end
  - . . .
