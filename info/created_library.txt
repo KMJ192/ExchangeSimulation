@@ -37,6 +37,9 @@ npm install loadash @types/loadash --save
 //formik, yup
 npm install formik yup --save
 
+//style components
+npm install tailwindcss
+
 //usehooks 참조
 https://usehooks-typescript.com/
 

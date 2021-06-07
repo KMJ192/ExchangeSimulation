@@ -12,7 +12,7 @@ function SideBar({ toggle } : Props) {
         <div className="side-bar">
             {SideBarMenuList.map((item, index) => {
                 return(
-                    <li key={index}>
+                    <li key={index} onClick={item.onClick}>
                         <A href={item.path} toggle={toggle} {...toggle}>
                             {item.icon}
                             <Span toggle={toggle} {...toggle}>
@@ -26,4 +26,4 @@ function SideBar({ toggle } : Props) {
     )
 }
 
-export default React.memo(SideBar)
+export default React.memo(SideBar);

@@ -6,7 +6,7 @@ function DefaultPage() {
     return (
         <Wrapper>
             <div>
-                main page
+                this will visible table
             </div>
         </Wrapper>
     )
