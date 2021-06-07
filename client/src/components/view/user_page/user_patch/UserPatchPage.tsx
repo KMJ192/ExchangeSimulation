@@ -5,7 +5,6 @@ import { Redirect } from 'react-router';
 import { user_image_path } from '../../../../path/ImagePath';
 import { server_url } from '../../../../path/Url';
 import { RootState } from '../../../../redux-module/RootReducer';
-import Wrapper from '../../../wrapper/Wrapper';
 import UserPatchEmailBox from './input_box/UserPatchEmailBox';
 import UserPatchNicknameBox from './input_box/UserPatchNicknameBox';
 import UserPatchPasswordContainer from './input_box/UserPatchPasswordContainer';
@@ -126,40 +125,38 @@ function UserPatchPage() {
     }
 
     return (
-        <Wrapper>
-            <form onSubmit={submit} className="user-info-form">
-                <div className="user-image-container">
-                    <div className="user-img-des">프로필 이미지</div>
-                    <img className="user-image" onClick={imgRemoveHandler} src={userimgBase64} alt="대표이미지"/>
-                    <label htmlFor="user-img-input">
-                        프로필 이미지 설정
-                    </label>
-                    <input id="user-img-input" type="file" onChange={fileChangeHandler} hidden></input>
-                    <span>대표 이미지를 수정해보세요.</span>
-                </div>
-                <div className="user-info-container">
-                    <div className="user-data-des">[{UserData.data?.nickname}]님 회원 정보</div>
-                    <UserPatchEmailBox
-                        useremail={String(UserData.data?.useremail)}
-                    />
-                    <UserPatchNicknameBox 
-                        nowNickname={String(UserData.data?.nickname)}
-                        returnNickname={getNickname}
-                    />
-                    <UserPatchPasswordContainer
-                        returnPassword={getPassword}
-                    />
-                    {UserData.loading ? 
-                        <div/>
-                    : 
-                        <div className="btn-container">
-                            <button className="btn" type="submit">수정하기</button>
-                            <a href="/"><button className="btn" type="button">돌아가기</button></a>
-                        </div>
-                    }
-                </div>
-            </form>
-        </Wrapper>
+        <form onSubmit={submit} className="user-info-form">
+            <div className="user-image-container">
+                <div className="user-img-des">프로필 이미지</div>
+                <img className="user-image" onClick={imgRemoveHandler} src={userimgBase64} alt="대표이미지"/>
+                <label htmlFor="user-img-input">
+                    프로필 이미지 설정
+                </label>
+                <input id="user-img-input" type="file" onChange={fileChangeHandler} hidden></input>
+                <span>대표 이미지를 수정해보세요.</span>
+            </div>
+            <div className="user-info-container">
+                <div className="user-data-des">[{UserData.data?.nickname}]님 회원 정보</div>
+                <UserPatchEmailBox
+                    useremail={String(UserData.data?.useremail)}
+                />
+                <UserPatchNicknameBox 
+                    nowNickname={String(UserData.data?.nickname)}
+                    returnNickname={getNickname}
+                />
+                <UserPatchPasswordContainer
+                    returnPassword={getPassword}
+                />
+                {UserData.loading ? 
+                    <div/>
+                : 
+                    <div className="btn-container">
+                        <button className="btn" type="submit">수정하기</button>
+                        <a href="/"><button className="btn" type="button">돌아가기</button></a>
+                    </div>
+                }
+            </div>
+        </form>
     );
 }
 

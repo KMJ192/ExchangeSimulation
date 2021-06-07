@@ -1,10 +1,13 @@
 import React from 'react'
+import Wrapper from '../wrapper/Wrapper';
 
 function NotFound() {
     return (
-        <div>
+        <Wrapper>
             404 NotFound
-        </div>
+            <br/>
+            없는 페이지 입니다.
+        </Wrapper>
     )
 }
 

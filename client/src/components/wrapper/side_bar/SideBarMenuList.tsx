@@ -20,6 +20,6 @@ export const SideBarMenuList = [
         icon: <i className="fas fa-chart-line side-icon"/>,
         path: "",
         className: "side",
-        onClick: () => {alert("준비중입니다.");}
+        onClick: () => { alert("준비중입니다."); }
     }
 ]

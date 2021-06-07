@@ -11,7 +11,7 @@ export function getUserThunk() {
         try{
             const userProfile = await requestUserProfile();
             dispatch(success(userProfile));
-        }catch(e){
+        }catch(e: any){
             dispatch(failure(e));
         }
     }    

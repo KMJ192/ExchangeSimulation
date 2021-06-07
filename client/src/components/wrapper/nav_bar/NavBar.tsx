@@ -57,9 +57,9 @@ function NavBar() {
                 <Div toggle={toggle} {...toggle}>
                     {loginState ? 
                         <AfterLogin
-                            useremail={UserData.data?.useremail}
-                            nickname={UserData.data?.nickname}
-                            user_image={UserData.data?.user_image}
+                            useremail={String(UserData.data?.useremail)}
+                            nickname={String(UserData.data?.nickname)}
+                            user_image={String(UserData.data?.user_image)}
                         /> : 
                         <BeforeLogin/>
                     }

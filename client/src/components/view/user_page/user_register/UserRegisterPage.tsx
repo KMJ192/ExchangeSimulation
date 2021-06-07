@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Redirect } from 'react-router';
 import { user_image_path } from '../../../../path/ImagePath';
 import { login_page } from '../../../../path/PagePath';
-import Wrapper from '../../../wrapper/Wrapper';
 import EmailBox from './input_box/EmailBox';
 import NicknameBox from './input_box/NicknameBox';
 import PasswordContainer from './input_box/PasswordContainer';
@@ -84,36 +83,34 @@ function UserRegisterPage() {
     }
 
     return (
-        <Wrapper>
-            <form onSubmit={submit} className="user-info-form">
-                <div className="user-image-container">
-                    <div className="user-img-des">프로필 이미지</div>
-                    <img className="user-image" onClick={imgRemoveHandler} src={userimgBase64} alt="대표이미지"/>
-                    <label htmlFor="user-img-input">
-                        프로필 이미지 설정
-                    </label>
-                    <input id="user-img-input" type="file" accept="image/*" onChange={fileChangeHandler} hidden></input>
-                    <span>대표 이미지를 추가하세요.</span>
+        <form onSubmit={submit} className="user-info-form">
+            <div className="user-image-container">
+                <div className="user-img-des">프로필 이미지</div>
+                <img className="user-image" onClick={imgRemoveHandler} src={userimgBase64} alt="대표이미지"/>
+                <label htmlFor="user-img-input">
+                    프로필 이미지 설정
+                </label>
+                <input id="user-img-input" type="file" accept="image/*" onChange={fileChangeHandler} hidden></input>
+                <span>대표 이미지를 추가하세요.</span>
+            </div>
+            <div className="user-info-container">
+                <div className="user-data-des">가입정보</div>
+                <EmailBox
+                    returnEmail={getEmail}
+                />
+                <NicknameBox 
+                    returnNickname={getNickname}
+                />
+                <PasswordContainer
+                    returnPassword={getPassword}
+                />
+                <div className="btn-container">
+                    <button className="btn" type="submit">가입하기</button>
+                    <a href={login_page}><button className="btn" type="button">로그인 하기</button></a>
+                    <a href="/"><button className="btn" type="button">돌아가기</button></a>
                 </div>
-                <div className="user-info-container">
-                    <div className="user-data-des">가입정보</div>
-                    <EmailBox
-                        returnEmail={getEmail}
-                    />
-                    <NicknameBox 
-                        returnNickname={getNickname}
-                    />
-                    <PasswordContainer
-                        returnPassword={getPassword}
-                    />
-                    <div className="btn-container">
-                        <button className="btn" type="submit">가입하기</button>
-                        <a href={login_page}><button className="btn" type="button">로그인 하기</button></a>
-                        <a href="/"><button className="btn" type="button">돌아가기</button></a>
-                    </div>
-                </div>
-            </form>
-        </Wrapper>
+            </div>
+        </form>
     );
 }
 

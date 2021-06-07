@@ -3,7 +3,6 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux-module/RootReducer';
-import Wrapper from '../../wrapper/Wrapper';
 import { user_register_page } from '../../../path/PagePath';
 import { StyledLoginContainer } from './LoginPageStyle';
 import './LoginPage.scss';
@@ -88,50 +87,48 @@ function LoginPage() {
         return <Redirect to="/"/>
     }
     return (
-        <Wrapper>
-            <form className="user-login-form" onSubmit={tryLogin}>
-                <StyledLoginContainer 
-                    className="login-container"
-                    width={winWidth} {...winWidth}
-                    height={winHeight} {...winHeight}
-                >
-                    <div className="login-des">
-                        로그인
-                    </div>
-                    <br/>
-                    <div className="input-login-des">이메일</div>
-                    <LoginInput
-                        className="input-box email-input"
-                        placeholder="이메일 입력"
-                        type="email"
-                        setData={setEmail}
-                    />
-                    <div className="input-login-des">비밀번호</div>
-                    <LoginInput
-                        className="input-box password-input"
-                        placeholder="비밀번호 입력"
-                        type="password"
-                        setData={setPassword}
-                    />
-                    <br/>
-                    <input className="remember-box" type="checkbox"/>기억하기
-                    <br/>
+        <form className="user-login-form" onSubmit={tryLogin}>
+            <StyledLoginContainer 
+                className="login-container"
+                width={winWidth} {...winWidth}
+                height={winHeight} {...winHeight}
+            >
+                <div className="login-des">
+                    로그인
+                </div>
+                <br/>
+                <div className="input-login-des">이메일</div>
+                <LoginInput
+                    className="input-box email-input"
+                    placeholder="이메일 입력"
+                    type="email"
+                    setData={setEmail}
+                />
+                <div className="input-login-des">비밀번호</div>
+                <LoginInput
+                    className="input-box password-input"
+                    placeholder="비밀번호 입력"
+                    type="password"
+                    setData={setPassword}
+                />
+                <br/>
+                <input className="remember-box" type="checkbox"/>기억하기
+                <br/>
+                <LoginButton
+                    type="submit"
+                    className="user-page-btn sign-btn"
+                    value="로그인"
+                />
+                <br/>
+                <Link to={user_register_page}>
                     <LoginButton
-                        type="submit"
-                        className="user-page-btn sign-btn"
-                        value="로그인"
+                        type="button"
+                        className="user-page-btn sign-btn sign-up"
+                        value="회원가입"
                     />
-                    <br/>
-                    <Link to={user_register_page}>
-                        <LoginButton
-                            type="button"
-                            className="user-page-btn sign-btn sign-up"
-                            value="회원가입"
-                        />
-                    </Link>
-                </StyledLoginContainer>
-            </form>
-        </Wrapper>
+                </Link>
+            </StyledLoginContainer>
+        </form>
     );
 }
 
