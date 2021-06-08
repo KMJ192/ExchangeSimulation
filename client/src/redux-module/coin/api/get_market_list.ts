@@ -8,6 +8,5 @@ export async function MarketListApi() {
         .filter((list: MarketList) => list.market.includes("KRW-"))
         .map((list: MarketList) => list.market))
       .catch((err: AxiosError) => err);
-      
     return response;
 }

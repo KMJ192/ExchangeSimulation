@@ -22,7 +22,7 @@ export type UserState = {
 export const InitialUserProfile = {
     userProfile : {
         loading: false,
-        error : null,
-        data : null
+        error: null,
+        data: null
     }
 };
