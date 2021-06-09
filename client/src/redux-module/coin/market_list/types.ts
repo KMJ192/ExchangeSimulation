@@ -7,19 +7,19 @@ export interface MarketList {
     english_name : string;
 }
 
-export type GetMarketListAction = ActionType<typeof actions>
+export type GetMarketListAction = ActionType<typeof actions>;
 export type GetMarketListState = {
     marketList: {
         loading: boolean;
         data: MarketList | null,
         error: Error | null
     }
-}
+};
 
 export const InitialMarketList: GetMarketListState = {
     marketList: {
         loading: false,
-        error: null,
-        data: null
+        data: null,
+        error: null
     }
-}
+};

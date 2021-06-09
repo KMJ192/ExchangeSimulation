@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-//import { w3cwebsocket } from 'websocket';
+import { useDispatch } from 'react-redux';
+import { w3cwebsocket } from 'websocket';
 import { connectSocketThunk } from '../../../redux-module/coin/connect_socket';
+import { CoinData } from '../../../redux-module/coin/get_coin/types';
 import { getMarketListThunk } from '../../../redux-module/coin/market_list';
-import { RootState } from '../../../redux-module/RootReducer';
+import { MarketList } from '../../../redux-module/coin/market_list/types';
 
-function CoinPage() {
+interface Props{
+    ws: w3cwebsocket | undefined;
+    marketList: MarketList | null;
+}
+
+function CoinPage({ws, marketList} : Props) {
     const [first, setFirst] = useState(true);
     const dispatch = useDispatch();
-    const marketList = useSelector((state: RootState) => state.market_list.marketList);
-    const ws = useSelector((state: RootState) => state.connect_socket.connectSocket.data?.socketClient);
 
     useEffect(() => {
-        //업비트 새벽 2시 cors block
         if(first){
             dispatch(getMarketListThunk());
             dispatch(connectSocketThunk("wss://api.upbit.com/websocket/v1"));
@@ -22,17 +25,17 @@ function CoinPage() {
     
     if(ws){
         ws.onopen = () => {
-            if(marketList.data){
+            if(marketList){
                 const sendData = JSON.stringify([
                     { ticket:"test" },
-                    { type:"ticker", codes:marketList.data }
+                    { type:"ticker", codes:marketList }
                 ]);
                 ws.send(sendData);
             }
         }
         ws.onmessage = (e: any) => {
             const enc =  new TextDecoder("utf-8");
-            const data = JSON.parse(enc.decode(e.data));
+            const data: CoinData = JSON.parse(enc.decode(e.data));
             console.log(data);
         }
         ws.onerror = (e: any) => {
