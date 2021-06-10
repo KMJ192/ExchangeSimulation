@@ -5,6 +5,9 @@ import { connectSocketThunk } from '../../../redux-module/coin/connect_socket';
 import { CoinData } from '../../../redux-module/coin/get_coin/types';
 import { getMarketListThunk } from '../../../redux-module/coin/market_list';
 import { MarketList } from '../../../redux-module/coin/market_list/types';
+import MainChart from './MainChart';
+import RealTimeTable from './RealTimeTable';
+import './CoinPage.scss';
 
 interface Props{
     ws: w3cwebsocket | undefined;
@@ -23,30 +26,31 @@ function CoinPage({ws, marketList} : Props) {
         }
     }, [dispatch, first, marketList]);
     
-    if(ws){
-        ws.onopen = () => {
-            if(marketList){
-                const sendData = JSON.stringify([
-                    { ticket:"test" },
-                    { type:"ticker", codes:marketList }
-                ]);
-                ws.send(sendData);
-            }
-        }
-        ws.onmessage = (e: any) => {
-            const enc =  new TextDecoder("utf-8");
-            const data: CoinData = JSON.parse(enc.decode(e.data));
-            console.log(data);
-        }
-        ws.onerror = (e: any) => {
-            ws.close();
-            console.log(e);
-        }
-    }
+    // if(ws){
+    //     ws.onopen = () => {
+    //         if(marketList){
+    //             const sendData = JSON.stringify([
+    //                 { ticket:"test" },
+    //                 { type:"ticker", codes:marketList }
+    //             ]);
+    //             ws.send(sendData);
+    //         }
+    //     }
+    //     ws.onmessage = (e: any) => {
+    //         const enc =  new TextDecoder("utf-8");
+    //         const data: CoinData = JSON.parse(enc.decode(e.data));
+    //         console.log(data);
+    //     }
+    //     ws.onerror = (e: any) => {
+    //         ws.close();
+    //         console.log(e);
+    //     }
+    // }
     
     return (
-        <div>
-            coinPage
+        <div className="coin-page-container">
+            <MainChart/>
+            <RealTimeTable/>
         </div>
     )
 }

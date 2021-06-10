@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { RealTimeTableStyled } from './CoinPageStyle';
+import './CoinPage.scss';
 
 function RealTimeTable() {
     return (
-        <div>
+
+        <RealTimeTableStyled className="real-time-table">
             
-        </div>
+        </RealTimeTableStyled>
     )
 }
 
