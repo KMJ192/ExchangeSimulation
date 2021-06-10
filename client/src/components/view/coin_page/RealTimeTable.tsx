@@ -4,7 +4,6 @@ import './CoinPage.scss';
 
 function RealTimeTable() {
     return (
-
         <RealTimeTableStyled className="real-time-table">
             
         </RealTimeTableStyled>

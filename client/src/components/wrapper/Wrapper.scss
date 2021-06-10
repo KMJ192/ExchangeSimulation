@@ -3,6 +3,7 @@
     position: absolute;
     font-size: 40px;
     color: #000000;
+    z-index: 100;
     &:hover{
         opacity: 0.15;
     }
@@ -10,7 +11,6 @@
         display: none;
     }
 }
-
 .nav{
     position: relative;
     z-index: 50;
@@ -21,9 +21,8 @@
     padding-top: 5px;
     transition: 0.5s;
     top: 6.5%;
-    @media screen and (max-width: 768px) {
-        position: relative;
-    }
+    //position: relative;
+    text-align: center;
 }
 .side-bar{
     z-index : 25;

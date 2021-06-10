@@ -5,8 +5,13 @@ import { connectSocketThunk } from '../../../redux-module/coin/connect_socket';
 import { CoinData } from '../../../redux-module/coin/get_coin/types';
 import { getMarketListThunk } from '../../../redux-module/coin/market_list';
 import { MarketList } from '../../../redux-module/coin/market_list/types';
+
 import MainChart from './MainChart';
 import RealTimeTable from './RealTimeTable';
+import PlotInvest from './PlotInvest';
+import DealState from './DealState';
+
+import { PDGrid } from './CoinPageStyle';
 import './CoinPage.scss';
 
 interface Props{
@@ -49,7 +54,13 @@ function CoinPage({ws, marketList} : Props) {
     
     return (
         <div className="coin-page-container">
-            <MainChart/>
+            <div className="chart-plotinv-dealstate-container">
+                <MainChart/>
+                <PDGrid>
+                    <DealState/>
+                    <PlotInvest/>
+                </PDGrid>
+            </div>
             <RealTimeTable/>
         </div>
     )

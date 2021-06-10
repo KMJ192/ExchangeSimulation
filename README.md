@@ -19,8 +19,8 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 ### 할일
 front-end
  - light-weight chart 사용?
- - react-finacial-chart 사용
- - upbit api CORS block 시간대 확인 //새벽2시쯤 안되었음
+ - react-finacial-chart 사용?
  - upbit api redux 작성(thunk, saga)
+ - redux-saga websocket 적용
 back-end
  - . . .
