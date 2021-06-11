@@ -5,7 +5,7 @@ import App from './App';
 import axios from 'axios';
 import { server_url } from './path/Url';
 import { applyMiddleware, createStore, compose } from 'redux';
-import rootReducer from './redux-module/RootReducer';
+import rootReducer, { rootSaga } from './redux-module/RootReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
@@ -25,7 +25,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
 //const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk, sagaMiddleware)));
-//sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

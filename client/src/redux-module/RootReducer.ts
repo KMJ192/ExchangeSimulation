@@ -4,6 +4,7 @@ import screen_size from "./screen_size";
 import market_list from "./coin/market_list";
 import connect_socket from "./coin/connect_socket";
 import { all } from "redux-saga/effects";
+import { coinDataSaga } from "./coin/get_coin/saga";
 
 const rootReducer = combineReducers({
     user,
@@ -15,6 +16,6 @@ const rootReducer = combineReducers({
 export default rootReducer;
 export type RootState= ReturnType <typeof rootReducer>
 
-// export function* rootSaga(){
-//     yield all();
-// }
+export function* rootSaga(){
+    yield all([coinDataSaga()]);
+}
