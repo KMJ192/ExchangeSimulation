@@ -1,4 +1,5 @@
 import { ActionType } from "typesafe-actions";
+import { w3cwebsocket } from "websocket";
 import * as actions from './action';
 
 export interface CoinData {
@@ -52,4 +53,9 @@ export const InitialCoinData: GetCoinDataState = {
         data: null,
         error: null
     }
+}
+
+export interface ReqUpbitSocketParam{
+    ws: w3cwebsocket;
+    marketList: string;
 }

@@ -6,8 +6,9 @@ import axios from 'axios';
 import { server_url } from './path/Url';
 import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from './redux-module/RootReducer';
-import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 //import reportWebVitals from './reportWebVitals';
 
 axios.defaults.baseURL = server_url;
@@ -21,7 +22,10 @@ declare global {
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+const sagaMiddleware = createSagaMiddleware();
+//const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk, sagaMiddleware)));
+//sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>

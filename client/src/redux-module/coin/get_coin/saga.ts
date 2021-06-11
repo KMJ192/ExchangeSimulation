@@ -1,8 +1,8 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import { getCoinDataAsync, GET_COINDATA } from "./action";
 
 function* getCoinDataSaga(action: ReturnType<typeof getCoinDataAsync.request>){
-
+    
     try{
 
     }catch(e: any){
