@@ -3,6 +3,8 @@ import user  from './user';
 import screen_size from "./screen_size";
 import market_list from "./coin/market_list";
 import connect_socket from "./coin/connect_socket";
+import get_coin from "./coin/get_coin";
+
 import { all } from "redux-saga/effects";
 import { coinDataSaga } from "./coin/get_coin/saga";
 
@@ -10,7 +12,8 @@ const rootReducer = combineReducers({
     user,
     screen_size,
     market_list,
-    connect_socket
+    connect_socket,
+    get_coin
 });
 
 export default rootReducer;

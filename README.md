@@ -22,5 +22,6 @@ front-end
  - react-finacial-chart 사용?
  - upbit api redux 작성(thunk, saga)
  - redux-saga websocket 적용
+ - redux-saga eventChannel -> buffer 제어
 back-end
  - . . .

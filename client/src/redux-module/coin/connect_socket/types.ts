@@ -1,9 +1,8 @@
 import { ActionType } from "typesafe-actions";
-import { w3cwebsocket } from "websocket";
 import { connectSocketAsycn } from "./action";
 
 export interface ConnectedSocket{
-    socketClient : w3cwebsocket;
+    socketClient : WebSocket;
 }
 
 export type ConnectSocketAction = ActionType<typeof connectSocketAsycn>

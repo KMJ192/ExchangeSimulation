@@ -1,8 +1,7 @@
 import { ActionType } from "typesafe-actions";
-import { w3cwebsocket } from "websocket";
 import * as actions from './action';
 
-export interface CoinData {
+export interface Ticker {
     type: string;
     code: string;
     opening_price: number;
@@ -39,11 +38,43 @@ export interface CoinData {
     stream_type: string;
 }
 
+export interface Trade{
+    ask_bid: "ASK" | "BID";
+    change: string;
+    change_price: string;
+    code: string;
+    prev_closing_price: number;
+    sequential_id: number;
+    stream_type: string;
+    timestamp: number;
+    trade_date: string;
+    trade_price: number;
+    trade_time: string;
+    trade_timestamp: number;
+    trade_volume: number;
+    type: string;
+}
+
+export interface Orderbook{
+    code: string;
+    orderbook_units: [{
+        ask_price: number;
+        ask_size: number;
+        bid_price: number;
+        bid_size: number;
+    }]
+    stream_type: string;
+    timestamp: number;
+    total_ask_size: number;
+    total_bid_size: number;
+    type: string;
+}
+
 export type GetCoinDataAction = ActionType<typeof actions>;
 export type GetCoinDataState = {
     coinData: {
         loading: boolean;
-        data: CoinData | null;
+        data: Ticker | null;
         error: Error | null;
     }
 };
@@ -56,6 +87,7 @@ export const InitialCoinData: GetCoinDataState = {
 }
 
 export interface ReqUpbitSocketParam{
-    ws: w3cwebsocket;
+    ws: WebSocket;
     marketList: string;
+    reqType: "ticker" | "orderbook" | "trade";
 }

@@ -14,6 +14,7 @@ function CoinContainer() {
     const marketListData  = useSelector((state: RootState) => state.market_list.marketList.data);
     const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
     // const marketListLoading = useSelector((state: RootState) => state.market_list.marketList.loading);
+    // const getCoinData = useSelector((state: RootState) => state.get_coin.coinData.data);
     const dispatch = useDispatch();
 
     //marketlist를 받고, ws에 연결한 후 데이터 입력 받기
@@ -30,14 +31,9 @@ function CoinContainer() {
             tmp = tmp.filter((list: MarketList) => list.market.includes("KRW-")).map((list: MarketList) => list.market);
             dispatch(getCoinDataAsync.request({
                 ws: data.socketClient,
-                marketList: String(tmp)
-            }));            
-        }
-        return () => {
-            if(data && data.socketClient){
-                //unMount시 socket연결 해제
-                data.socketClient.close();
-            }
+                marketList: tmp,
+                reqType: "orderbook"
+            }));
         }
     }, [dispatch, first, marketListData, data])
 
