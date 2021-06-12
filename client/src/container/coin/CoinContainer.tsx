@@ -14,25 +14,21 @@ function CoinContainer() {
     const marketListData  = useSelector((state: RootState) => state.market_list.marketList.data);
     const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
     // const marketListLoading = useSelector((state: RootState) => state.market_list.marketList.loading);
-    // const getCoinData = useSelector((state: RootState) => state.get_coin.coinData.data);
     const dispatch = useDispatch();
 
-    //marketlist를 받고, ws에 연결한 후 데이터 입력 받기
     useEffect(() => {
         if(first){
             setFirst(false);
             dispatch(getMarketListThunk());
             dispatch(connectSocketThunk("wss://api.upbit.com/websocket/v1"));
         }
-        //socket client, marketlist 모두 받아온 경우
         if(data && data.socketClient && marketListData){
-            //파라미터로 ws, marketList, request type(ticker or trade or orderbook)을 넣어서 saga에 dispatch
             let tmp: any = marketListData;
             tmp = tmp.filter((list: MarketList) => list.market.includes("KRW-")).map((list: MarketList) => list.market);
             dispatch(getCoinDataAsync.request({
                 ws: data.socketClient,
                 marketList: tmp,
-                reqType: "orderbook"
+                reqType: "ticker"
             }));
         }
     }, [dispatch, first, marketListData, data])
