@@ -15,42 +15,42 @@ function marketListToString(marketList: MarketList): string[]{
 
 function CoinContainer() {
     const [first, setFirst] = useState(true);
-    const { data, loading, error } = useSelector((state: RootState) => state.connect_socket.connectSocket);
-    const marketListData  = useSelector((state: RootState) => state.market_list.marketList.data);
-    const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
-    // const marketListLoading = useSelector((state: RootState) => state.market_list.marketList.loading);
+    const socket = useSelector((state: RootState) => state.connect_socket.connectSocket);
+    const marketList = useSelector((state: RootState) => state.market_list.marketList);
+    const marketListData = useSelector((state: RootState) => state.market_list.marketList.data);
     const coinData: any = useSelector((state: RootState) => state.get_coin);
+
     console.log(coinData);
     const dispatch = useDispatch();
+
     useEffect(() => {
         if(first){
             setFirst(false);
             dispatch(getMarketListThunk());
             dispatch(connectSocketThunk("wss://api.upbit.com/websocket/v1"));
         }
-        
-        if(data && data.socketClient && marketListData){
+        if(socket.data && socket.data.socketClient && marketListData){
             const marketList: string[] = marketListToString(marketListData);
             dispatch(getCoinDataAsync.request({
-                ws: data.socketClient,
+                ws: socket.data.socketClient,
                 marketList: marketList,
                 reqType: "ticker"
             }));
         }
-    }, [dispatch, first, marketListData, data])
+    }, [dispatch, first, marketList, marketListData, socket.data])
 
 
-    if(marketListError){
+    if(marketList.error){
         <Wrapper>
             <div>
                 Network Error. 
                 <br/>
-                error content : [{error}]
+                error content : [{marketList.error}]
             </div>
         </Wrapper>
     }
 
-    if(loading){
+    if(socket.loading){
         return (
             <Wrapper>
                 <div>loading...</div>
@@ -60,11 +60,11 @@ function CoinContainer() {
     
     return (
         <Wrapper>
-            {error ? 
+            {socket.error ? 
                 <div>
                     Network Error. 
                     <br/>
-                    error content : [{error}]
+                    error content : [{socket.error}]
                 </div>
             :
                 <CoinPage/>
