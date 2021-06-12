@@ -7,27 +7,33 @@ import { getCoinDataAsync } from '../../redux-module/coin/get_coin/action';
 import { getMarketListThunk, MarketList } from '../../redux-module/coin/market_list';
 import { RootState } from '../../redux-module/RootReducer';
 
+function marketListToString(marketList: MarketList): string[]{
+    const val: MarketList[] = Object.values(marketList);
+    const tmp: string[] = val.filter((list: MarketList) => list.market.includes("KRW-")).map((list: MarketList) => list.market);
+    return tmp;
+}
+
 function CoinContainer() {
     const [first, setFirst] = useState(true);
-
     const { data, loading, error } = useSelector((state: RootState) => state.connect_socket.connectSocket);
     const marketListData  = useSelector((state: RootState) => state.market_list.marketList.data);
     const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
     // const marketListLoading = useSelector((state: RootState) => state.market_list.marketList.loading);
+    const coinData: any = useSelector((state: RootState) => state.get_coin);
+    console.log(coinData);
     const dispatch = useDispatch();
-
     useEffect(() => {
         if(first){
             setFirst(false);
             dispatch(getMarketListThunk());
             dispatch(connectSocketThunk("wss://api.upbit.com/websocket/v1"));
         }
+        
         if(data && data.socketClient && marketListData){
-            let tmp: any = marketListData;
-            tmp = tmp.filter((list: MarketList) => list.market.includes("KRW-")).map((list: MarketList) => list.market);
+            const marketList: string[] = marketListToString(marketListData);
             dispatch(getCoinDataAsync.request({
                 ws: data.socketClient,
-                marketList: tmp,
+                marketList: marketList,
                 reqType: "ticker"
             }));
         }
@@ -67,4 +73,4 @@ function CoinContainer() {
     )
 }
 
-export default CoinContainer;
+export default React.memo(CoinContainer);

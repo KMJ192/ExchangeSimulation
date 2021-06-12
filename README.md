@@ -7,8 +7,11 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
   - typescript
   - React
   - Redux
+    + thunk
+    + saga
   - scss
   - styled-components
+  - web socket(업비트 open api)
 
 ### Server
 - dev stack
@@ -18,10 +21,8 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 
 ### 할일
 front-end
- - light-weight chart 사용?
- - react-finacial-chart 사용?
- - upbit api redux 작성(thunk, saga)
- - redux-saga websocket 적용
- - redux-saga eventChannel -> buffer 제어
+ - upbit에서 받아온 데이터 시각화
+  + light-weight chart 사용?
+  + react-finacial-chart 사용?
 back-end
  - . . .

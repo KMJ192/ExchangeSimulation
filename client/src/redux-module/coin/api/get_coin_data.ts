@@ -14,7 +14,6 @@ export default function upbitWebSocketNetworking({ws, marketList, reqType} : Req
         ws.onmessage = (e: any) => {
             const enc =  new TextDecoder("utf-8");
             const data: Ticker | Trade | Orderbook = JSON.parse(enc.decode(e.data));
-            //console.log(data);
             emit(data);
         }
         ws.onerror = (e: any) => {

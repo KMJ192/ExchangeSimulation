@@ -88,6 +88,6 @@ export const InitialCoinData: GetCoinDataState = {
 
 export interface ReqUpbitSocketParam{
     ws: WebSocket;
-    marketList: string;
+    marketList: string[];
     reqType: "ticker" | "orderbook" | "trade";
 }
