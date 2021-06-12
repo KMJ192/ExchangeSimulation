@@ -24,5 +24,6 @@ front-end
  - upbit에서 받아온 데이터 시각화
   + light-weight chart 사용?
   + react-finacial-chart 사용?
+
 back-end
  - . . .
