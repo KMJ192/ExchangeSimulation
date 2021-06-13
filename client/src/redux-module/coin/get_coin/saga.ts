@@ -1,8 +1,8 @@
 import { EventChannel } from "redux-saga";
 import { call, delay, flush, put, takeEvery } from "redux-saga/effects";
-import upbitWebSocketNetworking from "../api/get_coin_data";
+import upbitWebSocketChannel from "../api/get_coin_data";
 import { getCoinDataAsync, GET_COINDATA } from "./action";
-import { Ticker, Trade, Orderbook, ReqUpbitSocketParam } from "./types";
+import { Ticker, Trade, Orderbook } from "./types";
 
 function socketDataFilter(socketData: Ticker | Trade | Orderbook){
   const val: Ticker[] | Trade[] | Orderbook[] = Object.values(socketData);
@@ -23,7 +23,7 @@ function socketDataFilter(socketData: Ticker | Trade | Orderbook){
 
 function* getCoinDataSaga(action: ReturnType<typeof getCoinDataAsync.request>){
   try{
-    const coinData: EventChannel<ReqUpbitSocketParam> = yield call(upbitWebSocketNetworking, action.payload);
+    const coinData: EventChannel<Ticker | Trade | Orderbook> = yield call(upbitWebSocketChannel, action.payload);
     while(1){
       const socketData: Ticker | Trade | Orderbook = yield flush(coinData);
       const filterData: Ticker | Trade | Orderbook = yield socketDataFilter(socketData);
@@ -34,6 +34,8 @@ function* getCoinDataSaga(action: ReturnType<typeof getCoinDataAsync.request>){
     }
   }catch(e: any){
     yield put(getCoinDataAsync.failure(e));
+  }finally{
+    action.payload.ws.close();
   }
 }
 

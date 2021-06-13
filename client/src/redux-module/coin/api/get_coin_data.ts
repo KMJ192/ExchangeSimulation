@@ -2,8 +2,8 @@ import { buffers, END, eventChannel } from "redux-saga";
 import { Ticker, Trade, Orderbook } from "../get_coin/types";
 import { ReqUpbitSocketParam } from '../get_coin/types';
 
-export default function upbitWebSocketNetworking({ws, marketList, reqType} : ReqUpbitSocketParam){
-    return eventChannel(emit => {
+export default function upbitWebSocketChannel({ws, marketList, reqType} : ReqUpbitSocketParam){
+    return eventChannel<Ticker | Trade | Orderbook>(emit => {
         ws.onopen = () => {
             const sendData = JSON.stringify([
                 { ticket:"test" },
@@ -12,8 +12,8 @@ export default function upbitWebSocketNetworking({ws, marketList, reqType} : Req
             ws.send(sendData);
         }
         ws.onmessage = (e: any) => {
-            const enc =  new TextDecoder("utf-8");
-            const data: Ticker | Trade | Orderbook = JSON.parse(enc.decode(e.data));
+            const encode =  new TextDecoder("utf-8");
+            const data: Ticker | Trade | Orderbook = JSON.parse(encode.decode(e.data));
             emit(data);
         }
         ws.onerror = (e: any) => {
@@ -26,5 +26,5 @@ export default function upbitWebSocketNetworking({ws, marketList, reqType} : Req
             ws.close();
         }
         return unsubscribe;
-    }, buffers.expanding(1000) || buffers.none());
+    }, buffers.expanding(200) || buffers.none());
 }
