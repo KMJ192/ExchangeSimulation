@@ -16,8 +16,11 @@ function marketListToString(marketList: MarketList): string[]{
 function CoinContainer() {
     const [first, setFirst] = useState(true);
     const socket = useSelector((state: RootState) => state.connect_socket.connectSocket);
-    const marketList = useSelector((state: RootState) => state.market_list.marketList);
+
+    //const marketList = useSelector((state: RootState) => state.market_list.marketList);
+    const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
     const marketListData = useSelector((state: RootState) => state.market_list.marketList.data);
+
     const coinData: any = useSelector((state: RootState) => state.get_coin);
 
     console.log(coinData);
@@ -37,15 +40,15 @@ function CoinContainer() {
                 reqType: "ticker"
             }));
         }
-    }, [dispatch, first, marketList, marketListData, socket.data])
+    }, [dispatch, first, marketListData, socket.data])
 
 
-    if(marketList.error){
+    if(marketListError){
         <Wrapper>
             <div>
                 Network Error. 
                 <br/>
-                error content : [{marketList.error}]
+                error content : [{marketListError}]
             </div>
         </Wrapper>
     }
