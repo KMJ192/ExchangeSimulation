@@ -23,7 +23,6 @@ declare global {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const sagaMiddleware = createSagaMiddleware();
-//const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk, sagaMiddleware)));
 sagaMiddleware.run(rootSaga);
 

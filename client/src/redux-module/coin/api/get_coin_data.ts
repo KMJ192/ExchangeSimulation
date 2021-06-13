@@ -26,5 +26,5 @@ export default function upbitWebSocketNetworking({ws, marketList, reqType} : Req
             ws.close();
         }
         return unsubscribe;
-    }, buffers.expanding(500) || buffers.none());
+    }, buffers.expanding(1000) || buffers.none());
 }
