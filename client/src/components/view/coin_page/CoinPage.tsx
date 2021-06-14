@@ -1,7 +1,6 @@
 import React from 'react';
-
 import MainChart from './chart/MainChart';
-import RealTimeTable from './real_time_info/RealTimeTable';
+import RealTimeTable from './real_time_info/RealTimeList';
 import SellBuy from './sell_buy/SellBuy';
 import DealState from './deal_state/DealState';
 

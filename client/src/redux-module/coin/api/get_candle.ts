@@ -16,7 +16,7 @@ function getDayCandle({marketCode, time}: CandleParam) {
 function getWeekCandle({marketCode, time}: CandleParam){
     return requestToUpbit(`https://api.upbit.com/v1/candles/weeks?market=${marketCode}&to=${time}&count=200`);
 }
-async function getMonthCandle({marketCode, time}: CandleParam){
+function getMonthCandle({marketCode, time}: CandleParam){
     return requestToUpbit(`https://api.upbit.com/v1/candles/months?market=${marketCode}&to=${time}&count=200`);
 }
 export {
