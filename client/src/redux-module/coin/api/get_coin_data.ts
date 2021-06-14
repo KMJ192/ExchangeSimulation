@@ -2,7 +2,7 @@ import { buffers, END, eventChannel } from "redux-saga";
 import { Ticker, Trade, Orderbook } from "../get_coin/types";
 import { ReqUpbitSocketParam } from '../get_coin/types';
 
-export default function upbitWebSocketChannel({ws, marketList, reqType} : ReqUpbitSocketParam){
+function upbitWebSocketChannel({ws, marketList, reqType} : ReqUpbitSocketParam){
     return eventChannel<Ticker | Trade | Orderbook>(emit => {
         ws.onopen = () => {
             const sendData = JSON.stringify([
@@ -27,4 +27,12 @@ export default function upbitWebSocketChannel({ws, marketList, reqType} : ReqUpb
         }
         return unsubscribe;
     }, buffers.expanding(200) || buffers.none());
+}
+async function getInitCandles(){
+
+}
+
+export {
+    upbitWebSocketChannel,
+    getInitCandles
 }

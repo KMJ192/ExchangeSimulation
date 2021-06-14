@@ -1,6 +1,6 @@
 import { EventChannel } from "redux-saga";
 import { call, delay, flush, put, takeEvery } from "redux-saga/effects";
-import upbitWebSocketChannel from "../api/get_coin_data";
+import { upbitWebSocketChannel } from "../api/get_coin_data";
 import { getCoinDataAsync, GET_COINDATA } from "./action";
 import { Ticker, Trade, Orderbook } from "./types";
 
