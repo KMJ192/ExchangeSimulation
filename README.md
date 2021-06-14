@@ -21,6 +21,8 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 
 ### 할일
 front-end
+ - upbit candle 데이터 reducer, redux-saga 모듈 완성
+ - candle데이터 한번에 최대 200개 받아올 수 있으므로 request parameter에 스크롤 움직임에 따른 시간 계산 로직 추가
  - upbit에서 받아온 데이터 시각화
   + light-weight chart 사용?
   + react-finacial-chart 사용?

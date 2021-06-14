@@ -74,7 +74,7 @@ export type GetCoinDataAction = ActionType<typeof actions>;
 export type GetCoinDataState = {
     coinData: {
         loading: boolean;
-        data: Ticker | null;
+        data: Ticker | Trade | Orderbook | null;
         error: Error | null;
     }
 };

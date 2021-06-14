@@ -7,15 +7,13 @@ import { Ticker, Trade, Orderbook } from "./types";
 function socketDataFilter(socketData: Ticker | Trade | Orderbook){
   const val: Ticker[] | Trade[] | Orderbook[] = Object.values(socketData);
   const filterData: any = {};
-  if(val.length > 0){
-    for(let i = 0; i < val.length; i++){
-      if(filterData[val[i].code]){
-        filterData[val[i].code] 
-          = (filterData[val[i].code].timestamp > val[i].timestamp) ?
-            filterData[val[i].code] : val[i];
-      }else{
-        filterData[val[i].code] = val[i];
-      }
+  for(let i = 0; i < val.length; i++){
+    if(filterData[val[i].code]){
+      filterData[val[i].code] 
+        = (filterData[val[i].code].timestamp > val[i].timestamp) ?
+          filterData[val[i].code] : val[i];
+    }else{
+      filterData[val[i].code] = val[i];
     }
   }
   return filterData;
