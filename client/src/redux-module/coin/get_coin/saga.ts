@@ -9,9 +9,8 @@ function socketDataFilter(socketData: Ticker | Trade | Orderbook){
   const filterData: any = {};
   for(let i = 0; i < val.length; i++){
     if(filterData[val[i].code]){
-      filterData[val[i].code] 
-        = (filterData[val[i].code].timestamp > val[i].timestamp) ?
-          filterData[val[i].code] : val[i];
+      filterData[val[i].code] = 
+        (filterData[val[i].code].timestamp > val[i].timestamp) ? filterData[val[i].code] : val[i];
     }else{
       filterData[val[i].code] = val[i];
     }

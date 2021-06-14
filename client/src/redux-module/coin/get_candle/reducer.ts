@@ -8,20 +8,20 @@ import {
     GET_WEEK_CANDLE,
     GET_WEEK_CANDLE_SUCCESS,
     GET_WEEK_CANDLE_ERROR,
-    // GET_MONTH_CANDLE,
-    // GET_MONTH_CANDLE_SUCCESS,
-    // GET_MONTH_CANDLE_ERROR
+    GET_MONTH_CANDLE,
+    GET_MONTH_CANDLE_SUCCESS,
+    GET_MONTH_CANDLE_ERROR
 } from "./action";
 import { 
     CandleAction, 
     MinuteCandleState, 
     DayCandleState, 
     WeekCandleState, 
-    //MonthCandleState,
+    MonthCandleState,
     InitialMinuteCandle, 
     InitialDayCandle, 
     InitialWeekCandle, 
-    //InitialMonthCandle
+    InitialMonthCandle
 } from "./types";
 
 function minuteCandleReducer(
@@ -32,7 +32,7 @@ function minuteCandleReducer(
         case GET_MINUTE_CANDLE:
             return {
                 ...state,
-                monthCandle: {
+                minuteCandle: {
                     loading: true,
                     data: null,
                     error: null
@@ -41,7 +41,7 @@ function minuteCandleReducer(
         case GET_MINUTE_CANDLE_SUCCESS:
             return {
                 ...state,
-                monthCandle: {
+                minuteCandle: {
                     loading: false,
                     data: action.payload,
                     error: null
@@ -50,7 +50,7 @@ function minuteCandleReducer(
         case GET_MINUTE_CANDLE_ERROR:
             return{
                 ...state,
-                monthCandle: {
+                minuteCandle: {
                     loading: false,
                     data: null,
                     error: action.payload
@@ -69,7 +69,7 @@ function dayCandleReducer(
         case GET_DAY_CANDLE:
             return {
                 ...state,
-                monthCandle: {
+                dayCandle: {
                     loading: true,
                     data: null,
                     error: null
@@ -78,7 +78,7 @@ function dayCandleReducer(
         case GET_DAY_CANDLE_SUCCESS:
             return {
                 ...state,
-                monthCandle: {
+                dayCandle: {
                     loading: false,
                     data: action.payload,
                     error: null
@@ -87,7 +87,7 @@ function dayCandleReducer(
         case GET_DAY_CANDLE_ERROR:
             return{
                 ...state,
-                monthCandle: {
+                dayCandle: {
                     loading: false,
                     data: null,
                     error: action.payload
@@ -106,7 +106,7 @@ function weekCandleReducer(
         case GET_WEEK_CANDLE:
             return {
                 ...state,
-                monthCandle: {
+                weekCandle: {
                     loading: true,
                     data: null,
                     error: null
@@ -115,13 +115,50 @@ function weekCandleReducer(
         case GET_WEEK_CANDLE_SUCCESS:
             return {
                 ...state,
-                monthCandle: {
+                weekCandle: {
                     loading: false,
                     data: action.payload,
                     error: null
                 }
             }
         case GET_WEEK_CANDLE_ERROR:
+            return{
+                ...state,
+                weekCandle: {
+                    loading: false,
+                    data: null,
+                    error: action.payload
+                }
+            }
+        default: 
+            return state;
+    }
+}
+
+function monthCandleReducer(
+    state: MonthCandleState = InitialMonthCandle,
+    action: CandleAction
+){
+    switch(action.type){
+        case GET_MONTH_CANDLE:
+            return {
+                ...state,
+                monthCandle: {
+                    loading: true,
+                    data: null,
+                    error: null
+                } 
+            }
+        case GET_MONTH_CANDLE_SUCCESS:
+            return {
+                ...state,
+                monthCandle: {
+                    loading: false,
+                    data: action.payload,
+                    error: null
+                }
+            }
+        case GET_MONTH_CANDLE_ERROR:
             return{
                 ...state,
                 monthCandle: {
@@ -134,46 +171,9 @@ function weekCandleReducer(
             return state;
     }
 }
-
-// function monthCandleReducer(
-//     state: MonthCandleState = InitialMonthCandle,
-//     action: CandleAction
-// ){
-//     switch(action.type){
-//         case GET_MONTH_CANDLE:
-//             return {
-//                 ...state,
-//                 monthCandle: {
-//                     loading: true,
-//                     data: null,
-//                     error: null
-//                 } 
-//             }
-//         case GET_MONTH_CANDLE_SUCCESS:
-//             return {
-//                 ...state,
-//                 monthCandle: {
-//                     loading: false,
-//                     data: action.payload,
-//                     error: null
-//                 }
-//             }
-//         case GET_MONTH_CANDLE_ERROR:
-//             return{
-//                 ...state,
-//                 monthCandle: {
-//                     loading: false,
-//                     data: null,
-//                     error: action.payload
-//                 }
-//             }
-//         default: 
-//             return state;
-//     }
-// }
 export {
     minuteCandleReducer,
     dayCandleReducer,
     weekCandleReducer,
-    //monthCandleReducer
+    monthCandleReducer
 };

@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import CoinPage from '../../components/view/coin_page/CoinPage'
 import Wrapper from '../../components/wrapper/Wrapper'
 import { connectSocketThunk } from '../../redux-module/coin/connect_socket';
-import { getMinuteCandleAsync } from '../../redux-module/coin/get_candle';
+//import { getDayCandleAsync, getMinuteCandleAsync, getMonthCandleAsync, getWeekCandleAsync } from '../../redux-module/coin/get_candle';
 import { getCoinDataAsync } from '../../redux-module/coin/get_coin/action';
 import { getMarketListThunk, MarketList } from '../../redux-module/coin/market_list';
+
 import { RootState } from '../../redux-module/RootReducer';
 
 function marketListToString(marketList: MarketList): string[]{
@@ -24,8 +25,6 @@ function CoinContainer() {
     //const coinData: any = useSelector((state: RootState) => state.get_coin);
     //console.log(coinData);
 
-    const minuteCandle = useSelector((state: RootState) => state.minute_candle);
-    //console.log(minuteCandle);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,10 +32,22 @@ function CoinContainer() {
             setFirst(false);
             dispatch(getMarketListThunk());
             dispatch(connectSocketThunk("wss://api.upbit.com/websocket/v1"));
-            dispatch(getMinuteCandleAsync.request({
-                marketCode: "KRW-BTC",
-                time: "2020-01-01T00:00:00Z"
-            }));
+            // dispatch(getMinuteCandleAsync.request({
+            //     marketCode: "KRW-BTC",
+            //     time: "2020-01-01T00:00:00Z"
+            // }));
+            // dispatch(getDayCandleAsync.request({
+            //     marketCode: "KRW-BTC",
+            //     time: "2020-01-01T00:00:00Z"
+            // }));
+            // dispatch(getWeekCandleAsync.request({
+            //     marketCode: "KRW-BTC",
+            //     time: "2020-01-01T00:00:00Z"
+            // }));
+            // dispatch(getMonthCandleAsync.request({
+            //     marketCode: "KRW-BTC",
+            //     time: "2020-01-01T00:00:00Z"
+            // }));
         }
         if(socket.data && socket.data.socketClient && marketListData){
             const marketList: string[] = marketListToString(marketListData);

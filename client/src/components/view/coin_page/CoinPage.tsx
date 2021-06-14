@@ -1,11 +1,11 @@
 import React from 'react';
 
-import MainChart from './MainChart';
-import RealTimeTable from './RealTimeTable';
-import PlotInvest from './PlotInvest';
-import DealState from './DealState';
+import MainChart from './chart/MainChart';
+import RealTimeTable from './real_time_info/RealTimeTable';
+import SellBuy from './sell_buy/SellBuy';
+import DealState from './deal_state/DealState';
 
-import { PDGrid } from './CoinPageStyle';
+import { PSGrid } from './CoinPageStyle';
 import './CoinPage.scss';
 
 function CoinPage() { 
@@ -14,10 +14,10 @@ function CoinPage() {
         <div className="coin-page-container">
             <div className="chart-plotinv-dealstate-container">
                 <MainChart/>
-                <PDGrid>
+                <PSGrid>
                     <DealState/>
-                    <PlotInvest/>
-                </PDGrid>
+                    <SellBuy/>
+                </PSGrid>
             </div>
             <RealTimeTable/>
         </div>

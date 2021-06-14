@@ -1,6 +1,6 @@
 import React from 'react';
-import { RealTimeTableStyled } from './CoinPageStyle';
-import './CoinPage.scss';
+import { RealTimeTableStyled } from '../CoinPageStyle';
+import '../CoinPage.scss';
 
 function RealTimeTable() {
     return (

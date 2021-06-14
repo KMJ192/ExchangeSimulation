@@ -1,6 +1,6 @@
 import React from 'react';
-import './CoinPage.scss'
-import { DealStateStyled } from './CoinPageStyle';
+import { DealStateStyled } from '../CoinPageStyle';
+import '../CoinPage.scss'
 
 function DealState() {
     return (

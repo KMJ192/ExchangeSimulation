@@ -8,7 +8,7 @@ import {
     minute_candle,
     day_candle,
     week_candle,
-    //month_candle
+    month_candle
 } from './coin/get_candle';
 import { coinDataSaga } from "./coin/get_coin/saga";
 import { candleSaga } from "./coin/get_candle/saga";
@@ -23,11 +23,11 @@ const rootReducer = combineReducers({
     minute_candle,
     day_candle,
     week_candle,
-    //month_candle
+    month_candle
 });
 
 export default rootReducer;
-export type RootState= ReturnType <typeof rootReducer>
+export type RootState = ReturnType <typeof rootReducer>
 
 export function* rootSaga(){
     yield all([coinDataSaga(), candleSaga()]);
