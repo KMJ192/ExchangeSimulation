@@ -81,3 +81,22 @@ npm install --save-dev eslint-plugin-nestjs
 //web socket
 //npm install --save ws @types/ws
 npm i -s @nestjs/websockets @nestjs/platform-ws
+
+
+
+// dispatch(getMinuteCandleAsync.request({
+//     marketCode: "KRW-BTC",
+//     time: "2020-01-01T00:00:00Z"
+// }));
+// dispatch(getDayCandleAsync.request({
+//     marketCode: "KRW-BTC",
+//     time: "2020-01-01T00:00:00Z"
+// }));
+// dispatch(getWeekCandleAsync.request({
+//     marketCode: "KRW-BTC",
+//     time: "2020-01-01T00:00:00Z"
+// }));
+// dispatch(getMonthCandleAsync.request({
+//     marketCode: "KRW-BTC",
+//     time: "2020-01-01T00:00:00Z"
+// }));

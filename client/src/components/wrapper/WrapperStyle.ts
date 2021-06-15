@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const ToggleBtn = styled.div`
+    margin-top: 66px;
     ${(props : any) => props.toggle ? 
         css`
             margin-left: 150px;

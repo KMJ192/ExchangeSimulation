@@ -3,14 +3,24 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux-module/RootReducer';
 import { MarketList } from '../../../../redux-module/coin/market_list';
 import RealTimeListItem from './RealTimeListItem';
-
-import { 
-    Container
- } from './RealTimeListStyle';
+import { Container } from './RealTimeListStyle';
 import './RealTimeList.scss';
+
+interface RealTimeCoinData{
+    market: string;
+    korean_name: string;
+    english_name: string;
+    tradeprice: string;
+    signed_change_rate: string;
+    acc_trade_price_24h: string;
+}
 
 function marketListFilterKRW(marketList: MarketList){
     return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));
+}
+
+function syncData(marketList: MarketList, coinData: RealTimeCoinData){
+
 }
 
 function RealTimeList() {
@@ -18,9 +28,10 @@ function RealTimeList() {
     const [marketList, setMarketList] = useState<MarketList[]>([{
         market: "",
         korean_name: "",
-        english_name: ""
+        english_name: "",
     }]);
     const { data, loading, error } = useSelector((state: RootState) => state.market_list.marketList);
+    const realTimeData = useSelector((state: RootState) => state.get_coin.coinData);
 
     useEffect(() => {
         if(data && mount){
@@ -46,29 +57,32 @@ function RealTimeList() {
     return (
         <Container.Box className="real-time-list-container">
             <Container.SearchBox.Container className="real-time-list-search">
-                <Container.SearchBox.InputBox placeholder="검색" ></Container.SearchBox.InputBox>
+                <Container.SearchBox.InputBox placeholder="검색" />
                 <Container.SearchBox.Button>
-                    <i className="far fa-search"/>
                     검색
                 </Container.SearchBox.Button>
             </Container.SearchBox.Container>
+            <Container.Header className="real-time-list-header">
+                <div className="header-item">단위</div>
+                <div className="header-item">현재가</div>
+                <div className="header-item">전일대비</div>
+                <div className="header-item">거래금액</div>
+            </Container.Header>
             <Container.RealTimeList className="real-time-list">
-                <div className="real-time-list-item">
-                    인덱스 마켓 이름 영어
-                </div>
-                <hr/>
-                {marketList.length > 1 ?
-                marketList.map((market, key) => {
+                {marketList.length > 1 && !realTimeData.loading ?
+                marketList.map((market, index) => {
                     return(
-                        <>
+                        <li key={index}>
                             <RealTimeListItem 
-                                index={key}
                                 market={market.market}
                                 korean_name={market.korean_name}
                                 english_name={market.english_name}
+                                trade_price={"현재가"}
+                                signed_change_rate={"변동률"}
+                                acc_trade_price_24h={"누적거래량"}
                             />
-                            <hr/>
-                        </>
+                            <div className="b-line"/>
+                        </li>
                     );
                 })
                 :
@@ -79,4 +93,4 @@ function RealTimeList() {
     );
 }
 
-export default RealTimeList;
+export default React.memo(RealTimeList);

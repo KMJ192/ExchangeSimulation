@@ -20,8 +20,8 @@ function CoinContainer() {
     const marketListData = useSelector((state: RootState) => state.market_list.marketList.data);
     const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
 
-    //const coinData: any = useSelector((state: RootState) => state.get_coin);
-    //console.log(coinData);
+    const coinData: any = useSelector((state: RootState) => state.get_coin);
+    console.log(coinData);
 
     const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ function CoinContainer() {
         if(mount){
             setMount(false);
             dispatch(getMarketListThunk());
-            //dispatch(connectSocketThunk("wss://api.upbit.com/websocket/v1"));
+            dispatch(connectSocketThunk("wss://api.upbit.com/websocket/v1"));
             // dispatch(getMinuteCandleAsync.request({
             //     marketCode: "KRW-BTC",
             //     time: "2020-01-01T00:00:00Z"
@@ -47,14 +47,14 @@ function CoinContainer() {
             //     time: "2020-01-01T00:00:00Z"
             // }));
         }
-        // if(socket.data && socket.data.socketClient && marketListData){
-        //     const marketList: string[] = marketListToString(marketListData);
-        //     dispatch(getCoinDataAsync.request({
-        //         ws: socket.data.socketClient,
-        //         marketList: marketList,
-        //         reqType: "ticker"
-        //     }));
-        // }
+        if(socket.data && socket.data.socketClient && marketListData){
+            const marketList: string[] = marketListToString(marketListData);
+            dispatch(getCoinDataAsync.request({
+                ws: socket.data.socketClient,
+                marketList: marketList,
+                reqType: "ticker"
+            }));
+        }
     }, [dispatch, mount, marketListData, socket.data])
 
 

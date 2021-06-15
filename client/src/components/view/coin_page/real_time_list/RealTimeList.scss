@@ -1,31 +1,66 @@
-$padding : 5px;
+$padding-s : 5px;
+$fontsize-s: 12px;
+$fontsize-m: 14px;
+$fontsize-l: 18px;
+
+$box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
 
 .real-time-list-container{
     display: grid;
+    .real-time-list-search{
+        display: grid;
+        margin-left: 20px;
+        text-align: justify;
+        input{
+            border: none;
+            box-shadow: $box-shadow;
+        }
+        @media screen and (max-width: 768px) {
+            margin-left: 0px;
+        }
+    }
+    li{
+        list-style: none;
+        &:hover{
+            background-color: #cccccc;
+        }
+    }
+    .real-time-list{
+        background: #f6f6f6;
+        margin-left: 20px;
+        box-shadow: $box-shadow;
+        overflow: auto;
+        &::-webkit-scrollbar{
+            width: 5px;
+            height: 5px;
+        }
+        &::-webkit-scrollbar-thumb { 
+            background-color: rgba(50,50,50,.5);
+        }
+        @media screen and (max-width: 768px) {
+            margin-left: 0px;
+        }
+    }
+    .real-time-list-header{
+        display: grid;
+        margin: 0px 0px 7px 20px;
+        background: #f6f6f6;
+        box-shadow: $box-shadow;
+        padding: 7px $padding-s $padding-s $padding-s;
+        font-size: $fontsize-m;
+        @media screen and (max-width: 768px) {
+            margin-left: 0px;
+        }
+    }
 }
 
-.real-time-list{
-    background: #f6f6f6;
-    margin-left: 20px;
-    box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
-    padding: padding padding padding padding;
-    overflow-x: auto;
-    overflow-y: unset;
-    &::-webkit-scrollbar{
-        width: 5px;
-        height: 5px;
-    }
-    &::-webkit-scrollbar-thumb { 
-        background-color: rgba(50,50,50,.5);
-    }    
-    @media screen and (max-width: 768px) {
-        margin-left: 0px;
-    }
-}
-.real-time-list-search{
-    text-align: center;
-    margin-left: 15px;
-}
 .real-time-list-item{
-    margin-top: 10px;
+    display: grid;
+    padding: $padding-s $padding-s $padding-s $padding-s;
+    .market-nc{
+        font-size: $fontsize-s;
+    }
+    .current-price, .variation-rate, .trade-price{
+        font-size: $fontsize-s;
+    }
 }
