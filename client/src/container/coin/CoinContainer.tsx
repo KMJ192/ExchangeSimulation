@@ -88,7 +88,7 @@ function CoinContainer() {
                 <CoinPage/>
             }
         </Wrapper>
-    )
+    );
 }
 
 export default React.memo(CoinContainer);

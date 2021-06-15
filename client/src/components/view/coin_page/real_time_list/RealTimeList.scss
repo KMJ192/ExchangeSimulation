@@ -1,19 +1,31 @@
 $padding : 5px;
 
-.real-time-table{
+.real-time-list-container{
+    display: grid;
+}
+
+.real-time-list{
     background: #f6f6f6;
     margin-left: 20px;
     box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
     padding: padding padding padding padding;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: unset;
     &::-webkit-scrollbar{
         width: 5px;
         height: 5px;
     }
     &::-webkit-scrollbar-thumb { 
         background-color: rgba(50,50,50,.5);
-    }
+    }    
     @media screen and (max-width: 768px) {
         margin-left: 0px;
     }
+}
+.real-time-list-search{
+    text-align: center;
+    margin-left: 15px;
+}
+.real-time-list-item{
+    margin-top: 10px;
 }

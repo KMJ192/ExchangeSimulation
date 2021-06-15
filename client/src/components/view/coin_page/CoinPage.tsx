@@ -1,6 +1,6 @@
 import React from 'react';
 import MainChart from './chart/MainChart';
-import RealTimeTable from './real_time_info/RealTimeList';
+import RealTimeList from './real_time_list/RealTimeList';
 import SellBuy from './sell_buy/SellBuy';
 import DealState from './deal_state/DealState';
 
@@ -18,7 +18,7 @@ function CoinPage() {
                     <SellBuy/>
                 </PSGrid>
             </div>
-            <RealTimeTable/>
+            <RealTimeList/>
         </div>
     )
 }
