@@ -1,10 +1,10 @@
-import { ConnectedSocket } from "../connect_socket/types";
-
 //param socket address
-export const createSocket = (addr: string): ConnectedSocket => {
-    const ws = new WebSocket(addr);
-    ws.binaryType = "arraybuffer";
-    return {
-        socketClient: ws
-    };
+export const createUpibtSocket = (): WebSocket => {
+    try{
+        const ws = new WebSocket("wss://api.upbit.com/websocket/v1");
+        ws.binaryType = "arraybuffer";
+        return ws;
+    }catch(e: any){
+        return e;
+    }
 }

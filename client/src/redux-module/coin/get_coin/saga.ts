@@ -1,7 +1,13 @@
 import { EventChannel } from "redux-saga";
 import { call, delay, flush, put, takeEvery } from "redux-saga/effects";
 import { upbitWebSocketChannel } from "../api/get_coin_data";
-import { getCoinDataAsync, GET_COINDATA } from "./action";
+import { createUpibtSocket } from "../api/socket";
+import { 
+  getTickerAsync, 
+  getTradeAsync, 
+  getOrderbookAsync, 
+  GET_ORDERBOOK, GET_TICKER, GET_TRADE 
+} from "./action";
 import { Ticker, Trade, Orderbook } from "./types";
 
 function socketDataFilter(socketData: Ticker | Trade | Orderbook){
@@ -18,24 +24,77 @@ function socketDataFilter(socketData: Ticker | Trade | Orderbook){
   return filterData;
 }
 
-function* getCoinDataSaga(action: ReturnType<typeof getCoinDataAsync.request>){
+function* getTickerSaga(action: ReturnType<typeof getTickerAsync.request>){
   try{
-    const coinData: EventChannel<Ticker | Trade | Orderbook> = yield call(upbitWebSocketChannel, action.payload);
-    while(1){
-      const socketData: Ticker | Trade | Orderbook = yield flush(coinData);
-      const filterData: Ticker | Trade | Orderbook = yield socketDataFilter(socketData);
-      if(Object.keys(filterData).length){
-        yield put(getCoinDataAsync.success(filterData));
+    const ws = createUpibtSocket();
+    const coinData: EventChannel<Ticker> = yield call(upbitWebSocketChannel, ws, action.payload);
+    try{
+      while(1){
+        const socketData: Ticker = yield flush(coinData);
+        const filterData: Ticker = yield socketDataFilter(socketData);
+        if(Object.keys(filterData).length){
+          yield put(getTickerAsync.success(filterData));
+        }
+        yield delay(1000);
       }
-      yield delay(1000);
+    }catch(e: any){
+      yield put(getTickerAsync.failure(e));
+    }finally{
+      ws.close();
     }
   }catch(e: any){
-    yield put(getCoinDataAsync.failure(e));
-  }finally{
-    action.payload.ws.close();
+    yield put(getTickerAsync.failure(e));
+  }
+}
+
+function* getTradeSaga(action: ReturnType<typeof getTradeAsync.request>){
+  try{
+    const ws = createUpibtSocket();
+    const coinData: EventChannel<Trade> = yield call(upbitWebSocketChannel, ws, action.payload);
+    try{
+      while(1){
+        const socketData: Trade = yield flush(coinData);
+        const filterData: Trade = yield socketDataFilter(socketData);
+        if(Object.keys(filterData).length){
+          yield put(getTradeAsync.success(filterData));
+        }
+        yield delay(1000);
+      }
+    }catch(e: any){
+      yield put(getTradeAsync.failure(e));
+    }finally{
+      ws.close();
+    }
+  }catch(e: any){
+    yield put(getTradeAsync.failure(e));
+  }
+}
+
+function* getOrderbookSaga(action: ReturnType<typeof getOrderbookAsync.request>){
+  try{
+    const ws = createUpibtSocket();
+    const coinData: EventChannel<Orderbook> = yield call(upbitWebSocketChannel, ws, action.payload);
+    try{
+      while(1){
+        const socketData: Orderbook = yield flush(coinData);
+        const filterData: Orderbook = yield socketDataFilter(socketData);
+        if(Object.keys(filterData).length){
+          yield put(getOrderbookAsync.success(filterData));
+        }
+        yield delay(1000);
+      }
+    }catch(e: any){
+      yield put(getOrderbookAsync.failure(e));
+    }finally{
+      ws.close();
+    }
+  }catch(e: any){
+    yield put(getOrderbookAsync.failure(e));
   }
 }
 
 export function* coinDataSaga(){
-    yield takeEvery(GET_COINDATA, getCoinDataSaga);
+    yield takeEvery(GET_TICKER, getTickerSaga);
+    yield takeEvery(GET_TRADE, getTradeSaga);
+    yield takeEvery(GET_ORDERBOOK, getOrderbookSaga);
 }

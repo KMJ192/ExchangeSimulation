@@ -6,21 +6,36 @@ import RealTimeListItem from './RealTimeListItem';
 import { Container } from './RealTimeListStyle';
 import './RealTimeList.scss';
 
-interface RealTimeCoinData{
-    market: string;
-    korean_name: string;
-    english_name: string;
-    tradeprice: string;
-    signed_change_rate: string;
-    acc_trade_price_24h: string;
-}
+// interface RealTimeCoinData{
+//     market: string;
+//     korean_name: string;
+//     english_name: string;
+//     tradeprice: string;
+//     signed_change_rate: string;
+//     acc_trade_price_24h: string;
+// }
 
 function marketListFilterKRW(marketList: MarketList){
     return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));
 }
 
-function syncData(marketList: MarketList, coinData: RealTimeCoinData){
+// function syncData(marketList: MarketList, coinData: RealTimeCoinData){
 
+// }
+
+function loadingComponent(){
+    return(
+        <Container.RealTimeList className="real-time-list">
+            loading...
+        </Container.RealTimeList>
+    );
+}
+function errorComponent(error: Error){
+    return(
+        <Container.RealTimeList className="real-time-list">
+            Network error : [{error}]
+        </Container.RealTimeList>
+    );
 }
 
 function RealTimeList() {
@@ -31,29 +46,24 @@ function RealTimeList() {
         english_name: "",
     }]);
     const { data, loading, error } = useSelector((state: RootState) => state.market_list.marketList);
-    const realTimeData = useSelector((state: RootState) => state.get_coin.coinData);
+    const tickerData = useSelector((state: RootState) => state.ticker.ticker);
+    const tradeData = useSelector((state: RootState) => state.trade.trade);
+    console.log(tickerData);
+    console.log(tradeData);
 
     useEffect(() => {
         if(data && mount){
             setMount(false);
             setMarketList(marketListFilterKRW(data));
         }
+        
+        // if(realTimeData.data){
+        //     syncData(data, realTimeData.data);
+        // }
     }, [data, marketList, mount]);
 
-    if(loading){
-        return(
-            <Container.RealTimeList className="real-time-list">
-                loading...
-            </Container.RealTimeList>
-        );
-    }
-    if(error){
-        return(
-            <Container.RealTimeList className="real-time-list">
-                Network error : [{error}]
-            </Container.RealTimeList>
-        );
-    }
+    if(loading){ return loadingComponent();}
+    if(error){ return errorComponent(error);}
     return (
         <Container.Box className="real-time-list-container">
             <Container.SearchBox.Container className="real-time-list-search">
@@ -69,7 +79,7 @@ function RealTimeList() {
                 <div className="header-item">거래금액</div>
             </Container.Header>
             <Container.RealTimeList className="real-time-list">
-                {marketList.length > 1 && !realTimeData.loading ?
+                {marketList.length > 1 && !tickerData.loading ?
                 marketList.map((market, index) => {
                     return(
                         <li key={index}>

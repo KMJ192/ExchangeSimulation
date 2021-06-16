@@ -70,16 +70,47 @@ export interface Orderbook{
     type: string;
 }
 
-export type GetCoinDataAction = ActionType<typeof actions>;
-export type GetCoinDataState = {
-    coinData: {
+export type GetSocketDataAction = ActionType<typeof actions>;
+
+export type GetTickerState = {
+    ticker: {
+        loading: boolean;
+        data: Ticker | null;
+        error: Error | null;
+    }
+};
+export const InitialGetTicker: GetTickerState = {
+    ticker: {
+        loading: false,
+        data: null,
+        error: null
+    }
+}
+
+export type GetTradeState = {
+    trade: {
         loading: boolean;
         data: Ticker | Trade | Orderbook | null;
         error: Error | null;
     }
 };
-export const InitialCoinData: GetCoinDataState = {
-    coinData: {
+export const InitialGetTrade: GetTradeState = {
+    trade: {
+        loading: false,
+        data: null,
+        error: null
+    }
+}
+
+export type GetOrderbookState = {
+    orderbook: {
+        loading: boolean;
+        data: Ticker | Trade | Orderbook | null;
+        error: Error | null;
+    }
+};
+export const InitialGetOrderbook: GetOrderbookState = {
+    orderbook: {
         loading: false,
         data: null,
         error: null
@@ -87,7 +118,6 @@ export const InitialCoinData: GetCoinDataState = {
 }
 
 export interface ReqUpbitSocketParam{
-    ws: WebSocket;
     marketList: string[];
     reqType: "ticker" | "orderbook" | "trade";
 }
