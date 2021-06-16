@@ -73,14 +73,16 @@ function RealTimeList() {
                 marketList.map((market, index) => {
                     return(
                         <li key={index}>
-                            <RealTimeListItem 
-                                market={market.market}
-                                korean_name={market.korean_name}
-                                english_name={market.english_name}
-                                trade_price={"현재가"}
-                                signed_change_rate={"변동률"}
-                                acc_trade_price_24h={"누적거래량"}
-                            />
+                            <div className="list-item">
+                                <RealTimeListItem 
+                                    market={market.market}
+                                    korean_name={market.korean_name}
+                                    english_name={market.english_name}
+                                    trade_price={"현재가"}
+                                    signed_change_rate={"변동률"}
+                                    acc_trade_price_24h={"누적거래량"}
+                                />
+                            </div>
                             <div className="b-line"/>
                         </li>
                     );

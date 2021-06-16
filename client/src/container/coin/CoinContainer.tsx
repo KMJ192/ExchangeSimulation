@@ -30,23 +30,12 @@ function CoinContainer() {
             setMount(false);
             dispatch(getMarketListThunk());
             dispatch(connectSocketThunk("wss://api.upbit.com/websocket/v1"));
-            // dispatch(getMinuteCandleAsync.request({
-            //     marketCode: "KRW-BTC",
-            //     time: "2020-01-01T00:00:00Z"
-            // }));
-            // dispatch(getDayCandleAsync.request({
-            //     marketCode: "KRW-BTC",
-            //     time: "2020-01-01T00:00:00Z"
-            // }));
-            // dispatch(getWeekCandleAsync.request({
-            //     marketCode: "KRW-BTC",
-            //     time: "2020-01-01T00:00:00Z"
-            // }));
-            // dispatch(getMonthCandleAsync.request({
-            //     marketCode: "KRW-BTC",
-            //     time: "2020-01-01T00:00:00Z"
-            // }));
         }
+        // if(!socket.data){
+        //     setInterval(() => {
+        //         dispatch(connectSocketThunk("wss://api.upbit.com/websocket/v1"));
+        //     }, 1000);
+        // }
         if(socket.data && socket.data.socketClient && marketListData){
             const marketList: string[] = marketListToString(marketListData);
             dispatch(getCoinDataAsync.request({
