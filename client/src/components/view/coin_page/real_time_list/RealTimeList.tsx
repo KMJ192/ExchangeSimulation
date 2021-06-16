@@ -6,20 +6,20 @@ import RealTimeListItem from './RealTimeListItem';
 import { Container } from './RealTimeListStyle';
 import './RealTimeList.scss';
 
-// interface RealTimeCoinData{
-//     market: string;
-//     korean_name: string;
-//     english_name: string;
-//     tradeprice: string;
-//     signed_change_rate: string;
-//     acc_trade_price_24h: string;
-// }
+interface RealTimeCoinData{
+    market: string;
+    korean_name: string;
+    english_name: string;
+    tradeprice: string;
+    signed_change_rate: string;
+    acc_trade_price_24h: string;
+}
 
 function marketListFilterKRW(marketList: MarketList){
     return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));
 }
 
-// function syncData(marketList: MarketList, coinData: RealTimeCoinData){
+// function syncData(marketList: MarketList, coinData: MarketList): RealTimeCoinData[]{
 
 // }
 
@@ -47,20 +47,20 @@ function RealTimeList() {
     }]);
     const { data, loading, error } = useSelector((state: RootState) => state.market_list.marketList);
     const tickerData = useSelector((state: RootState) => state.ticker.ticker);
-    const tradeData = useSelector((state: RootState) => state.trade.trade);
+    // const tradeData = useSelector((state: RootState) => state.trade.trade);
     console.log(tickerData);
-    console.log(tradeData);
+    console.log(marketList);
+    // console.log(tradeData);
 
     useEffect(() => {
         if(data && mount){
             setMount(false);
             setMarketList(marketListFilterKRW(data));
-        }
-        
-        // if(realTimeData.data){
-        //     syncData(data, realTimeData.data);
+        }        
+        // if(data && tickerData.data){
+        //     syncData(data, tickerData.data);
         // }
-    }, [data, marketList, mount]);
+    }, [data, marketList, mount, tickerData.data]);
 
     if(loading){ return loadingComponent();}
     if(error){ return errorComponent(error);}
