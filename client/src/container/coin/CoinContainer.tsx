@@ -32,14 +32,14 @@ function CoinContainer() {
                 marketList: marketList,
                 reqType: "ticker"
             }));
-            // dispatch(getTradeAsync.request({
-            //     marketList: marketList,
-            //     reqType: "trade"
-            // }));            
-            // dispatch(getOrderbookAsync.request({
-            //     marketList: marketList,
-            //     reqType: "orderbook"
-            // }));
+            dispatch(getTradeAsync.request({
+                marketList: marketList,
+                reqType: "trade"
+            }));            
+            dispatch(getOrderbookAsync.request({
+                marketList: marketList,
+                reqType: "orderbook"
+            }));
         }
     }, [dispatch, mount, marketListData])
 

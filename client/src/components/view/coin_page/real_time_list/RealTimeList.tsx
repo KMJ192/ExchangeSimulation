@@ -2,26 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux-module/RootReducer';
 import { MarketList } from '../../../../redux-module/coin/market_list';
+import { Ticker } from '../../../../redux-module/coin/get_coin';
 import RealTimeListItem from './RealTimeListItem';
+
 import { Container } from './RealTimeListStyle';
 import './RealTimeList.scss';
-
-interface RealTimeCoinData{
-    market: string;
-    korean_name: string;
-    english_name: string;
-    tradeprice: string;
-    signed_change_rate: string;
-    acc_trade_price_24h: string;
-}
-
-function marketListFilterKRW(marketList: MarketList){
-    return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));
-}
-
-// function syncData(marketList: MarketList, coinData: MarketList): RealTimeCoinData[]{
-
-// }
 
 function loadingComponent(){
     return(
@@ -38,29 +23,52 @@ function errorComponent(error: Error){
     );
 }
 
+function marketListFilterKRW(marketList: MarketList){
+    return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));
+}
+
+function syncData(marketList: any[], coinData: Ticker){
+    const tmp: any = coinData;
+    let coinArray: string[] = Object.keys(coinData);
+    let merge: string[][] = [];
+    for(let i = 0; i < marketList.length; i++){}
+
+    for(let i = 0; i < marketList.length; i++){
+        for(let j = 0; j < coinArray.length; j++){
+            if(marketList[i].market === coinArray[j]){
+                let mergeTmp: string[] = [];
+                mergeTmp.push(marketList[i].market);
+                mergeTmp.push(marketList[i].korean_name);
+                mergeTmp.push(marketList[i].english_name);
+                mergeTmp.push(tmp[coinArray[j]]["trade_price"]);
+                mergeTmp.push(tmp[coinArray[j]]["signed_change_rate"]);
+                mergeTmp.push(tmp[coinArray[j]]["acc_trade_price_24h"]);
+                merge.push(mergeTmp);
+            }
+        }
+    }
+    return merge;
+}
+
 function RealTimeList() {
     const [mount, setMount] = useState(true);
-    const [marketList, setMarketList] = useState<MarketList[]>([{
+    const [marketList, setMarketList] = useState<any[]>([{
         market: "",
         korean_name: "",
         english_name: "",
     }]);
     const { data, loading, error } = useSelector((state: RootState) => state.market_list.marketList);
     const tickerData = useSelector((state: RootState) => state.ticker.ticker);
-    // const tradeData = useSelector((state: RootState) => state.trade.trade);
-    console.log(tickerData);
-    console.log(marketList);
-    // console.log(tradeData);
 
     useEffect(() => {
         if(data && mount){
             setMount(false);
             setMarketList(marketListFilterKRW(data));
-        }        
-        // if(data && tickerData.data){
-        //     syncData(data, tickerData.data);
-        // }
-    }, [data, marketList, mount, tickerData.data]);
+        }
+        if(marketList && tickerData.data){
+            console.log(syncData(marketList, tickerData.data));
+        }
+    }, [data, marketList, mount, tickerData, tickerData.data]);
 
     if(loading){ return loadingComponent();}
     if(error){ return errorComponent(error);}
@@ -89,8 +97,8 @@ function RealTimeList() {
                                     korean_name={market.korean_name}
                                     english_name={market.english_name}
                                     trade_price={"현재가"}
-                                    signed_change_rate={"변동률"}
-                                    acc_trade_price_24h={"누적거래량"}
+                                    signed_change_rate={"전일대비"}
+                                    acc_trade_price_24h={"변동률"}
                                 />
                             </div>
                             <div className="b-line"/>
