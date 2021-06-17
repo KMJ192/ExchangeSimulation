@@ -8,7 +8,6 @@ $box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
 .real-time-list-container{
     display: grid;
     .real-time-list-search{
-        display: grid;
         margin-left: 20px;
         text-align: justify;
         input{
@@ -33,11 +32,12 @@ $box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
         box-shadow: $box-shadow;
         overflow: auto;
         &::-webkit-scrollbar{
-            width: 5px;
+            width: 1px;
             height: 5px;
+            //display: none;
         }
         &::-webkit-scrollbar-thumb { 
-            background-color: rgba(50,50,50,.5);
+            background-color: rgba(5, 5, 5, 0.5);
         }
         @media screen and (max-width: 768px) {
             margin-left: 0px;
@@ -59,10 +59,14 @@ $box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
 .real-time-list-item{
     display: grid;
     padding: $padding-s $padding-s $padding-s $padding-s;
-    .market-nc{
-        font-size: $fontsize-s;
+    font-size: $fontsize-m;
+    .variation{
+        grid-template-rows: 18px 10px;
+        .variation-rate, .variation-price{
+            float: right;
+        }
     }
-    .current-price, .variation-rate, .trade-price{
-        font-size: $fontsize-s;
+    .str{
+        color: #252121;
     }
 }

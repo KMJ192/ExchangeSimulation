@@ -13,6 +13,7 @@ import { paceCaseUserPatch, pageCaseLogined } from './auth/PageCase';
 import './global_style/button.scss';
 import './global_style/inputbox.scss';
 import './global_style/line.scss';
+import './global_style/sort.scss';
 import LoginContainer from './container/login/LoginContainer';
 import DefaultContainer from './container/default/DefaultContainer';
 import UserPatchContainer from './container/user_patch/UserPatchContainer';

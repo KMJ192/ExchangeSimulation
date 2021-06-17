@@ -35,7 +35,7 @@ function* getTickerSaga(action: ReturnType<typeof getTickerAsync.request>){
         if(Object.keys(filterData).length){
           yield put(getTickerAsync.success(filterData));
         }
-        yield delay(1000);
+        yield delay(1000); 
       }
     }catch(e: any){
       yield put(getTickerAsync.failure(e));

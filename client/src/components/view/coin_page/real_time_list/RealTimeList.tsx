@@ -8,6 +8,18 @@ import RealTimeListItem from './RealTimeListItem';
 import { Container } from './RealTimeListStyle';
 import './RealTimeList.scss';
 
+interface marketList {
+    market: string,
+    korean_name: string,
+    english_name: string,
+    trade_price: string,
+    signed_change_rate: string,
+    signed_change_price: string,
+    acc_trade_price_24h: string,
+    change: "RISE" | "EVEN" | "FALL" | "",
+    update: "i" | "d" | ""
+}
+
 function loadingComponent(){
     return(
         <Container.RealTimeList className="real-time-list">
@@ -27,35 +39,40 @@ function marketListFilterKRW(marketList: MarketList){
     return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));
 }
 
-function syncData(marketList: any[], coinData: Ticker){
+function syncData(marketList: marketList[], coinData: Ticker){
     const tmp: any = coinData;
-    let coinArray: string[] = Object.keys(coinData);
-    let merge: string[][] = [];
-    for(let i = 0; i < marketList.length; i++){}
-
     for(let i = 0; i < marketList.length; i++){
-        for(let j = 0; j < coinArray.length; j++){
-            if(marketList[i].market === coinArray[j]){
-                let mergeTmp: string[] = [];
-                mergeTmp.push(marketList[i].market);
-                mergeTmp.push(marketList[i].korean_name);
-                mergeTmp.push(marketList[i].english_name);
-                mergeTmp.push(tmp[coinArray[j]]["trade_price"]);
-                mergeTmp.push(tmp[coinArray[j]]["signed_change_rate"]);
-                mergeTmp.push(tmp[coinArray[j]]["acc_trade_price_24h"]);
-                merge.push(mergeTmp);
-            }
+        if(tmp[marketList[i].market]) {
+            const before = marketList[i].trade_price;
+            const after = tmp[marketList[i].market]["trade_price"];
+            if(before !== after){
+                if(before < after) marketList[i].update = "i";
+                else if(before > after) marketList[i].update = "d";
+                marketList[i].trade_price = after;
+            }else marketList[i].update = "";
+            marketList[i].signed_change_rate = String((tmp[marketList[i].market]["signed_change_rate"]*100).toFixed(2));
+            marketList[i].signed_change_price = tmp[marketList[i].market]["signed_change_price"];
+            marketList[i].acc_trade_price_24h = String(Math.round(tmp[marketList[i].market]["acc_trade_price_24h"] / 1000000));;
+            marketList[i].change = tmp[marketList[i].market]["change"];
+        }else if (marketList[i].update){
+            marketList[i].update = ""
         }
     }
-    return merge;
+    return marketList;
 }
 
 function RealTimeList() {
     const [mount, setMount] = useState(true);
-    const [marketList, setMarketList] = useState<any[]>([{
+    const [marketList, setMarketList] = useState<marketList[]>([{
         market: "",
         korean_name: "",
         english_name: "",
+        trade_price: "",
+        signed_change_rate: "",
+        signed_change_price: "",
+        acc_trade_price_24h: "",
+        change : "",
+        update: ""
     }]);
     const { data, loading, error } = useSelector((state: RootState) => state.market_list.marketList);
     const tickerData = useSelector((state: RootState) => state.ticker.ticker);
@@ -65,26 +82,21 @@ function RealTimeList() {
             setMount(false);
             setMarketList(marketListFilterKRW(data));
         }
-        if(marketList && tickerData.data){
-            console.log(syncData(marketList, tickerData.data));
-        }
+        if(tickerData.data) setMarketList(syncData(marketList, tickerData.data));
     }, [data, marketList, mount, tickerData, tickerData.data]);
 
     if(loading){ return loadingComponent();}
     if(error){ return errorComponent(error);}
     return (
         <Container.Box className="real-time-list-container">
-            <Container.SearchBox.Container className="real-time-list-search">
+            <div className="real-time-list-search">
                 <Container.SearchBox.InputBox placeholder="검색" />
-                <Container.SearchBox.Button>
-                    검색
-                </Container.SearchBox.Button>
-            </Container.SearchBox.Container>
+            </div>
             <Container.Header className="real-time-list-header">
-                <div className="header-item">단위</div>
-                <div className="header-item">현재가</div>
-                <div className="header-item">전일대비</div>
-                <div className="header-item">거래금액</div>
+                <div>단위</div>
+                <div className="right-sort">현재가</div>
+                <div className="right-sort">전일대비</div>
+                <div className="right-sort">거래금액</div>
             </Container.Header>
             <Container.RealTimeList className="real-time-list">
                 {marketList.length > 1 && !tickerData.loading ?
@@ -96,9 +108,12 @@ function RealTimeList() {
                                     market={market.market}
                                     korean_name={market.korean_name}
                                     english_name={market.english_name}
-                                    trade_price={"현재가"}
-                                    signed_change_rate={"전일대비"}
-                                    acc_trade_price_24h={"변동률"}
+                                    trade_price={market.trade_price ? market.trade_price : "0"}
+                                    signed_change_rate={market.signed_change_rate ? market.signed_change_rate : "0"}
+                                    signed_change_price={market.signed_change_price ? market.signed_change_price : "0"}
+                                    acc_trade_price_24h={market.acc_trade_price_24h ? market.acc_trade_price_24h : "0"}
+                                    change={market.change}
+                                    update={market.update}
                                 />
                             </div>
                             <div className="b-line"/>

@@ -44,8 +44,6 @@ function CoinContainer() {
     }, [dispatch, mount, marketListData])
 
 
-
-
     if(marketListLoading){
         return (
             <Wrapper>

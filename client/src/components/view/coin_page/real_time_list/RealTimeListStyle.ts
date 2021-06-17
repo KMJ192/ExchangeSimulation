@@ -1,42 +1,66 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 const listItemGrid = {
-    first: 140,
-    second: 140,
-    third: 120,
+    first: 170,
+    second: 90,
+    third: 110,
     fourth: 120
 }
 
 export const Container = {
     Box: styled.div`
-        grid-template-rows: 38px 40px 450px;
+        grid-template-rows: 36px 40px 450px;
     `,
     SearchBox : {
-        Container : styled.div`
-            grid-template-columns: 485px 50px;
-            width: 450px;
-            height: 30px;
-        `,
         InputBox: styled.input`
             padding: 7px;
-            width: 516px;
+            width: 495px;
         `,
-        Button: styled.div`
-            padding: 5px 5px 5px 5px;
-            font: 7px;
-        `
     },
     Header: styled.div`
+        width: 500px;
         grid-template-columns: ${listItemGrid.first}px ${listItemGrid.second}px ${listItemGrid.third}px ${listItemGrid.fourth}px;
     `,
     RealTimeList : styled.div`
-        width: 530px;
-        height: 922px;
+        width: 510px;
+        height: 925px;
     `
 };
+
+const iFlash = keyframes`
+    0% { border: none; }
+    10% { border: solid 1px red; }
+    50% { border: none; }
+`
+const dFlash = keyframes`
+    0% { border: none; }
+    10% { border: solid 1px blue; }
+    50% { border: none; }
+`
 
 export const ListItem = {
     ListItemBox : styled.div`
         grid-template-columns: ${listItemGrid.first}px ${listItemGrid.second}px ${listItemGrid.third}px ${listItemGrid.fourth}px;
+    `,
+    Cell: styled.div`
+        ${(props: any) => props.ud === "RISE" ?
+            css`color: red;` :
+            (props: any) => props.ud === "FALL" && css`color: blue;`
+        }
+    `,
+    FlashCell: styled.div`
+        ${(props: any) => props.flash === "i" ?
+        css`
+            animation: ${iFlash} 0.5s step-end;
+            width: 100px;
+            height: 30px;
+        `:
+        props.flash === "d" && 
+        css`
+            animation: ${dFlash} 0.5s step-end;
+            width: 100px;
+            height: 30px;
+        `}
     `
 }
+
