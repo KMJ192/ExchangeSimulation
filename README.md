@@ -36,3 +36,6 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
   - 실시간 시세 리스트 구현
 - back-end
   - . . .
+
+### 화면
+![sample](./a-progress/sample.gif)
