@@ -4,8 +4,7 @@ const container = {
     width: 470,
     height: 469,
     header: 30,
-    body: 415,
-    footer: 30
+    body: 440
 };
 
 const header = {
@@ -13,7 +12,9 @@ const header = {
     selected: {
         fontWeight: 1000,
         fontSize: 15
-    }
+    },
+    colorStrong: "rgba(60, 200, 255, .3)",
+    colorWeak: "rgba(60, 200, 255, .1)"
 }
 
 
@@ -21,7 +22,7 @@ export const OrderbookContainer = {
     Container: styled.div`
         width: ${container.width}px;
         height: ${container.height}px;
-        grid-template-rows: ${container.header}px ${container.body}px ${container.footer}px;
+        grid-template-rows: ${container.header}px ${container.body}px;
     `,
     Header: styled.div`
         grid-template-columns: ${header.column}px ${header.column}px;
@@ -33,12 +34,12 @@ export const OrderbookContainer = {
         border: none;
         ${(props: any) => props.toggle ? 
             css`
-                background-color: rgba(60, 200, 255, .8);
+                background-color: ${header.colorStrong};
                 font-weight: ${header.selected.fontWeight};
                 font-size: ${header.selected.fontSize}px;
             `:
             css`
-                background-color: rgba(60, 200, 255, .2);
+                background-color: ${header.colorWeak};
             `
         }`,
         Second: styled.button`
@@ -47,16 +48,13 @@ export const OrderbookContainer = {
         border: none;
         ${(props: any) => props.toggle ? 
             css`
-                background-color: rgba(60, 200, 255, .2);
+                background-color: ${header.colorWeak};
             `:
             css`
-                background-color: rgba(60, 200, 255, .8);
+                background-color: ${header.colorStrong};
                 font-weight: ${header.selected.fontWeight};
                 font-size: ${header.selected.fontSize}px;
             `
         }`
-    },
-    Footer: styled.div`
-        grid-template-columns: 120px 230px 120px;
-    `
+    }
 }

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../redux-module/RootReducer';
-
+import DefOrderbook from './OrderbookList/DefOrderbook';
+import ComOrderbook from './OrderbookList/ComOrderbook';
 import { OrderbookContainer} from './OrderbookStyle';
 import './Orderbook.scss';
 
-function Orderbook() {
-    //orderbook data socket
-    const orderbook = useSelector((state: RootState) => state.orderbook.orderbook);
-    //console.log(orderbook.data);
-    const [selected, setSelected] = useState(true);    
+interface Props{
+    coinCode: string;
+}
 
+function Orderbook({ coinCode }: Props) {
+    const [selected, setSelected] = useState(true);    
     const defaultOrderbook = () => {
         setSelected(true);
     }
@@ -35,13 +34,13 @@ function Orderbook() {
                 </OrderbookContainer.HeaderCell.Second>
             </OrderbookContainer.Header>
             {selected ? 
-                <div>일반호가</div> : <div>누적호가</div>
+                <DefOrderbook
+                    coinCode={coinCode}
+                /> :
+                <ComOrderbook
+                    coinCode={coinCode}
+                />
             }
-            <OrderbookContainer.Footer className="orderbook-footer">
-                <div>footer1</div>
-                <div>footer2</div>
-                <div>footer3</div>
-            </OrderbookContainer.Footer>
         </OrderbookContainer.Container>
     )
 }

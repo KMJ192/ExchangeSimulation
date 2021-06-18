@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux-module/RootReducer';
-import { MarketList } from '../../../../redux-module/coin/market_list';
-import { Ticker } from '../../../../redux-module/coin/get_coin';
 import RealTimeListItem from './RealTimeListItem';
+import { marketListFilterKRW } from '../CoinPage';
 
 import { Container } from './RealTimeListStyle';
 import './RealTimeList.scss';
@@ -35,25 +34,20 @@ function errorComponent(error: Error){
     );
 }
 
-function marketListFilterKRW(marketList: MarketList){
-    return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));
-}
-
-function syncData(marketList: marketList[], coinData: Ticker){
-    const tmp: any = coinData;
+function syncData(marketList: marketList[], coinData: any){
     for(let i = 0; i < marketList.length; i++){
-        if(tmp[marketList[i].market]) {
+        if(coinData[marketList[i].market]) {
             const before = marketList[i].trade_price;
-            const after = tmp[marketList[i].market]["trade_price"];
+            const after = coinData[marketList[i].market]["trade_price"];
             if(before !== after){
                 if(before < after) marketList[i].update = "i";
                 else if(before > after) marketList[i].update = "d";
                 marketList[i].trade_price = after;
             }else marketList[i].update = "";
-            marketList[i].signed_change_rate = String((tmp[marketList[i].market]["signed_change_rate"]*100).toFixed(2));
-            marketList[i].signed_change_price = tmp[marketList[i].market]["signed_change_price"];
-            marketList[i].acc_trade_price_24h = String(Math.round(tmp[marketList[i].market]["acc_trade_price_24h"] / 1000000));;
-            marketList[i].change = tmp[marketList[i].market]["change"];
+            marketList[i].signed_change_rate = String((coinData[marketList[i].market]["signed_change_rate"]*100).toFixed(2));
+            marketList[i].signed_change_price = coinData[marketList[i].market]["signed_change_price"];
+            marketList[i].acc_trade_price_24h = String(Math.round(coinData[marketList[i].market]["acc_trade_price_24h"] / 1000000));
+            marketList[i].change = coinData[marketList[i].market]["change"];
         }else if (marketList[i].update){
             marketList[i].update = ""
         }
@@ -61,7 +55,11 @@ function syncData(marketList: marketList[], coinData: Ticker){
     return marketList;
 }
 
-function RealTimeList() {
+interface Props{
+    selectedCoin: (e: React.MouseEvent<HTMLLIElement>) => void;
+}
+
+function RealTimeList({ selectedCoin }: Props) {
     const [mount, setMount] = useState(true);
     const [marketList, setMarketList] = useState<marketList[]>([{
         market: "",
@@ -102,7 +100,9 @@ function RealTimeList() {
                 {marketList.length > 1 && !tickerData.loading ?
                 marketList.map((market, index) => {
                     return(
-                        <li key={index}>
+                        <li key={index}
+                            onClick={selectedCoin}
+                        >
                             <div className="list-item">
                                 <RealTimeListItem 
                                     market={market.market}

@@ -1,0 +1,32 @@
+.def-orderbook-container{
+    display: grid;
+    .def-orderbook-body{
+        display: grid;
+        overflow: auto;
+        &::-webkit-scrollbar{
+            width: 3px;
+            height: 5px;
+        }
+        &::-webkit-scrollbar-thumb { 
+            background-color: rgba(5, 5, 5, 0.3);
+        }
+        .def-orderbook-ask{
+            display: grid;
+            grid-template-columns: 235px 235px;
+        }
+        .def-orderbook-bid{
+            display: grid;
+            grid-template-columns: 235px 235px;
+        }
+    }
+    .def-orderbook-footer{
+        display: grid;
+        //grid-template-columns: 160px 150px 160px;
+        div{
+            display: grid;
+            justify-content: center;
+            border: solid 1px;
+            padding-top: 7px;
+        }
+    }
+}
