@@ -2,7 +2,7 @@ import React from 'react';
 import MainChart from './chart/MainChart';
 import RealTimeList from './real_time_list/RealTimeList';
 import SellBuy from './sell_buy/SellBuy';
-import DealState from './deal_state/DealState';
+import Orderbook from './deal_state/Orderbook';
 
 import { PSGrid } from './CoinPageStyle';
 import './CoinPage.scss';
@@ -14,7 +14,7 @@ function CoinPage() {
             <div className="chart-plotinv-dealstate-container">
                 <MainChart/>
                 <PSGrid>
-                    <DealState/>
+                    <Orderbook/>
                     <SellBuy/>
                 </PSGrid>
             </div>

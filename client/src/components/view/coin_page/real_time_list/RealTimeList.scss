@@ -5,6 +5,10 @@ $fontsize-l: 18px;
 
 $box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
 
+$mediaMarginLeft: 15px;
+
+$containerColor: #ffffff;
+
 .real-time-list-container{
     display: grid;
     .real-time-list-search{
@@ -15,7 +19,7 @@ $box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
             box-shadow: $box-shadow;
         }
         @media screen and (max-width: 768px) {
-            margin-left: 0px;
+            margin-left: $mediaMarginLeft;
         }
     }
     li{
@@ -27,31 +31,31 @@ $box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
         }
     }
     .real-time-list{
-        background: #f6f6f6;
+        background: $containerColor;
         margin-left: 20px;
         box-shadow: $box-shadow;
         overflow: auto;
         &::-webkit-scrollbar{
-            width: 1px;
+            width: 3px;
             height: 5px;
             //display: none;
         }
         &::-webkit-scrollbar-thumb { 
-            background-color: rgba(5, 5, 5, 0.5);
+            background-color: rgba(5, 5, 5, 0.3);
         }
         @media screen and (max-width: 768px) {
-            margin-left: 0px;
+            margin-left: $mediaMarginLeft;
         }
     }
     .real-time-list-header{
         display: grid;
         margin: 0px 0px 7px 20px;
-        background: #f6f6f6;
+        background: $containerColor;
         box-shadow: $box-shadow;
         padding: 7px $padding-s $padding-s $padding-s;
         font-size: $fontsize-m;
         @media screen and (max-width: 768px) {
-            margin-left: 0px;
+            margin-left: $mediaMarginLeft;
         }
     }
 }
