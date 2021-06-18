@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TradeBox } from './Trade';
+import { TradeBox } from './TradeStyle';
 import './Trade.scss';
 
 function Trade() {

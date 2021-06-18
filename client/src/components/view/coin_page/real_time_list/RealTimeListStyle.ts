@@ -23,7 +23,7 @@ export const Container = {
     `,
     RealTimeList : styled.div`
         width: 510px;
-        height: 925px;
+        height: 1340px;
     `
 };
 

@@ -90,7 +90,7 @@ export const InitialGetTicker: GetTickerState = {
 export type GetTradeState = {
     trade: {
         loading: boolean;
-        data: Ticker | Trade | Orderbook | null;
+        data: Trade | null;
         error: Error | null;
     }
 };
@@ -105,7 +105,7 @@ export const InitialGetTrade: GetTradeState = {
 export type GetOrderbookState = {
     orderbook: {
         loading: boolean;
-        data: Ticker | Trade | Orderbook | null;
+        data: Orderbook | null;
         error: Error | null;
     }
 };

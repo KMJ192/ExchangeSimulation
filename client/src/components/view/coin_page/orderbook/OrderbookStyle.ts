@@ -9,8 +9,13 @@ const container = {
 };
 
 const header = {
-    column: 235 
+    column: 235,
+    selected: {
+        fontWeight: 1000,
+        fontSize: 15
+    }
 }
+
 
 export const OrderbookContainer = {
     Container: styled.div`
@@ -29,6 +34,8 @@ export const OrderbookContainer = {
         ${(props: any) => props.toggle ? 
             css`
                 background-color: rgba(60, 200, 255, .8);
+                font-weight: ${header.selected.fontWeight};
+                font-size: ${header.selected.fontSize}px;
             `:
             css`
                 background-color: rgba(60, 200, 255, .2);
@@ -44,7 +51,12 @@ export const OrderbookContainer = {
             `:
             css`
                 background-color: rgba(60, 200, 255, .8);
+                font-weight: ${header.selected.fontWeight};
+                font-size: ${header.selected.fontSize}px;
             `
         }`
-    }
+    },
+    Footer: styled.div`
+        grid-template-columns: 120px 230px 120px;
+    `
 }

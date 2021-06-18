@@ -1,5 +1,6 @@
 import { EventChannel } from "redux-saga";
-import { call, delay, flush, put, takeEvery } from "redux-saga/effects";
+import { call, delay, flush, put, select, takeEvery } from "redux-saga/effects";
+import { RootState } from "../../RootReducer";
 import { upbitWebSocketChannel } from "../api/get_coin_data";
 import { createUpibtSocket } from "../api/socket";
 import { 
@@ -35,7 +36,7 @@ function* getTickerSaga(action: ReturnType<typeof getTickerAsync.request>){
         if(Object.keys(filterData).length){
           yield put(getTickerAsync.success(filterData));
         }
-        yield delay(1000); 
+        yield delay(500); 
       }
     }catch(e: any){
       yield put(getTickerAsync.failure(e));
@@ -56,7 +57,11 @@ function* getTradeSaga(action: ReturnType<typeof getTradeAsync.request>){
         const socketData: Trade = yield flush(coinData);
         const filterData: Trade = yield socketDataFilter(socketData);
         if(Object.keys(filterData).length){
-          yield put(getTradeAsync.success(filterData));
+          const windowSize: RootState = yield select();
+          //windo 가로 길이가 768이상일 때만 dispatch
+          if(windowSize.screen_size.width > 768){ 
+            yield put(getTradeAsync.success(filterData));
+          }
         }
         yield delay(1000);
       }
@@ -79,7 +84,11 @@ function* getOrderbookSaga(action: ReturnType<typeof getOrderbookAsync.request>)
         const socketData: Orderbook = yield flush(coinData);
         const filterData: Orderbook = yield socketDataFilter(socketData);
         if(Object.keys(filterData).length){
-          yield put(getOrderbookAsync.success(filterData));
+          const windowSize: RootState = yield select();
+          //windo 가로 길이가 768이상일 때만 dispatch
+          if(windowSize.screen_size.width > 768){
+            yield put(getOrderbookAsync.success(filterData));
+          }
         }
         yield delay(1000);
       }

@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux-module/RootReducer';
 
 import { OrderbookContainer} from './OrderbookStyle';
 import './Orderbook.scss';
-import { useState } from 'react';
 
 function Orderbook() {
     //orderbook data socket
     const orderbook = useSelector((state: RootState) => state.orderbook.orderbook);
     //console.log(orderbook.data);
-    const [selected, setSelected] = useState(true);
+    const [selected, setSelected] = useState(true);    
 
     const defaultOrderbook = () => {
         setSelected(true);
@@ -35,10 +34,16 @@ function Orderbook() {
                     누적호가
                 </OrderbookContainer.HeaderCell.Second>
             </OrderbookContainer.Header>
-            <div>contents</div>
-            <div>footer</div>
+            {selected ? 
+                <div>일반호가</div> : <div>누적호가</div>
+            }
+            <OrderbookContainer.Footer className="orderbook-footer">
+                <div>footer1</div>
+                <div>footer2</div>
+                <div>footer3</div>
+            </OrderbookContainer.Footer>
         </OrderbookContainer.Container>
     )
 }
 
-export default Orderbook;
+export default React.memo(Orderbook);
