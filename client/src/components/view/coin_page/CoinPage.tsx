@@ -2,7 +2,8 @@ import React from 'react';
 import MainChart from './chart/MainChart';
 import RealTimeList from './real_time_list/RealTimeList';
 import SellBuy from './sell_buy/SellBuy';
-import Orderbook from './deal_state/Orderbook';
+import Orderbook from './orderbook/Orderbook';
+import Trade from './trade/Trade';
 
 import { PSGrid } from './CoinPageStyle';
 import './CoinPage.scss';
@@ -16,6 +17,7 @@ function CoinPage() {
                 <PSGrid>
                     <Orderbook/>
                     <SellBuy/>
+                    <Trade/>
                 </PSGrid>
             </div>
             <RealTimeList/>

@@ -11,11 +11,10 @@ function Orderbook() {
     const orderbook = useSelector((state: RootState) => state.orderbook.orderbook);
     //console.log(orderbook.data);
     const [selected, setSelected] = useState(true);
-    
+
     const defaultOrderbook = () => {
         setSelected(true);
     }
-
     const cumulative = () => {
         setSelected(false);
     }

@@ -2,7 +2,10 @@ import styled, { css } from "styled-components";
 
 const container = {
     width: 470,
-    height: 469
+    height: 469,
+    header: 30,
+    body: 415,
+    footer: 30
 };
 
 const header = {
@@ -13,6 +16,7 @@ export const OrderbookContainer = {
     Container: styled.div`
         width: ${container.width}px;
         height: ${container.height}px;
+        grid-template-rows: ${container.header}px ${container.body}px ${container.footer}px;
     `,
     Header: styled.div`
         grid-template-columns: ${header.column}px ${header.column}px;
