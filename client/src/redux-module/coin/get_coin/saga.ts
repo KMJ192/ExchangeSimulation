@@ -11,6 +11,8 @@ import {
 } from "./action";
 import { Ticker, Trade, Orderbook } from "./types";
 
+const socketDelay = 500;
+
 function socketDataFilter(socketData: Ticker | Trade | Orderbook){
   const val: Ticker[] | Trade[] | Orderbook[] = Object.values(socketData);
   const filterData: any = {};
@@ -36,7 +38,7 @@ function* getTickerSaga(action: ReturnType<typeof getTickerAsync.request>){
         if(Object.keys(filterData).length){
           yield put(getTickerAsync.success(filterData));
         }
-        yield delay(500); 
+        yield delay(socketDelay); 
       }
     }catch(e: any){
       yield put(getTickerAsync.failure(e));
@@ -63,7 +65,7 @@ function* getTradeSaga(action: ReturnType<typeof getTradeAsync.request>){
             yield put(getTradeAsync.success(filterData));
           }
         }
-        yield delay(1000);
+        yield delay(socketDelay);
       }
     }catch(e: any){
       yield put(getTradeAsync.failure(e));
@@ -90,7 +92,7 @@ function* getOrderbookSaga(action: ReturnType<typeof getOrderbookAsync.request>)
             yield put(getOrderbookAsync.success(filterData));
           }
         }
-        yield delay(1000);
+        yield delay(socketDelay);
       }
     }catch(e: any){
       yield put(getOrderbookAsync.failure(e));
@@ -103,7 +105,7 @@ function* getOrderbookSaga(action: ReturnType<typeof getOrderbookAsync.request>)
 }
 
 export function* coinDataSaga(){
-    yield takeEvery(GET_TICKER, getTickerSaga);
-    yield takeEvery(GET_TRADE, getTradeSaga);
-    yield takeEvery(GET_ORDERBOOK, getOrderbookSaga);
+  yield takeEvery(GET_TICKER, getTickerSaga);
+  yield takeEvery(GET_TRADE, getTradeSaga);
+  yield takeEvery(GET_ORDERBOOK, getOrderbookSaga);
 }

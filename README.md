@@ -1,4 +1,4 @@
-# 토이프로젝트 - 가상화폐 거래소 토이 프로잭트
+# 토이프로젝트 - 가상화폐 거래소 토이 프로잭트 (prototype)
 
 bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 
@@ -39,3 +39,6 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 
 ### 화면
 ![sample](./a-progress/sample.gif)
+
+### next step
+- ticker/orderbook/trade type 하나의 모듈로 관리 필요

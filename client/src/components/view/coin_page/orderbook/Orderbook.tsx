@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import DefOrderbook from './OrderbookList/DefOrderbook';
-import ComOrderbook from './OrderbookList/ComOrderbook';
+import DefOrderbook from './OrderbookList/default_orderbook/DefOrderbook';
+import ComOrderbook from './OrderbookList/cumulation_orderbook/ComOrderbook';
 import { OrderbookContainer} from './OrderbookStyle';
 import './Orderbook.scss';
 

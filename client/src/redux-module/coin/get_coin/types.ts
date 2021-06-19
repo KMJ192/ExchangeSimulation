@@ -57,12 +57,12 @@ export interface Trade{
 
 export interface Orderbook{
     code: string;
-    orderbook_units: [{
+    orderbook_units: {
         ask_price: number;
         ask_size: number;
         bid_price: number;
         bid_size: number;
-    }]
+    }[];
     stream_type: string;
     timestamp: number;
     total_ask_size: number;

@@ -18,7 +18,7 @@ export const Container = {
         `,
     },
     Header: styled.div`
-        width: 500px;
+        width: 495px;
         grid-template-columns: ${listItemGrid.first}px ${listItemGrid.second}px ${listItemGrid.third}px ${listItemGrid.fourth}px;
     `,
     RealTimeList : styled.div`
