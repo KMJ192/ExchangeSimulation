@@ -7,103 +7,100 @@ import DefList from './DefListItem';
 import { Def } from '../OrderbookListStyle';
 import '../OrderbookList.scss';
 import axios from 'axios';
+import { numberToKrw } from '../../../CoinPage';
 
 interface Props{
     coinCode: string;
 }
 
-// interface OrderbookList{
-//     orderbook_units: {
-//         ask_price: string; //매도
-//         ask_size: string;  
-//         bid_price: string; //매수
-//         bid_size:  string;
-//         selected: boolean;
-//     }[];
-//     code: string;
-//     total_ask_size: string;
-//     total_bid_size: string;
-//     ask_bid: string;
-// }
-
-// function getOrderbook(orderbook: any, trade: any, coinCode: string): OrderbookList | undefined{
-//     if(!orderbook[coinCode] || !trade[coinCode]) {
-//         return undefined;
-//     }
-//     const orderbookTmp: Orderbook = orderbook[coinCode];
-//     const tradeTmp: Trade = trade[coinCode];
-//     let orderbookList:  OrderbookList  = {
-//         code: coinCode,
-//         total_ask_size: String(orderbookTmp.total_ask_size.toFixed(3)),
-//         total_bid_size: String(orderbookTmp.total_bid_size.toFixed(3)),
-//         ask_bid: String(tradeTmp.ask_bid),
-//         orderbook_units: Array.from({
-//             length: orderbookTmp.orderbook_units.length
-//         }, (orderbook_units) =>
-//             orderbook_units = {
-//                 ask_price: "",
-//                 ask_size: "",
-//                 bid_price: "",
-//                 bid_size  : "",
-//                 selected: false
-//             })
-//     }
-//     for(let i = 0; i < orderbookTmp.orderbook_units.length; i++){
-//         orderbookList.orderbook_units[i] = {
-//             ask_price: String(orderbookTmp.orderbook_units[i].ask_price),
-//             ask_size: String(orderbookTmp.orderbook_units[i].ask_size),
-//             bid_price: String(orderbookTmp.orderbook_units[i].bid_price),
-//             bid_size: String(orderbookTmp.orderbook_units[i].bid_size),
-//             selected: orderbookTmp.orderbook_units[i].ask_price === tradeTmp.trade_price
-//         }    
-//     }
-//     return orderbookList;
-// }
-
 function getOrderbook(orderbook: any, coinCode: string): Orderbook{
-    //console.log(orderbook[coinCode]);
     return orderbook[coinCode];
+}
+function myGration(orderbook: any){
+    return {
+        ...orderbook[0],
+        code: orderbook[0].market
+    }
 }
 
 function DefOrderbook({ coinCode }: Props) {
-    const [defOrderbookList, setDefOrderbookList] = useState<Orderbook>();
+    const [defOrderbookList, setDefOrderbookList] = useState<Orderbook>({
+        code: "",
+        orderbook_units: [{
+            ask_price: 0,
+            ask_size: 0,
+            bid_price: 0,
+            bid_size: 0,
+        }],
+        stream_type: "",
+        timestamp: 0,
+        total_ask_size: 0,
+        total_bid_size: 0,
+        type: ""
+    });
     const [tmpCoin, setTmpCoin] = useState("");
 
     const orderbookData = useSelector((state: RootState) => state.orderbook.orderbook.data);
 
     useEffect(() => {
         if(tmpCoin !== coinCode && coinCode){
-            console.log(tmpCoin);
-            console.log(coinCode);
             setTmpCoin(coinCode);
-            const request = async () => {
+            const request = async (coinCode: string) => {
                 await axios.get(`https://api.upbit.com/v1/orderbook?markets=${coinCode}`, {
                     withCredentials: false
-                }).then(resposne => 
-                    setDefOrderbookList(resposne.data)
-                ).catch(e => e);
-            }
-            request();
+                })
+                .then(response => setDefOrderbookList(myGration(response.data)))
+                .catch(e => e);
+            };
+            request(coinCode);
         }else if(orderbookData && coinCode) {
             const orderbookArray = getOrderbook(orderbookData, coinCode);
             if(orderbookArray) setDefOrderbookList(orderbookArray);
         }
+        //console.log(defOrderbookList);
+        // console.log(Object.values(defOrderbookList.orderbook_units)[0]);
+        // console.log(Object.values(defOrderbookList.orderbook_units)[14]);
     }, [coinCode, defOrderbookList, orderbookData, tmpCoin]);
 
     return (
         <Def.Container className="def-orderbook-container">
-            <Def.Body className="def-orderbook-body">
-                <DefList/>
-            </Def.Body>
+            <div className="def-orderbook-body">
+                {Object.values(defOrderbookList.orderbook_units).reverse().map((ask_bid, index) => {
+                    return(
+                        <Def.List key={index}>
+                            <DefList
+                                ask_price={String(ask_bid.ask_price)}
+                                ask_size={String(ask_bid.ask_size)}
+                                bid_price={String(ask_bid.bid_price)}
+                                bid_size={String(ask_bid.bid_size)}
+                                ask_bid={"ASK"}
+                            />
+                        </Def.List>
+                    )
+                })}
+                {Object.values(defOrderbookList.orderbook_units).map((ask_bid, index) => {
+                    return(
+                        <Def.List key={index}>
+                            <DefList
+                                ask_price={String(ask_bid.ask_price)}
+                                ask_size={String(ask_bid.ask_size)}
+                                bid_price={String(ask_bid.bid_price)}
+                                bid_size={String(ask_bid.bid_size)}
+                                ask_bid={"BID"}
+                            />
+                        </Def.List>
+                    )
+                })}
+            </div>
             <Def.Footer className="def-orderbook-footer">
                 <div>
-                    {defOrderbookList?.total_ask_size && String(defOrderbookList?.total_ask_size.toFixed(3))}
+                    {defOrderbookList?.total_ask_size && numberToKrw(String(defOrderbookList?.total_ask_size.toFixed(3)))}
                 </div>
                 <div>
-                    {defOrderbookList?.code ? String(defOrderbookList?.code).replace("KRW-", " 수량") : "loading..."}
+                    {defOrderbookList?.code ? coinCode.replace("KRW-", " 수량") : "loading..."}
                 </div>
                 <div>
-                    {defOrderbookList?.total_bid_size && String(defOrderbookList?.total_bid_size.toFixed(3))}
+                    {defOrderbookList?.total_bid_size && numberToKrw(String(defOrderbookList?.total_bid_size.toFixed(3)))}
                 </div>
             </Def.Footer>
         </Def.Container>

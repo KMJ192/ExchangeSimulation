@@ -1,11 +1,12 @@
+$table-border: solid 1px rgba(0, 0, 0, .1);
 .def-orderbook-container{
     display: grid;
     .def-orderbook-body{
         display: grid;
-        overflow: auto;
+        overflow: auto;        
         &::-webkit-scrollbar{
-            width: 3px;
-            height: 5px;
+            width: 2px;
+            height: 1px;
         }
         &::-webkit-scrollbar-thumb { 
             background-color: rgba(5, 5, 5, 0.3);
@@ -13,6 +14,16 @@
         .orderbook-list-item{
             display: grid;
             justify-content: center;
+        }
+        li{
+            display: grid;
+            grid-template-columns: 235px 235px;
+            list-style: none;
+            div{
+                border: $table-border;
+                font-size: 13px;
+                font-weight: 500;
+            }
         }
     }
     .def-orderbook-footer{
@@ -22,6 +33,7 @@
             justify-content: center;
             padding-top: 3px;
             font-size: 13px;
+            border: $table-border;
         }
     }
 }

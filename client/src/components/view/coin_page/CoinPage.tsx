@@ -11,6 +11,9 @@ import { MarketList } from '../../../redux-module/coin/market_list';
 import { PSGrid } from './CoinPageStyle';
 import './CoinPage.scss';
 
+export function numberToKrw(krw: string) {
+    return krw.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 export function marketListFilterKRW(marketList: MarketList){
     return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));

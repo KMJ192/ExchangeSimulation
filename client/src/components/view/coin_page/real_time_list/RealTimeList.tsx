@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux-module/RootReducer';
 import RealTimeListItem from './RealTimeListItem';
-import { marketListFilterKRW } from '../CoinPage';
+import { marketListFilterKRW, numberToKrw } from '../CoinPage';
 
 import { Container } from './RealTimeListStyle';
 import './RealTimeList.scss';
@@ -38,15 +38,15 @@ function syncData(marketList: marketList[], coinData: any){
     for(let i = 0; i < marketList.length; i++){
         if(coinData[marketList[i].market]) {
             const before = marketList[i].trade_price;
-            const after = coinData[marketList[i].market]["trade_price"];
+            const after = numberToKrw(String(coinData[marketList[i].market]["trade_price"]));
             if(before !== after){
                 if(before < after) marketList[i].update = "i";
                 else if(before > after) marketList[i].update = "d";
                 marketList[i].trade_price = after;
             }else marketList[i].update = "";
-            marketList[i].signed_change_rate = String((coinData[marketList[i].market]["signed_change_rate"]*100).toFixed(2));
-            marketList[i].signed_change_price = coinData[marketList[i].market]["signed_change_price"];
-            marketList[i].acc_trade_price_24h = String(Math.round(coinData[marketList[i].market]["acc_trade_price_24h"] / 1000000));
+            marketList[i].signed_change_rate = numberToKrw(String((coinData[marketList[i].market]["signed_change_rate"]*100).toFixed(2)));
+            marketList[i].signed_change_price = numberToKrw(coinData[marketList[i].market]["signed_change_price"]);
+            marketList[i].acc_trade_price_24h = numberToKrw(String(Math.round(coinData[marketList[i].market]["acc_trade_price_24h"] / 1000000)));
             marketList[i].change = coinData[marketList[i].market]["change"];
         }else if (marketList[i].update){
             marketList[i].update = ""
