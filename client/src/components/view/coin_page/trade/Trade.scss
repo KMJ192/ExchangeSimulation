@@ -1,4 +1,30 @@
 .trade-container{
+    display: grid;
     margin-top: 15px;
     box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
+    .trade-header{
+        display: grid;
+        button{
+            display: grid;
+            justify-content: center;
+            border: none;
+        }
+    }
+    .trade-list-container{
+        border: solid 1px;
+        display: grid;
+        .trade-list-header{
+            border: solid 1px;
+            display: grid;
+            grid-template-columns: repeat(3, 320px);
+            div{
+                display: grid;
+                justify-content: center;
+                border: solid 1px;
+            }
+        }
+        .trade-list-body{
+            border: solid 1px;
+        }
+    }
 }

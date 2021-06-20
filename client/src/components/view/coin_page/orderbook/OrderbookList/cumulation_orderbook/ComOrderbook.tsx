@@ -7,7 +7,7 @@ interface Props{
 function ComOrderbook({ coinCode }: Props) {
     return (
         <div>
-            누적호가
+            준비중입니다.
         </div>
     )
 }

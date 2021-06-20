@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Orderbook } from '../../../../../../redux-module/coin/get_coin';
 import { RootState } from '../../../../../../redux-module/RootReducer';
 import DefList from './DefListItem';
+import { numberToKrw } from '../../../CoinPage';
+import axios from 'axios';
 
 import { Def } from '../OrderbookListStyle';
 import '../OrderbookList.scss';
-import axios from 'axios';
-import { numberToKrw } from '../../../CoinPage';
 
 interface Props{
     coinCode: string;
 }
-
 function getOrderbook(orderbook: any, coinCode: string): Orderbook{
     return orderbook[coinCode];
 }
@@ -39,7 +38,7 @@ function DefOrderbook({ coinCode }: Props) {
         type: ""
     });
     const [tmpCoin, setTmpCoin] = useState("");
-
+    const orderbookBody = useRef<HTMLDivElement>(null);
     const orderbookData = useSelector((state: RootState) => state.orderbook.orderbook.data);
 
     useEffect(() => {
@@ -53,26 +52,29 @@ function DefOrderbook({ coinCode }: Props) {
                 .catch(e => e);
             };
             request(coinCode);
+            orderbookBody.current?.scrollTo(0, (orderbookBody.current.clientHeight / 2) - 33);
         }else if(orderbookData && coinCode) {
             const orderbookArray = getOrderbook(orderbookData, coinCode);
             if(orderbookArray) setDefOrderbookList(orderbookArray);
+        }else{
+            orderbookBody.current?.scrollTo(0, (orderbookBody.current.clientHeight / 2) - 33);
         }
-        //console.log(defOrderbookList);
-        // console.log(Object.values(defOrderbookList.orderbook_units)[0]);
-        // console.log(Object.values(defOrderbookList.orderbook_units)[14]);
     }, [coinCode, defOrderbookList, orderbookData, tmpCoin]);
 
     return (
         <Def.Container className="def-orderbook-container">
-            <div className="def-orderbook-body">
+            <div 
+                className="def-orderbook-body"
+                ref={orderbookBody}
+            >
                 {Object.values(defOrderbookList.orderbook_units).reverse().map((ask_bid, index) => {
                     return(
                         <Def.List key={index}>
                             <DefList
-                                ask_price={String(ask_bid.ask_price)}
-                                ask_size={String(ask_bid.ask_size)}
-                                bid_price={String(ask_bid.bid_price)}
-                                bid_size={String(ask_bid.bid_size)}
+                                ask_price={numberToKrw(String(ask_bid.ask_price))}
+                                ask_size={String(ask_bid.ask_size.toFixed(3))}
+                                bid_price={numberToKrw(String(ask_bid.bid_price))}
+                                bid_size={String(ask_bid.bid_size.toFixed(3))}
                                 ask_bid={"ASK"}
                             />
                         </Def.List>
@@ -82,10 +84,10 @@ function DefOrderbook({ coinCode }: Props) {
                     return(
                         <Def.List key={index}>
                             <DefList
-                                ask_price={String(ask_bid.ask_price)}
-                                ask_size={String(ask_bid.ask_size)}
-                                bid_price={String(ask_bid.bid_price)}
-                                bid_size={String(ask_bid.bid_size)}
+                                ask_price={numberToKrw(String(ask_bid.ask_price))}
+                                ask_size={String(ask_bid.ask_size.toFixed(3))}
+                                bid_price={numberToKrw(String(ask_bid.bid_price))}
+                                bid_size={String(ask_bid.bid_size.toFixed(3))}
                                 ask_bid={"BID"}
                             />
                         </Def.List>

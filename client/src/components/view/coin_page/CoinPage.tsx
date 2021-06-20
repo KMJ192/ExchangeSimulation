@@ -41,10 +41,12 @@ function CoinPage() {
                 <MainChart/>
                 <PSGrid>
                     <Orderbook
-                       coinCode={coinCode} 
+                       coinCode={coinCode}
                     />
                     <SellBuy/>
-                    <Trade/>
+                    <Trade
+                        coinCode={coinCode}
+                    />
                 </PSGrid>
             </div>
             <RealTimeList

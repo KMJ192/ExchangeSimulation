@@ -13,7 +13,7 @@ function Orderbook({ coinCode }: Props) {
     const defaultOrderbook = () => {
         setSelected(true);
     }
-    const cumulative = () => {
+    const cumulativeOrderbook = () => {
         setSelected(false);
     }
 
@@ -28,7 +28,7 @@ function Orderbook({ coinCode }: Props) {
                 </OrderbookContainer.HeaderCell.First>
                 <OrderbookContainer.HeaderCell.Second
                     toggle={selected} {...selected}
-                    onClick={cumulative}
+                    onClick={cumulativeOrderbook}
                 >
                     누적호가
                 </OrderbookContainer.HeaderCell.Second>

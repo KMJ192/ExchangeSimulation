@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ComList() {
+function DayTradeListItem() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function ComList() {
     )
 }
 
-export default ComList;
+export default React.memo(DayTradeListItem);
