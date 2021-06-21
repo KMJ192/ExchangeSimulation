@@ -8,7 +8,7 @@ export interface Ticker {
     high_price: number;
     trade_price: number;
     prev_closing_price: number;
-    change: string;
+    change: "RISE" | "EVEN" | "FALL";
     change_price: number;
     signed_change_price: number;
     change_rate: number;

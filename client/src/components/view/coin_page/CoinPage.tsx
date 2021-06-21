@@ -20,22 +20,13 @@ export function marketListFilterKRW(marketList: MarketList){
     return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));
 }
 
-// function CoinForOrderbook() {
-//     const ticker = useSelector((state: RootState) => state.ticker.ticker);
-//     const trade = useSelector((state: RootState) => state.trade.trade);
-//     const orderbook = useSelector((state: RootState) => state.orderbook.orderbook);
-//     if(ticker.loading || trade.loading || orderbook.loading){
-//         return "loading";
-//     }
-// }
-// function CoinForTrade(){
-//     const ticker = useSelector((state: RootState) => state.ticker.ticker);
-//     const trade = useSelector((state: RootState) => state.trade.trade);
-//     const orderbook = useSelector((state: RootState) => state.orderbook.orderbook);
-//     if(ticker.loading || trade.loading || orderbook.loading){
-//         return "loading";   
-//     }
-// }
+function pullMarketData(ticker: any, trade: any, orderbook: any, marketCode: string){
+    return {
+        ticker: ticker[marketCode],
+        trade: trade[marketCode],
+        orderbook: orderbook[marketCode]
+    }
+}
 
 function CoinPage() {
     const marketList = useSelector((state: RootState) => state.market_list.marketList);
@@ -44,6 +35,10 @@ function CoinPage() {
         const code = e.currentTarget.innerText.split("\n");
         dispatch(selectCoin(code[0]));
     }
+    const ticker = useSelector((state: RootState) => state.ticker.ticker.data, (prev, next) => prev === next);
+    const trade = useSelector((state: RootState) => state.trade.trade.data, (prev, next) => prev === next);
+    const orderbook = useSelector((state: RootState) => state.orderbook.orderbook.data, (prev, next) => prev === next);
+    const marketCode = useSelector((state: RootState) => state.selected_coin.coinCode, (prev, next) => prev === next);
 
     useEffect(() => {
         if(marketList.data){
@@ -52,7 +47,12 @@ function CoinPage() {
                 dispatch(selectCoin(capCoin[0].market));
             }
         }
-    }, [dispatch, marketList])
+        if(marketCode && ticker && trade && orderbook){
+            const totalData = pullMarketData(ticker, trade, orderbook, marketCode);
+            //console.log(totalData);
+        }
+
+    }, [dispatch, marketCode, marketList, orderbook, ticker, trade])
 
     return (
         <div className="coin-page-container">
@@ -68,7 +68,7 @@ function CoinPage() {
                 selectedCoin={selectedCoin} {...selectedCoin}
             />
         </div>
-    )
+    );
 }
 
 export default React.memo(CoinPage);

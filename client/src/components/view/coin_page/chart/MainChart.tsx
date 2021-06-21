@@ -11,4 +11,4 @@ function MainChart() {
     )
 }
 
-export default MainChart
+export default React.memo(MainChart);

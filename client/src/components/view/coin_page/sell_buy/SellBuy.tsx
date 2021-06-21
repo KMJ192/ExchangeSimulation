@@ -10,4 +10,4 @@ function SellBuy() {
     )
 }
 
-export default SellBuy
+export default React.memo(SellBuy);
