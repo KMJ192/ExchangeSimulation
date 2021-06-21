@@ -13,9 +13,15 @@ import {
     week_candle,
     month_candle
 } from './coin/get_candle';
+import {
+    req_ticker,
+    req_trade,
+    req_orderbook
+} from  './coin/req_coin';
 import selected_coin from "./coin/selected_coin";
 import { coinDataSaga } from "./coin/get_coin/saga";
 import { candleSaga } from "./coin/get_candle/saga";
+import { reqCoinSaga } from "./coin/req_coin";
 import { all } from "redux-saga/effects";
 
 const rootReducer = combineReducers({
@@ -29,12 +35,15 @@ const rootReducer = combineReducers({
     day_candle,
     week_candle,
     month_candle,
-    selected_coin
+    selected_coin,
+    req_ticker,
+    req_trade,
+    req_orderbook
 });
 
 export default rootReducer;
 export type RootState = ReturnType <typeof rootReducer>
 
 export function* rootSaga(){
-    yield all([coinDataSaga(), candleSaga()]);
+    yield all([coinDataSaga(), candleSaga(), reqCoinSaga()]);
 }
