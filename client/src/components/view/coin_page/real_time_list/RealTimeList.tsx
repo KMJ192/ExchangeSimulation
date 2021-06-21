@@ -100,9 +100,7 @@ function RealTimeList({ selectedCoin }: Props) {
                 {marketList.length > 1 && !tickerData.loading ?
                 marketList.map((market, index) => {
                     return(
-                        <li key={index}
-                            onClick={selectedCoin}
-                        >
+                        <li key={index} onClick={selectedCoin}>
                             <div className="list-item">
                                 <RealTimeListItem 
                                     market={market.market}

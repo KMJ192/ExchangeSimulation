@@ -4,11 +4,7 @@ import ComOrderbook from './OrderbookList/cumulation_orderbook/ComOrderbook';
 import { OrderbookContainer} from './OrderbookStyle';
 import './Orderbook.scss';
 
-interface Props{
-    coinCode: string;
-}
-
-function Orderbook({ coinCode }: Props) {
+function Orderbook() {
     const [selected, setSelected] = useState(true);    
     const defaultOrderbook = () => {
         setSelected(true);
@@ -34,12 +30,8 @@ function Orderbook({ coinCode }: Props) {
                 </OrderbookContainer.HeaderCell.Second>
             </OrderbookContainer.Header>
             {selected ? 
-                <DefOrderbook
-                    coinCode={coinCode}
-                /> :
-                <ComOrderbook
-                    coinCode={coinCode}
-                />
+                <DefOrderbook/> :
+                <ComOrderbook/>
             }
         </OrderbookContainer.Container>
     )

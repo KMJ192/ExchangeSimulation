@@ -13,6 +13,7 @@ import {
     week_candle,
     month_candle
 } from './coin/get_candle';
+import selected_coin from "./coin/selected_coin";
 import { coinDataSaga } from "./coin/get_coin/saga";
 import { candleSaga } from "./coin/get_candle/saga";
 import { all } from "redux-saga/effects";
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
     minute_candle,
     day_candle,
     week_candle,
-    month_candle
+    month_candle,
+    selected_coin
 });
 
 export default rootReducer;

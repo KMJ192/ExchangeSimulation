@@ -9,9 +9,6 @@ import axios from 'axios';
 import { Def } from '../OrderbookListStyle';
 import '../OrderbookList.scss';
 
-interface Props{
-    coinCode: string;
-}
 function getOrderbook(orderbook: any, coinCode: string): Orderbook{
     return orderbook[coinCode];
 }
@@ -22,7 +19,7 @@ function myGration(orderbook: any){
     }
 }
 
-function DefOrderbook({ coinCode }: Props) {
+function DefOrderbook() {
     const [defOrderbookList, setDefOrderbookList] = useState<Orderbook>({
         code: "",
         orderbook_units: [{
@@ -40,6 +37,7 @@ function DefOrderbook({ coinCode }: Props) {
     const [tmpCoin, setTmpCoin] = useState("");
     const orderbookBody = useRef<HTMLDivElement>(null);
     const orderbookData = useSelector((state: RootState) => state.orderbook.orderbook.data);
+    const coinCode = useSelector((state: RootState) => state.selected_coin.coinCode);
 
     useEffect(() => {
         if(tmpCoin !== coinCode && coinCode){

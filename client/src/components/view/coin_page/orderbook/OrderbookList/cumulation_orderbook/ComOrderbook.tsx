@@ -1,10 +1,6 @@
 import React from 'react'
 
-interface Props{
-    coinCode: string;
-}
-
-function ComOrderbook({ coinCode }: Props) {
+function ComOrderbook() {
     return (
         <div>
             준비중입니다.
