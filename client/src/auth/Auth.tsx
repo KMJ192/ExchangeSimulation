@@ -2,6 +2,7 @@ import React from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { paceCaseUserPatch, pageCaseLogined } from './PageCase';
+import { RouteChildrenProps } from 'react-router-dom';
 
 interface ResponseData{
     useremail : string;
@@ -10,7 +11,7 @@ interface ResponseData{
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function(Component : React.ComponentType, option : boolean,pageCase : string | null = null) {
-    function Authentication(props : any){
+    function Authentication(props: RouteChildrenProps){
         useEffect(() => {
             if(option){                
                 (async () => {
