@@ -4,7 +4,6 @@ import { Orderbook } from '../../../../../../redux-module/coin/get_coin';
 import { RootState } from '../../../../../../redux-module/RootReducer';
 import DefList from './DefListItem';
 import { numberToKrw } from '../../../CoinPage';
-import axios from 'axios';
 
 import { Def } from '../OrderbookListStyle';
 import '../OrderbookList.scss';
@@ -18,6 +17,14 @@ function myGration(orderbook: any){
         code: orderbook[0].market
     }
 }
+
+//호가창 정보
+//socket
+// => ticker
+//    signed_change_rate(전일대비 등락률), 
+//    change(전일 대비, RISE : 상승, EVEN : 보합, FALL : 하락)
+// => trade
+//    
 
 function DefOrderbook() {
     const [defOrderbookList, setDefOrderbookList] = useState<Orderbook>({
@@ -36,20 +43,16 @@ function DefOrderbook() {
     });
     const [tmpCoin, setTmpCoin] = useState("");
     const orderbookBody = useRef<HTMLDivElement>(null);
-    const orderbookData = useSelector((state: RootState) => state.orderbook.orderbook.data);
-    const coinCode = useSelector((state: RootState) => state.selected_coin.coinCode);
+    const orderbookData = useSelector((state: RootState) => state.orderbook.orderbook.data, (prev, next) => prev === next);
+    const orderbookRes = useSelector((state: RootState) => state.req_orderbook.orderbook, (prev, next) => prev === next);
+    const tradeRes = useSelector((state: RootState) => state.req_trade.trade, (prev, next) => prev === next);
+    const coinCode = useSelector((state: RootState) => state.selected_coin.coinCode,(prev, next) => prev === next);
+    //console.log(tradeRes.data);
 
     useEffect(() => {
-        if(tmpCoin !== coinCode && coinCode){
+        if(tmpCoin !== coinCode && coinCode && orderbookRes.data){
             setTmpCoin(coinCode);
-            const request = async (coinCode: string) => {
-                await axios.get(`https://api.upbit.com/v1/orderbook?markets=${coinCode}`, {
-                    withCredentials: false
-                })
-                .then(response => setDefOrderbookList(myGration(response.data)))
-                .catch(e => e);
-            };
-            request(coinCode);
+            setDefOrderbookList(myGration(orderbookRes.data));
             orderbookBody.current?.scrollTo(0, (orderbookBody.current.clientHeight / 2) - 33);
         }else if(orderbookData && coinCode) {
             const orderbookArray = getOrderbook(orderbookData, coinCode);
@@ -57,7 +60,7 @@ function DefOrderbook() {
         }else{
             orderbookBody.current?.scrollTo(0, (orderbookBody.current.clientHeight / 2) - 33);
         }
-    }, [coinCode, defOrderbookList, orderbookData, tmpCoin]);
+    }, [coinCode, defOrderbookList, orderbookData, orderbookRes.data, tmpCoin]);
 
     return (
         <Def.Container className="def-orderbook-container">

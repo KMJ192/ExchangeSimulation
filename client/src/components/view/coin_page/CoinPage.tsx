@@ -20,7 +20,7 @@ export function marketListFilterKRW(marketList: MarketList){
     return Object.values(marketList).filter((list: MarketList) => list.market.includes("KRW-"));
 }
 
-function pullMarketData(ticker: any, trade: any, orderbook: any, marketCode: string){
+export function pullMarketData(ticker: any, trade: any, orderbook: any, marketCode: string){
     return {
         ticker: ticker[marketCode],
         trade: trade[marketCode],
@@ -39,7 +39,6 @@ function CoinPage() {
     const trade = useSelector((state: RootState) => state.trade.trade.data, (prev, next) => prev === next);
     const orderbook = useSelector((state: RootState) => state.orderbook.orderbook.data, (prev, next) => prev === next);
     const marketCode = useSelector((state: RootState) => state.selected_coin.coinCode, (prev, next) => prev === next);
-
     useEffect(() => {
         if(marketList.data){
             const capCoin = marketListFilterKRW(marketList.data);
@@ -47,10 +46,10 @@ function CoinPage() {
                 dispatch(selectCoin(capCoin[0].market));
             }
         }
-        if(marketCode && ticker && trade && orderbook){
-            const totalData = pullMarketData(ticker, trade, orderbook, marketCode);
-            //console.log(totalData);
-        }
+        // if(marketCode && ticker && trade && orderbook){
+        //     const totalData = pullMarketData(ticker, trade, orderbook, marketCode);
+        //     //console.log(totalData);
+        // }
 
     }, [dispatch, marketCode, marketList, orderbook, ticker, trade])
 

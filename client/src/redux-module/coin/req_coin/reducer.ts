@@ -55,7 +55,7 @@ function reqTradeReducer(
     action: RequestCoinAction
 ){
     switch(action.type){
-        case REQUEST_ORDERBOOK:
+        case REQUEST_TRADE:
             return {
                 ...state,
                 trade: {
@@ -64,7 +64,7 @@ function reqTradeReducer(
                     error: null
                 }
             }
-        case REQUEST_ORDERBOOK_SUCCESS:
+        case REQUEST_TRADE_SUCCESS:
             return {
                 ...state,
                 trade: {
@@ -73,7 +73,7 @@ function reqTradeReducer(
                     error: null
                 }
             }
-        case REQUEST_ORDERBOOK_ERROR:
+        case REQUEST_TRADE_ERROR:
             return {
                 ...state,
                 trade: {
@@ -92,7 +92,7 @@ function reqOrderbookReducer(
     action: RequestCoinAction
 ){
     switch(action.type){
-        case REQUEST_TRADE:
+        case REQUEST_ORDERBOOK:
             return {
                 ...state,
                 orderbook: {
@@ -101,7 +101,7 @@ function reqOrderbookReducer(
                     error: null
                 }
             }
-        case REQUEST_TRADE_SUCCESS:
+        case REQUEST_ORDERBOOK_SUCCESS:
             return {
                 ...state,
                 orderbook: {
@@ -110,7 +110,7 @@ function reqOrderbookReducer(
                     error: null
                 }
             }
-        case REQUEST_TRADE_ERROR:
+        case REQUEST_ORDERBOOK_ERROR:
             return {
                 ...state,
                 orderbook: {

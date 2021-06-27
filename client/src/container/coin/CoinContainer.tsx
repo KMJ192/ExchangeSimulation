@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CoinPage from '../../components/view/coin_page/CoinPage'
 import Wrapper from '../../components/wrapper/Wrapper'
 import { getOrderbookAsync, getTickerAsync, getTradeAsync } from '../../redux-module/coin/get_coin/action';
 import { getMarketListThunk, MarketList } from '../../redux-module/coin/market_list';
+import { reqOrderbookAsync, reqTickerAsync, reqTradeAsync } from '../../redux-module/coin/req_coin';
 
 import { RootState } from '../../redux-module/RootReducer';
 
@@ -14,18 +15,18 @@ function marketListToString(marketList: MarketList): string[]{
 }
 
 function CoinContainer() {
-    const [mount, setMount] = useState(true);
     const marketListData = useSelector((state: RootState) => state.market_list.marketList.data);
     const marketListLoading = useSelector((state: RootState) => state.market_list.marketList.loading);
     const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
+    const selectedCode = useSelector((state: RootState) => state.selected_coin.coinCode);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(mount){
-            setMount(false);
-            dispatch(getMarketListThunk());
-        }
+        dispatch(getMarketListThunk());
+    }, [dispatch]);
+
+    useEffect(() => {
         if(marketListData){
             const marketList: string[] = marketListToString(marketListData);
             dispatch(getTickerAsync.request({
@@ -40,10 +41,22 @@ function CoinContainer() {
                 marketList: marketList,
                 reqType: "trade"
             }));
-
         }
-    }, [dispatch, mount, marketListData])
+    }, [dispatch, marketListData])
 
+    useEffect(() => {
+        if(selectedCode){
+            dispatch(reqTickerAsync.request({
+                marketCode: selectedCode
+            }));
+            dispatch(reqTradeAsync.request({
+                marketCode: selectedCode
+            }));
+            dispatch(reqOrderbookAsync.request({
+                marketCode: selectedCode
+            }));
+        }
+    }, [dispatch, selectedCode])
 
     if(marketListLoading){
         return (
