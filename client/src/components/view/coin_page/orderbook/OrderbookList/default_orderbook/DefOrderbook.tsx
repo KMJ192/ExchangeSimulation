@@ -18,17 +18,6 @@ function myGration(orderbook: any){
     }
 }
 
-//호가창 정보
-//필요정보 
-//마켓코드, 전일대비 등락률, 
-//socket
-// => ticker
-//    signed_change_rate(전일대비 등락률), 
-//    change(전일 대비, RISE : 상승, EVEN : 보합, FALL : 하락)
-// => trade
-//    
-// => orderbook
-//    
 
 function DefOrderbook() {
     const [defOrderbookList, setDefOrderbookList] = useState<Orderbook>({
@@ -50,11 +39,9 @@ function DefOrderbook() {
 
     const coinCode = useSelector((state: RootState) => state.selected_coin.coinCode,(prev, next) => prev === next);
     const orderbookData = useSelector((state: RootState) => state.orderbook.orderbook.data, (prev, next) => prev === next);
+
     const orderbookRes = useSelector((state: RootState) => state.req_orderbook.orderbook, (prev, next) => prev === next);
-    //const tradeRes = useSelector((state: RootState) => state.req_trade.trade, (prev, next) => prev === next);
-    //const tickerRes = useSelector((state: RootState) => state.req_ticker.ticker, (prev, next) => prev === next);
-    //console.log(tickerRes);
-    //console.log(tradeRes.data);
+    const tickerRes = useSelector((state: RootState) => state.req_ticker.ticker, (prev, next) => prev === next);
 
     useEffect(() => {
         if(tmpCoin !== coinCode && coinCode && orderbookRes.data){
@@ -71,37 +58,41 @@ function DefOrderbook() {
 
     return (
         <Def.Container className="def-orderbook-container">
-            <div 
-                className="def-orderbook-body"
-                ref={orderbookBody}
-            >
-                {/* {Object.values(defOrderbookList.orderbook_units).reverse().map((ask_bid, index) => {
-                    return(
-                        <Def.List key={index}>
-                            <DefList
-                                ask_price={numberToKrw(String(ask_bid.ask_price))}
-                                ask_size={String(ask_bid.ask_size.toFixed(3))}
-                                bid_price={numberToKrw(String(ask_bid.bid_price))}
-                                bid_size={String(ask_bid.bid_size.toFixed(3))}
-                                ask_bid={"ASK"}
-                            />
-                        </Def.List>
-                    )
-                })}
-                {Object.values(defOrderbookList.orderbook_units).map((ask_bid, index) => {
-                    return(
-                        <Def.List key={index}>
-                            <DefList
-                                ask_price={numberToKrw(String(ask_bid.ask_price))}
-                                ask_size={String(ask_bid.ask_size.toFixed(3))}
-                                bid_price={numberToKrw(String(ask_bid.bid_price))}
-                                bid_size={String(ask_bid.bid_size.toFixed(3))}
-                                ask_bid={"BID"}
-                            />
-                        </Def.List>
-                    )
-                })} */}
-            </div>
+            {orderbookRes.loading || tickerRes.loading ?
+                    <div>loading...</div>
+                :
+                <div 
+                    className="def-orderbook-body"
+                    ref={orderbookBody}
+                >
+                    {Object.values(defOrderbookList.orderbook_units).reverse().map((ask_bid, index) => {
+                        return(
+                            <Def.List key={index}>
+                                <DefList
+                                    ask_price={numberToKrw(String(ask_bid.ask_price))}
+                                    ask_size={String(ask_bid.ask_size.toFixed(3))}
+                                    bid_price={numberToKrw(String(ask_bid.bid_price))}
+                                    bid_size={String(ask_bid.bid_size.toFixed(3))}
+                                    ask_bid={"ASK"}
+                                />
+                            </Def.List>
+                        )
+                    })}
+                    {Object.values(defOrderbookList.orderbook_units).map((ask_bid, index) => {
+                        return(
+                            <Def.List key={index}>
+                                <DefList
+                                    ask_price={numberToKrw(String(ask_bid.ask_price))}
+                                    ask_size={String(ask_bid.ask_size.toFixed(3))}
+                                    bid_price={numberToKrw(String(ask_bid.bid_price))}
+                                    bid_size={String(ask_bid.bid_size.toFixed(3))}
+                                    ask_bid={"BID"}
+                                />
+                            </Def.List>
+                        )
+                    })}
+                </div>
+            }
             <Def.Footer className="def-orderbook-footer">
                 <div>
                     {defOrderbookList?.total_ask_size && numberToKrw(String(defOrderbookList?.total_ask_size.toFixed(3)))}

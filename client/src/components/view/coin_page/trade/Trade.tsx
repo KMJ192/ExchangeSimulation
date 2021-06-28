@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux-module/RootReducer';
 import { Trade } from '../../../../redux-module/coin/get_coin';
@@ -12,10 +11,12 @@ import './Trade.scss';
 // interface TradeData{
 //     code: string;
 //     ask_bid: "ASK" | "BID";
-//     changePrice: number;    //전일대비
 //     tradeDate: string;      //체결날짜
 //     tradeTime: string;      //체결시간
 //     tradeVolume: number;    //체결량
+//     prev_closing_price: number; //전일종가
+//     changePrice: number;    //전일대비
+//      
 // }
 
 function getTradeData(trade: Trade[], tradeData: any, coinCode: string){
@@ -33,12 +34,6 @@ function marketCode(trade: any){
     }
 }
 
-async function request(addr: string) {
-    return await axios.get(addr, {
-        withCredentials: false
-    }).then(response => response.data);
-}
-
 function TradeWindow() {
     const [selected, setSelected] = useState(true);
     const [trade, setTrade] = useState<Trade[]>();
@@ -49,29 +44,18 @@ function TradeWindow() {
     const dayContents = () => {
         setSelected(false);
     }
-
-    const tradeData = useSelector((state: RootState) => state.trade.trade.data);
-    const coinCode = useSelector((state: RootState) => state.selected_coin.coinCode);
-    
+    const resTradeData = useSelector((state: RootState) => state.req_trade.trade, (prev, next) => prev === next);
+    const tradeData = useSelector((state: RootState) => state.trade.trade.data, (prev, next) => prev === next);
+    const coinCode = useSelector((state: RootState) => state.selected_coin.coinCode, (prev, next) => prev === next);
+    //console.log(tradeData);
     useEffect(() => {
-        //console.log(trade);
         if(!trade){
-            if(coinCode) {
-                request(`https://api.upbit.com/v1/trades/ticks?market=${coinCode}&count=50`)
-                .then(response => {
-                    setTrade(response)
-                });
-            }
-        }else if(marketCode(trade[0]).code && marketCode(trade[0]).code !== coinCode){
-            if(coinCode) {
-                request(`https://api.upbit.com/v1/trades/ticks?market=${coinCode}&count=50`)
-                .then(response => setTrade(response));
-            }
+           //console.log(resTradeData);
         }else if(tradeData) {
             const tradeListItem = getTradeData(trade, tradeData, coinCode);
             if(tradeListItem && trade !== tradeListItem) setTrade(tradeListItem)
         }
-    }, [trade, tradeData, coinCode]);
+    }, [trade, tradeData, coinCode, resTradeData]);
     
 
     return (
