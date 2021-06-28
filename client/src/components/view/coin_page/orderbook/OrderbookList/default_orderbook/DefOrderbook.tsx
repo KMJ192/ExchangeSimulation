@@ -19,11 +19,15 @@ function myGration(orderbook: any){
 }
 
 //호가창 정보
+//필요정보 
+//마켓코드, 전일대비 등락률, 
 //socket
 // => ticker
 //    signed_change_rate(전일대비 등락률), 
 //    change(전일 대비, RISE : 상승, EVEN : 보합, FALL : 하락)
 // => trade
+//    
+// => orderbook
 //    
 
 function DefOrderbook() {
@@ -43,10 +47,13 @@ function DefOrderbook() {
     });
     const [tmpCoin, setTmpCoin] = useState("");
     const orderbookBody = useRef<HTMLDivElement>(null);
+
+    const coinCode = useSelector((state: RootState) => state.selected_coin.coinCode,(prev, next) => prev === next);
     const orderbookData = useSelector((state: RootState) => state.orderbook.orderbook.data, (prev, next) => prev === next);
     const orderbookRes = useSelector((state: RootState) => state.req_orderbook.orderbook, (prev, next) => prev === next);
-    const tradeRes = useSelector((state: RootState) => state.req_trade.trade, (prev, next) => prev === next);
-    const coinCode = useSelector((state: RootState) => state.selected_coin.coinCode,(prev, next) => prev === next);
+    //const tradeRes = useSelector((state: RootState) => state.req_trade.trade, (prev, next) => prev === next);
+    //const tickerRes = useSelector((state: RootState) => state.req_ticker.ticker, (prev, next) => prev === next);
+    //console.log(tickerRes);
     //console.log(tradeRes.data);
 
     useEffect(() => {
@@ -68,7 +75,7 @@ function DefOrderbook() {
                 className="def-orderbook-body"
                 ref={orderbookBody}
             >
-                {Object.values(defOrderbookList.orderbook_units).reverse().map((ask_bid, index) => {
+                {/* {Object.values(defOrderbookList.orderbook_units).reverse().map((ask_bid, index) => {
                     return(
                         <Def.List key={index}>
                             <DefList
@@ -93,7 +100,7 @@ function DefOrderbook() {
                             />
                         </Def.List>
                     )
-                })}
+                })} */}
             </div>
             <Def.Footer className="def-orderbook-footer">
                 <div>

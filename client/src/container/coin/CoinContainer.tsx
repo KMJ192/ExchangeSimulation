@@ -19,7 +19,6 @@ function CoinContainer() {
     const marketListLoading = useSelector((state: RootState) => state.market_list.marketList.loading);
     const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
     const selectedCode = useSelector((state: RootState) => state.selected_coin.coinCode);
-
     const dispatch = useDispatch();
 
     useEffect(() => {

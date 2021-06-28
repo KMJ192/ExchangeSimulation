@@ -39,8 +39,10 @@ function CoinPage() {
     const trade = useSelector((state: RootState) => state.trade.trade.data, (prev, next) => prev === next);
     const orderbook = useSelector((state: RootState) => state.orderbook.orderbook.data, (prev, next) => prev === next);
     const marketCode = useSelector((state: RootState) => state.selected_coin.coinCode, (prev, next) => prev === next);
+    const prevCode = useSelector((state: RootState) => state.selected_coin.coinCode, (prev, next) => prev === next);
+
     useEffect(() => {
-        if(marketList.data){
+        if(marketList.data && !prevCode){
             const capCoin = marketListFilterKRW(marketList.data);
             if(capCoin.length > 0) {
                 dispatch(selectCoin(capCoin[0].market));
@@ -51,7 +53,7 @@ function CoinPage() {
         //     //console.log(totalData);
         // }
 
-    }, [dispatch, marketCode, marketList, orderbook, ticker, trade])
+    }, [dispatch, marketCode, marketList, orderbook, prevCode, ticker, trade]);
 
     return (
         <div className="coin-page-container">
