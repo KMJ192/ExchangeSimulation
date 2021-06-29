@@ -1,17 +1,18 @@
 import React from 'react'
+import { TradeData } from '../Trade';
+import { TradeListSt } from './TradeListStyle';
+
+
 
 interface Props{
-    coinCode: string; //코인
-    date: string; //날짜
-    time: string; //시간
-    tradePrice: string; //체결가격
+    data: TradeData;
 }
 
-function TradeListItem({coinCode, date, time, tradePrice}: Props) {
+function TradeListItem({ data }: Props) {
     return (
-        <div>
-            item
-        </div>
+        <TradeListSt.Container>
+            {data.ask_bid}
+        </TradeListSt.Container>
     )
 }
 

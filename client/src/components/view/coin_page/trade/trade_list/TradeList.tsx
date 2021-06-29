@@ -1,11 +1,13 @@
 import React from 'react';
 import { TradeListSt } from './TradeListStyle';
+import { TradeData } from '../Trade';
+import TradeListItem from './TradeListItem';
 
 interface Props{
-    coinCode: string;
+    data: TradeData[] | undefined;
 }
-function TradeList({ coinCode }: Props) {
-
+function TradeList({ data }: Props) {
+    console.log(data);
     return (
         <TradeListSt.Container className="trade-list-container">
             <div className="trade-list-header">
@@ -14,15 +16,20 @@ function TradeList({ coinCode }: Props) {
                 <div>체결량</div>
             </div>
             <div className="trade-list-body">
-                {/* {trade?.map((trade, index) => {
-                    <li key={index}>
-                        <TradeListItem 
-                            coinCode={coinCode}
-                            date={trade.trade_date}
-                            time={trade.}
-                        />
-                    </li>
-                })} */}
+                {data ? 
+                    <ul>
+                        {data.map((trade, index) => {
+                            return(
+                                <li key={index}>
+                                    <TradeListItem 
+                                        data={trade}
+                                    />
+                                </li>
+                            );
+                        })}
+                    </ul> :
+                    <div>loading...</div>
+                }
             </div>
         </TradeListSt.Container>
     )

@@ -25,6 +25,17 @@
         }
         .trade-list-body{
             border: solid 1px;
+            overflow: auto;
+            &::-webkit-scrollbar{
+                width: 3px;
+                height: 5px;
+            }
+            &::-webkit-scrollbar-thumb { 
+                background-color: rgba(5, 5, 5, 0.3);
+            }
+            li{
+                list-style: none;
+            }
         }
     }
 }
