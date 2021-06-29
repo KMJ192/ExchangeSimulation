@@ -1,10 +1,6 @@
 import React from 'react'
 
-interface Props{
-    coinCode: string;
-}
-
-function DayTradeList({ coinCode }: Props) {
+function DayTradeList() {
     return (
         <div className="trade-list-container">
             일별
