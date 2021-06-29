@@ -1,9 +1,12 @@
 import React from 'react'
+import { DTData } from './DayTradeList';
 
-function DayTradeListItem() {
+interface Props extends DTData{}
+
+function DayTradeListItem({date_time, closing_price, change_price, transaction_rate}: Props) {
     return (
         <div>
-            
+            {date_time} {closing_price} {change_price} {transaction_rate}
         </div>
     )
 }

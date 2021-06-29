@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CoinPage from '../../components/view/coin_page/CoinPage'
 import Wrapper from '../../components/wrapper/Wrapper'
+import { getDayCandleAsync } from '../../redux-module/coin/get_candle';
 import { getOrderbookAsync, getTickerAsync, getTradeAsync } from '../../redux-module/coin/get_coin/action';
 import { getMarketListThunk, MarketList } from '../../redux-module/coin/market_list';
 import { reqOrderbookAsync, reqTickerAsync, reqTradeAsync } from '../../redux-module/coin/req_coin';
@@ -15,11 +16,26 @@ function marketListToString(marketList: MarketList): string[]{
 }
 
 function CoinContainer() {
+    const [prevCoin, setNextCoin] = useState("");
+
     const marketListData = useSelector((state: RootState) => state.market_list.marketList.data);
     const marketListLoading = useSelector((state: RootState) => state.market_list.marketList.loading);
     const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
     const selectedCode = useSelector((state: RootState) => state.selected_coin.coinCode);
     const dispatch = useDispatch();
+
+    const today = useCallback(() => {
+        const today = new Date();
+        let month = String(today.getMonth() + 1);
+        let day = String(today.getDate());
+        if(String(month).length === 1){
+            month = `0${month}`;
+        }
+        if(String(day).length === 1){
+            day = `0${day}`;
+        }
+        return `${today.getFullYear()}-${month}-${day}`
+    }, [])
 
     useEffect(() => {
         dispatch(getMarketListThunk());
@@ -44,7 +60,8 @@ function CoinContainer() {
     }, [dispatch, marketListData])
 
     useEffect(() => {
-        if(selectedCode){
+        if(prevCoin !== selectedCode){
+            setNextCoin(selectedCode);
             dispatch(reqTickerAsync.request({
                 marketCode: selectedCode
             }));
@@ -54,8 +71,13 @@ function CoinContainer() {
             dispatch(reqOrderbookAsync.request({
                 marketCode: selectedCode
             }));
+            const now = `${today()}T00:00:00Z`;
+            dispatch(getDayCandleAsync.request({
+                marketCode: selectedCode,
+                time: now
+            }));
         }
-    }, [dispatch, selectedCode])
+    }, [dispatch, prevCoin, selectedCode, today])
 
     if(marketListLoading){
         return (

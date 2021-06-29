@@ -39,6 +39,7 @@ function marketCode(trade: any): TradeData[]{
 }
 
 function TradeList() {
+    const [prevCoin, setCoin] = useState("");
     const [trade, setTrade] = useState<TradeData[]>();
 
     const resTradeData = useSelector((state: RootState) => state.req_trade.trade, (prev, next) => prev === next);
@@ -48,13 +49,20 @@ function TradeList() {
     useEffect(() => {
         if(!trade && resTradeData.data){
             setTrade(marketCode(resTradeData.data));
-        }else if(trade && tradeData){
+        }else if(prevCoin !== coinCode && resTradeData.data){
+            const tmp: any = resTradeData.data;
+            if(tmp.length > 1 && tmp[0].market !== prevCoin){
+                setCoin(coinCode);
+                setTrade(marketCode(resTradeData.data));
+            }
+        }
+        else if(trade && tradeData){
             const tradeListItem = getTradeData(trade, tradeData, coinCode);
             if(tradeListItem && trade !== tradeListItem) {
                 setTrade(tradeListItem);
             }
         }
-    }, [trade, tradeData, coinCode, resTradeData]);
+    }, [trade, tradeData, coinCode, resTradeData, prevCoin]);
 
     return (
         <TradeListSt.Container className="trade-list-container">
