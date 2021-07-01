@@ -44,6 +44,7 @@ function syncData(marketList: marketList[], coinData: any){
                 else if(before > after) marketList[i].update = "d";
                 marketList[i].trade_price = after;
             }else marketList[i].update = "";
+            
             marketList[i].signed_change_rate = numberToKrw(String((coinData[marketList[i].market]["signed_change_rate"]*100).toFixed(2)));
             marketList[i].signed_change_price = numberToKrw(coinData[marketList[i].market]["signed_change_price"]);
             marketList[i].acc_trade_price_24h = numberToKrw(String(Math.round(coinData[marketList[i].market]["acc_trade_price_24h"] / 1000000)));
