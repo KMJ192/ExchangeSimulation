@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Orderbook } from '../../../../../../redux-module/coin/get_coin';
 import { RootState } from '../../../../../../redux-module/RootReducer';
 import DefList from './DefListItem';
@@ -7,6 +7,7 @@ import { numberToKrw } from '../../../CoinPage';
 
 import { Def } from '../OrderbookListStyle';
 import '../OrderbookList.scss';
+import { selectedPrice } from '../../../../../../redux-module/coin/selected_price';
 
 function getOrderbook(orderbook: any, coinCode: string): Orderbook{
     return orderbook[coinCode];
@@ -43,6 +44,8 @@ function DefOrderbook() {
     const orderbookRes = useSelector((state: RootState) => state.req_orderbook.orderbook, (prev, next) => prev === next);
     const tickerRes = useSelector((state: RootState) => state.req_ticker.ticker, (prev, next) => prev === next);
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         if(tmpCoin !== coinCode && coinCode && orderbookRes.data){
             setTmpCoin(coinCode);
@@ -56,18 +59,22 @@ function DefOrderbook() {
         }
     }, [coinCode, defOrderbookList, orderbookData, orderbookRes.data, tmpCoin]);
 
+    const setPrice = (e: React.MouseEvent<HTMLLIElement>) => {
+        const price: string[] = e.currentTarget.innerText.split("\n");
+        dispatch(selectedPrice(price[0].replaceAll(",", "")));
+    }
+
     return (
         <Def.Container className="def-orderbook-container">
             {orderbookRes.loading || tickerRes.loading ?
-                    <div>loading...</div>
-                :
+                <div>loading...</div> :
                 <div 
                     className="def-orderbook-body"
                     ref={orderbookBody}
                 >
                     {Object.values(defOrderbookList.orderbook_units).reverse().map((ask_bid, index) => {
                         return(
-                            <Def.List key={index}>
+                            <Def.List key={index} onClick={setPrice}>
                                 <DefList
                                     ask_price={numberToKrw(String(ask_bid.ask_price))}
                                     ask_size={String(ask_bid.ask_size.toFixed(3))}
@@ -80,7 +87,7 @@ function DefOrderbook() {
                     })}
                     {Object.values(defOrderbookList.orderbook_units).map((ask_bid, index) => {
                         return(
-                            <Def.List key={index}>
+                            <Def.List key={index} onClick={setPrice}>
                                 <DefList
                                     ask_price={numberToKrw(String(ask_bid.ask_price))}
                                     ask_size={String(ask_bid.ask_size.toFixed(3))}

@@ -15,10 +15,10 @@ export const DayTradeListSt = {
         display: grid;
         grid-template-columns: ${listItem.gridTemplateCol};
         div{
+            background-color: rgba(199, 199, 199, 0.3);
             display: grid;
             justify-content: center;
             padding-top: 5px;
-            border-bottom: ${listItem.border};
             font-size: 13px;
         }
         

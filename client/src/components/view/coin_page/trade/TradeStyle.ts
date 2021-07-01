@@ -26,12 +26,14 @@ export const TradeBox = {
     `,
     Header: styled.div`
         grid-template-columns: ${header.col1}px ${header.col2}px;
-    `,
-    HeaderCell: {
-        First: styled.button`
+        button{
             border-radius: 3px;
             color: #04040E;
             border: none;
+        }
+    `,
+    HeaderCell: {
+        First: styled.button`
             ${(props: any) => props.toggle ? 
                 css`
                     background-color: ${header.colorStrong};
@@ -43,9 +45,6 @@ export const TradeBox = {
                 `}
         `,
         Second: styled.button`
-            border-radius: 3px;
-            color: #04040E;
-            border: none;
             ${(props: any) => props.toggle ? 
                 css`
                     background-color: ${header.colorWeak};
