@@ -1,10 +1,11 @@
 import React from 'react'
+import SellBuyUI from './SellBuyUI';
 
 function Buy() {
     return (
-        <div>
-            buy
-        </div>
+        <SellBuyUI
+            ask_bid="매도"
+        />
     )
 }
 

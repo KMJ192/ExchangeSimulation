@@ -1,17 +1,12 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../redux-module/RootReducer';
+import SellBuyUI from './SellBuyUI';
 
 function Sell() {
-    const price = useSelector((state: RootState) => state.selected_price.price);
-    
-    
-
     return (
-        <div>
-            sell
-        </div>
-    )
+        <SellBuyUI
+            ask_bid="매수"
+        />        
+    );
 }
 
 export default React.memo(Sell);

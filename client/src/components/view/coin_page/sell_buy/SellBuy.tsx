@@ -4,7 +4,6 @@ import Sell from './Sell';
 
 import { SellBuySt } from './SellBuyStyle';
 
-
 function SellBuy() {
     const [selected, setSelected] = useState(true);
     const SellContents = () => {
@@ -13,6 +12,7 @@ function SellBuy() {
     const buyContents = () => {
         setSelected(false);
     }
+
     return (
         <SellBuySt.Container>
             <SellBuySt.Header>

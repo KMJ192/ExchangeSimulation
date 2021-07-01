@@ -22,9 +22,8 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 ### Todo List
 - front-end
   - candle데이터 한번에 최대 200개 받아올 수 있으므로 request parameter에 스크롤 움직임에 따른 시간 계산 로직 추가
-  - 실시간 체결창 구현
   - 모의투자 구현
-  - 호가창 재구현
+    + ask/bid 화면 완료(mock데이터 설정 및 매도/매수 구현 필요)
   - upbit에서 받아온 데이터 시각화
     + light-weight chart 사용
 - back-end
@@ -34,12 +33,12 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 - front-end
   - upbit open api 모듈화(redux, redux-thunk, redux-saga, websocket)
   - 실시간 시세 리스트 구현
+  - 실시간 체결창 구현
 - back-end
   - . . .
 
 ### 화면
 ![sample](./a-progress/sample.gif)
-
 
 
 ### upbit open api

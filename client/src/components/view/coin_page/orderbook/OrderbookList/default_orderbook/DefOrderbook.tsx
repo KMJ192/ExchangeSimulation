@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Orderbook } from '../../../../../../redux-module/coin/get_coin';
 import { RootState } from '../../../../../../redux-module/RootReducer';
@@ -59,10 +59,10 @@ function DefOrderbook() {
         }
     }, [coinCode, defOrderbookList, orderbookData, orderbookRes.data, tmpCoin]);
 
-    const setPrice = (e: React.MouseEvent<HTMLLIElement>) => {
+    const setPrice = useCallback((e: React.MouseEvent<HTMLLIElement>) => {
         const price: string[] = e.currentTarget.innerText.split("\n");
         dispatch(selectedPrice(price[0].replaceAll(",", "")));
-    }
+    }, [dispatch]);
 
     return (
         <Def.Container className="def-orderbook-container">
