@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux-module/RootReducer';
 import { SellBuyProps } from './SellBuy';
@@ -10,9 +10,8 @@ interface Props extends SellBuyProps{
     ask_bid: "매도" | "매수";
 }
 
-function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, setting }: Props) {
+function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, setting, initData, itemCount }: Props) {
     const code = useSelector((state: RootState) => state.selected_coin.coinCode);
-    const inputRef = useRef<HTMLInputElement>(null);
 
     return (
         <SellCompoSt.Container>
@@ -35,7 +34,9 @@ function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, settin
                     주문총액(KRW)
                 </SellCompoSt.SellBuyCell>
                 <SellCompoSt.InitializeButton>
-                    <button>
+                    <button
+                        onClick={initData}
+                    >
                         초기화
                     </button>
                 </SellCompoSt.InitializeButton>
@@ -46,7 +47,7 @@ function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, settin
                         <input 
                             placeholder="자산설정(KRW)"
                             onChange={setProperty}
-                            ref={inputRef}
+                            
                         />
                         <button
                             onClick={setting}
@@ -64,7 +65,7 @@ function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, settin
                 </div>                
                 <SellCompoSt.SellBuyQuantity>
                     <SellCompoSt.SellBuyQuantityInput
-                        value={percent}
+                        value={`${String(itemCount)} ${code.split("-")[1]}`}
                         readOnly
                     />
                     <SellCompoSt.SellBuyQuantityPer>
@@ -86,7 +87,10 @@ function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, settin
                     </SellCompoSt.SellBuyQuantityPer>
                 </SellCompoSt.SellBuyQuantity>
                 <div>
-                    <SellCompoSt.SellBuyInput/>
+                    <SellCompoSt.SellBuyInput
+                        value={percent}
+                        readOnly
+                    />
                 </div>
                 <SellCompoSt.SellBuyButton
                     ask_bid={ask_bid}

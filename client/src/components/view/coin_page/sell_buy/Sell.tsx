@@ -5,7 +5,7 @@ import SellBuyUI from './SellBuyUI';
 
 interface Props extends SellBuyProps{}
 
-function Sell({per, price, mockData, percent, setProperty, setting}: Props) {
+function Sell({per, price, mockData, percent, setProperty, setting, initData, itemCount}: Props) {
     return (
         <SellBuyUI
             ask_bid="매수"
@@ -13,8 +13,10 @@ function Sell({per, price, mockData, percent, setProperty, setting}: Props) {
             price={price}
             mockData={mockData}
             percent={percent}
+            itemCount={itemCount}
             setProperty={setProperty}
             setting={setting}
+            initData={initData}
         />        
     );
 }
