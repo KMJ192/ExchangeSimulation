@@ -1,65 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux-module/RootReducer';
+import { SellBuyProps } from './SellBuy';
 
 import { SellCompoSt } from './SellBuyStyle';
 import './SellBuy.scss';
 
-interface Props{
+interface Props extends SellBuyProps{
     ask_bid: "매도" | "매수";
 }
 
-function SellBuyUI({ ask_bid }: Props) {
-    const [price, setPrice] = useState(0);
-    const [percent, setPercent] = useState(0);
-    const [mockData, setMockData] = useState({
-        prev: 0,
-        next: 0
-    });
-
+function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, setting }: Props) {
     const code = useSelector((state: RootState) => state.selected_coin.coinCode);
-    const selectedPrice = useSelector((state: RootState) => Number(state.selected_price.price));
-
-    useEffect(() => {
-        if(price !== selectedPrice) setPrice(selectedPrice);
-    }, [price, selectedPrice]);
-
-    const per = {
-        first: () => {
-            const val = price * 10 / 100;
-            setPercent(val);
-        },
-        second: () => {
-            const val = price * 25 / 100;
-            setPercent(val);
-        },
-        third: () => {
-            const val = price * 50 / 100;
-            setPercent(val);
-        }, 
-        forth: () => {
-            const val = price;
-            setPercent(val);
-        },
-        input: (e: React.ChangeEvent<HTMLInputElement>) => {
-            const val = isNaN(Number(e.target.value)) ? 0 : price * Number(e.target.value) / 100;
-            setPercent(val);
-        }
-    }
-    const setProperty = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const val = isNaN(Number(e.target.value)) ? 0 : Number(e.target.value);
-        setMockData({
-            ...mockData,
-            prev: val
-        });
-    }
-
-    const setting = () => {
-        setMockData({
-            ...mockData,
-            next: mockData.prev
-        })
-    }
+    const inputRef = useRef<HTMLInputElement>(null);
 
     return (
         <SellCompoSt.Container>
@@ -81,6 +34,11 @@ function SellBuyUI({ ask_bid }: Props) {
                 <SellCompoSt.SellBuyCell>
                     주문총액(KRW)
                 </SellCompoSt.SellBuyCell>
+                <SellCompoSt.InitializeButton>
+                    <button>
+                        초기화
+                    </button>
+                </SellCompoSt.InitializeButton>
             </SellCompoSt.Row1>
             <SellCompoSt.Row2>
                 <SellCompoSt.PropertySet>
@@ -88,6 +46,7 @@ function SellBuyUI({ ask_bid }: Props) {
                         <input 
                             placeholder="자산설정(KRW)"
                             onChange={setProperty}
+                            ref={inputRef}
                         />
                         <button
                             onClick={setting}
@@ -129,6 +88,12 @@ function SellBuyUI({ ask_bid }: Props) {
                 <div>
                     <SellCompoSt.SellBuyInput/>
                 </div>
+                <SellCompoSt.SellBuyButton
+                    ask_bid={ask_bid}
+                    {...ask_bid}
+                >
+                    <button>{ask_bid}</button>
+                </SellCompoSt.SellBuyButton>
             </SellCompoSt.Row2>
         </SellCompoSt.Container>
     )

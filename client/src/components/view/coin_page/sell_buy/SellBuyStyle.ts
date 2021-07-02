@@ -74,11 +74,11 @@ export const SellCompoSt = {
     `,
     Row1: styled.div`
         display: grid;
-        grid-template-rows: repeat(4, 110px);
+        grid-template-rows: repeat(5, 88px);
     `,
     Row2: styled.div`
         display: grid;
-        grid-template-rows: repeat(4, 110px);
+        grid-template-rows: repeat(5, 88px);
     `,
     PropertySet: styled.div`
         display: grid;
@@ -203,6 +203,7 @@ export const SellCompoSt = {
             height: 29px;
             border: none;
             background-color: ${inputBox.color};
+            border-radius: 3px 3px;
             &::placeholder{
                 font-size: 13px;
             }
@@ -210,6 +211,47 @@ export const SellCompoSt = {
                 outline: none;
             }
         }
+    `,
+    InitializeButton: styled.div`
+        display: grid;
+        justify-content: center;
+        padding: 25px 25px;
+        button{
+            width: 100px;
+            border: none;
+            background-color: #878787;
+            transition: 0.2s;
+            border-radius: 3px 3px;
+            &:hover{
+                background-color: #686868;
+            }
+        }
+    `,
+    SellBuyButton: styled.div`
+        display: grid;
+        justify-content: center;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        button{
+            transition: 0.3s;
+            border-radius: 3px 3px;
+            ${(props: any) => props.ask_bid === "매수" ? 
+                css`
+                    background-color: #124FFF;
+                    &:hover{
+                        background-color: red;
+                    }
+                ` :
+                css`
+                    background-color: red;
+                    &:hover{
+                        background-color: #124FFF;
+                    }
+                `
+            }
+            width: 300px;
+            border: none;
+            color: white;
+        }
     `
-
 }
