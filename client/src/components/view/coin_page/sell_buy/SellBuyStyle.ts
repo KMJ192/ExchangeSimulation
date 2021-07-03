@@ -18,7 +18,7 @@ const inputBox = {
 
 export const SellBuySt = {
     Container: styled.div`
-        width: 470px;
+        width: 471px;
         height: 469px;
         background: #ffffff;
         box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
@@ -28,7 +28,7 @@ export const SellBuySt = {
     `,
     Header: styled.div`
         display: grid;
-        grid-template-columns: repeat(2, 235px);
+        grid-template-columns: repeat(3, 157px);
         button{
             display: grid;
             justify-content: center;
@@ -39,7 +39,7 @@ export const SellBuySt = {
         }
     `,
     SellButton: styled.button`
-        ${(props: any) => props.toggle ?
+        ${(props: any) => props.toggle === 0 ?
             css`
                 background-color: ${header.colorStrong};
                 font-weight: ${header.selected.fontWeight};
@@ -51,14 +51,26 @@ export const SellBuySt = {
         }
     `,
     BuyButton: styled.button`
-        ${(props: any) => props.toggle ?
-            css`
-                background-color: ${header.colorWeak};
-            ` :
+        ${(props: any) => props.toggle === 1 ?
             css`
                 background-color: ${header.colorStrong};
                 font-weight: ${header.selected.fontWeight};
                 font-size: ${header.selected.fontSize}px;
+            ` :
+            css`
+                background-color: ${header.colorWeak};
+            `
+        }
+    `,
+    MyPropertyButton: styled.button`
+        ${(props: any) => props.toggle === 2 ?
+            css`
+                background-color: ${header.colorStrong};
+                font-weight: ${header.selected.fontWeight};
+                font-size: ${header.selected.fontSize}px;
+            ` :
+            css`
+                background-color: ${header.colorWeak};
             `
         }
     `,

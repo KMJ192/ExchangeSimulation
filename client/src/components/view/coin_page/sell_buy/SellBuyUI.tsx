@@ -10,7 +10,7 @@ interface Props extends SellBuyProps{
     ask_bid: "매도" | "매수";
 }
 
-function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, setting, initData, itemCount }: Props) {
+function SellBuyUI({ ask_bid, per, price, mockData, percent, itemCount, selectPer, setProperty, setting, initData }: Props) {
     const code = useSelector((state: RootState) => state.selected_coin.coinCode);
 
     return (
@@ -47,14 +47,14 @@ function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, settin
                         <input 
                             placeholder="자산설정(KRW)"
                             onChange={setProperty}
-                            
+                            value={mockData.init}
                         />
                         <button
                             onClick={setting}
                         >확인</button>
                     </SellCompoSt.PropertySetInput>
                     <SellCompoSt.PropertySettedVal>
-                        {mockData.next} KRW
+                        {mockData.setting} KRW
                     </SellCompoSt.PropertySettedVal>
                 </SellCompoSt.PropertySet>
                 <div>
@@ -83,6 +83,7 @@ function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, settin
                         >100%</button>
                         <input placeholder="입력(%)"
                             onChange={per.input}
+                            value={selectPer}
                         />
                     </SellCompoSt.SellBuyQuantityPer>
                 </SellCompoSt.SellBuyQuantity>
@@ -96,7 +97,14 @@ function SellBuyUI({ ask_bid, per, price, mockData, percent, setProperty, settin
                     ask_bid={ask_bid}
                     {...ask_bid}
                 >
-                    <button>{ask_bid}</button>
+                    {ask_bid === "매수" ? 
+                        <button
+                            onClick={per.sell}
+                        >{ask_bid}</button> :
+                        <button
+                            onClick={per.buy}
+                        >{ask_bid}</button>
+                    }
                 </SellCompoSt.SellBuyButton>
             </SellCompoSt.Row2>
         </SellCompoSt.Container>

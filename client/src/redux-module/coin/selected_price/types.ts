@@ -1,6 +1,6 @@
 import { selectedPrice } from "./action";
 
-export type SelectedPriceAction = ReturnType<typeof  selectedPrice>
+export type SelectedPriceAction = ReturnType<typeof selectedPrice>
 export type SelectedPriceState = {
     price: string;
 }
