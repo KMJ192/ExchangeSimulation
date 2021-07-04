@@ -1,9 +1,14 @@
 import React from 'react'
 
-function MyPropertyItem() {
+interface Props{
+    code: string;
+    myProperty: any;
+}
+
+function MyPropertyItem({ code, myProperty }: Props) {
     return (
         <div>
-            
+            {code} : {myProperty[code]}
         </div>
     )
 }

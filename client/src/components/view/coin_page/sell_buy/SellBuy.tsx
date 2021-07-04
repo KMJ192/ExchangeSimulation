@@ -86,32 +86,45 @@ function SellBuy() {
             setPercent(val);
 
         }, [price]),
-        sell: useCallback(() => {
-            if(percent <= mockData.setting) {
+        buy: useCallback(() => {
+            if(percent && percent <= mockData.setting) {
                 setMockData({
                     ...mockData,
                     setting: mockData.setting - percent
                 });
-                if(myProperty[code]) {
-                    myProperty[code].count += percent;
+                if(myProperty[code] && myProperty[code].count) {
+                    myProperty[code] += percent;
+                } else {
+                    myProperty[code] = percent;
                 }
-                else myProperty[code].count = percent;
-            }else{
+                alert(`${code}를 ${percent}-krw에 매수하였습니다.`);
+            } else if(!percent){
+                alert("가격을 선택해주세요.");
+            } else {
                 alert(`선택한 가격 [${percent}]는 현재자산 [${mockData.setting}]보다 많으므로 매수할 수 없습니다.`);
             }
             initData();
         }, [code, initData, mockData, myProperty, percent]),
-        buy: useCallback(() => {
-            if(myProperty[code] && myProperty[code].count > itemCount && mockData.setting > percent) {
+        sell: useCallback(() => {
+            if(myProperty[code] && percent && myProperty[code] >= percent) {
                 setMockData({
                     ...mockData,
                     setting: mockData.setting + percent
                 });
-            }else{
-                alert(`선택된 항목은 팔수 없는 자산입니다.`);
+                myProperty[code] -= percent;
+                if(!myProperty[code]) {
+                    delete myProperty[code];
+                }
+                alert(`${code}를 ${percent}-krw에 매도하였습니다.`)
+            } else if(!percent){
+                alert("가격을 선택해주세요.")
+            } else if(myProperty[code] <= percent) {
+                alert(`자산(${myProperty[code]})이 매도가(${percent})보다 적으므로 팔 수 없습니다.`);
+            } else {
+                alert("선택된 항목은 팔수 없는 자산입니다.");
             }
             initData();
-        }, [code, initData, itemCount, mockData, myProperty, percent])
+        }, [code, initData, mockData, myProperty, percent])
     }
     const setProperty = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const val = isNaN(Number(e.target.value)) ? 0 : Number(e.target.value);
@@ -193,6 +206,8 @@ function SellBuy() {
             {selected === 2 &&
                 <MyProperty
                     myProperty={myProperty}
+                    balance={mockData.setting}
+                    init={mockData.init}
                 />
             }
         </SellBuySt.Container>

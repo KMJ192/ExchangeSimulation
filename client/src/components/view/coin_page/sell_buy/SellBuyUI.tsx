@@ -99,10 +99,10 @@ function SellBuyUI({ ask_bid, per, price, mockData, percent, itemCount, selectPe
                 >
                     {ask_bid === "매수" ? 
                         <button
-                            onClick={per.sell}
+                            onClick={per.buy}
                         >{ask_bid}</button> :
                         <button
-                            onClick={per.buy}
+                            onClick={per.sell}
                         >{ask_bid}</button>
                     }
                 </SellCompoSt.SellBuyButton>
