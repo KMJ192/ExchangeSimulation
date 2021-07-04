@@ -1,12 +1,7 @@
 import React from 'react';
-// import { myProperty } from '../SellBuy';
 
-// interface Props{
-//     property: myProperty
-// }
-
-function MyProperty() {
-    
+function MyProperty(myProperty: any) {
+    console.log(myProperty);
     return (
         <div>
             

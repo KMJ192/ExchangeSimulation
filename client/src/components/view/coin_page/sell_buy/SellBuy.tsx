@@ -18,15 +18,6 @@ interface SellBuyFunction {
     buy: () => void
 }
 
-export interface myProperty{
-    code: string;
-    count: string;
-    mockData: {
-        init: number;
-        setting: number;
-    };
-}
-
 export interface SellBuyProps{
     per: SellBuyFunction;
     price: number;
@@ -45,20 +36,13 @@ function SellBuy() {
     const [percent, setPercent] = useState(0);
     const [itemCount, setItemCount] = useState(0);
     const [selectPer, setSelectPer] = useState("");
-    // const [myProperty, setMyProperty] = useState<myProperty[]>([{
-    //     code: "",
-    //     count: "",
-    //     mockData: {
-    //         init: 0,
-    //         setting: 0
-    //     }
-    // }]);
+    const myProperty = useState<any>({})[0];
     const [mockData, setMockData] = useState({
         init: 0,
         setting: 0
     });
     const orderbookPrice = useSelector((state: RootState) => Number(state.selected_price.price));
-    //const code = useSelector((state: RootState) => state.selected_coin.coinCode);
+    const code = useSelector((state: RootState) => state.selected_coin.coinCode);
     const dispatch = useDispatch();
 
     const initData = useCallback(() => {
@@ -78,7 +62,7 @@ function SellBuy() {
         const val = price * percentage / 100;
         setPercent(val);
         if(price) setItemCount(percentage / 100);
-    }, [price])
+    }, [price]);
 
     const per: SellBuyFunction = {
         first: useCallback(() => {
@@ -100,6 +84,7 @@ function SellBuy() {
                 setItemCount(Number(e.target.value) / 100);
             }
             setPercent(val);
+
         }, [price]),
         sell: useCallback(() => {
             if(percent <= mockData.setting) {
@@ -107,22 +92,26 @@ function SellBuy() {
                     ...mockData,
                     setting: mockData.setting - percent
                 });
+                if(myProperty[code]) {
+                    myProperty[code].count += percent;
+                }
+                else myProperty[code].count = percent;
             }else{
                 alert(`선택한 가격 [${percent}]는 현재자산 [${mockData.setting}]보다 많으므로 매수할 수 없습니다.`);
             }
             initData();
-        }, [initData, mockData, percent]),
+        }, [code, initData, mockData, myProperty, percent]),
         buy: useCallback(() => {
-            if(mockData.setting > percent) {
+            if(myProperty[code] && myProperty[code].count > itemCount && mockData.setting > percent) {
                 setMockData({
                     ...mockData,
                     setting: mockData.setting + percent
                 });
             }else{
-                alert(`선택한 가격 [${percent}]는 현재자산 [${mockData.setting}]보다 적어 매도할 수 없습니다.`);
+                alert(`선택된 항목은 팔수 없는 자산입니다.`);
             }
             initData();
-        }, [initData, mockData, percent])
+        }, [code, initData, itemCount, mockData, myProperty, percent])
     }
     const setProperty = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const val = isNaN(Number(e.target.value)) ? 0 : Number(e.target.value);
@@ -202,7 +191,9 @@ function SellBuy() {
                 />
             }
             {selected === 2 &&
-                <MyProperty/>
+                <MyProperty
+                    myProperty={myProperty}
+                />
             }
         </SellBuySt.Container>
     )
