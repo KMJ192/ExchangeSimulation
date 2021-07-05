@@ -43,7 +43,7 @@ bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 
 ### 화면
 ![sample](./a-progress/sample.gif)
-
+![sample2](./a-progress/screen.png)
 
 ### upbit open api
 - REST API
