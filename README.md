@@ -2,6 +2,8 @@
 
 bolier Plate Code : https://github.com/KMJ192/BolierPlateCode_1
 
+진행 : https://kmj24.tistory.com/category/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EA%B1%B0%EB%9E%98%EC%86%8C%20%EB%AA%A8%EC%9D%98%ED%88%AC%EC%9E%90%20%EC%82%AC%EC%9D%B4%ED%8A%B8%20%EB%A7%8C%EB%93%A4%EA%B8%B0
+
 ### Client
 - dev stack
   - typescript
