@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CoinPage from '../../components/view/coin_page/CoinPage'
 import Wrapper from '../../components/wrapper/Wrapper'
-import { getDayCandleAsync } from '../../redux-module/coin/get_candle';
+import { getDayCandleAsync, getMinuteCandleAsync, getMonthCandleAsync, getWeekCandleAsync } from '../../redux-module/coin/get_candle';
 import { getOrderbookAsync, getTickerAsync, getTradeAsync } from '../../redux-module/coin/get_coin/action';
 import { getMarketListThunk, MarketList } from '../../redux-module/coin/market_list';
 import { reqOrderbookAsync, reqTickerAsync, reqTradeAsync } from '../../redux-module/coin/req_coin';
@@ -72,10 +72,22 @@ function CoinContainer() {
                 marketCode: selectedCode
             }));
             const now = `${today()}T00:00:00Z`;
+            dispatch(getMinuteCandleAsync.request({
+                marketCode: selectedCode,
+                time: now
+            }));
             dispatch(getDayCandleAsync.request({
                 marketCode: selectedCode,
                 time: now
             }));
+            dispatch(getWeekCandleAsync.request({
+                marketCode: selectedCode,
+                time: now
+            }));
+            dispatch(getMonthCandleAsync.request({
+                marketCode: selectedCode,
+                time: now
+            }))
         }
     }, [dispatch, prevCoin, selectedCode, today])
 
