@@ -22,6 +22,8 @@ function CoinContainer() {
     const marketListLoading = useSelector((state: RootState) => state.market_list.marketList.loading);
     const marketListError = useSelector((state: RootState) => state.market_list.marketList.error);
     const selectedCode = useSelector((state: RootState) => state.selected_coin.coinCode);
+    const selectedChart = useSelector((state: RootState) => state.selected_chart);
+
     const dispatch = useDispatch();
 
     const today = useCallback(() => {
@@ -90,6 +92,31 @@ function CoinContainer() {
             }));
         }
     }, [dispatch, prevCoin, selectedCode, today])
+
+    useEffect(() => {
+        const now = `${today()}T00:00:00Z`;
+        if(selectedChart.dayChart) {
+            dispatch(getMinuteCandleAsync.request({
+                marketCode: selectedCode,
+                time: now
+            }));
+        }else if(selectedChart.minuteChart){
+            dispatch(getDayCandleAsync.request({
+                marketCode: selectedCode,
+                time: now
+            }));
+        }else if(selectedChart.weekChart){
+            dispatch(getWeekCandleAsync.request({
+                marketCode: selectedCode,
+                time: now
+            }));
+        }else if(selectedChart.monthChart){
+            dispatch(getMonthCandleAsync.request({
+                marketCode: selectedCode,
+                time: now
+            }));
+        }
+    }, [dispatch, selectedChart, selectedCode, today])
 
     if(marketListLoading){
         return (

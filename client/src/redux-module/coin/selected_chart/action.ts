@@ -4,18 +4,14 @@ export const WEEK_CHART = 'coin/WEEK_CHART';
 export const MONTH_CHART = 'coin/MONTH_CHART';
 
 export const selectMinuteChart = () => ({
-    type: MINUTE_CHART,
-    payload: true
+    type: MINUTE_CHART
 })
 export const selectDayChart = () => ({
-    type: MINUTE_CHART,
-    payload: true
+    type: DAY_CHART
 })
 export const selectWeekChart = () => ({
-    type: WEEK_CHART,
-    payload: true
+    type: WEEK_CHART
 })
 export const selectMonthChart = () => ({
-    type: MONTH_CHART,
-    payload: true
+    type: MONTH_CHART
 })

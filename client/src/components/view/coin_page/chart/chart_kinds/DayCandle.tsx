@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux-module/RootReducer';
 
 function DayCandle() {
-    const tmp = useSelector((state: RootState) => state.day_candle.dayCandle);
-    console.log(tmp);
+    const dayCandle = useSelector((state: RootState) => state.day_candle.dayCandle);
+    //console.log(dayCandle.data);
+
     return (
         <div>
             Day Chart
