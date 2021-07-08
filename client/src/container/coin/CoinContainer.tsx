@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import CoinPage from '../../components/view/coin_page/CoinPage'
 import Wrapper from '../../components/wrapper/Wrapper'
 import { getDayCandleAsync, getMinuteCandleAsync, getMonthCandleAsync, getWeekCandleAsync } from '../../redux-module/coin/get_candle';
@@ -35,7 +35,7 @@ function CoinContainer() {
             day = `0${day}`;
         }
         return `${today.getFullYear()}-${month}-${day}`
-    }, [])
+    }, []);
 
     useEffect(() => {
         dispatch(getMarketListThunk());
@@ -87,7 +87,7 @@ function CoinContainer() {
             dispatch(getMonthCandleAsync.request({
                 marketCode: selectedCode,
                 time: now
-            }))
+            }));
         }
     }, [dispatch, prevCoin, selectedCode, today])
 

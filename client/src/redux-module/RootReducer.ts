@@ -20,6 +20,7 @@ import {
 } from  './coin/req_coin';
 import selected_coin from "./coin/selected_coin";
 import selected_price from "./coin/selected_price";
+import selected_chart from "./coin/selected_chart";
 
 import { coinDataSaga } from "./coin/get_coin/saga";
 import { candleSaga } from "./coin/get_candle/saga";
@@ -39,9 +40,10 @@ const rootReducer = combineReducers({
     month_candle,
     selected_coin,
     selected_price,
+    selected_chart,
     req_ticker,
     req_trade,
-    req_orderbook
+    req_orderbook,
 });
 
 export default rootReducer;

@@ -1,31 +1,52 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../redux-module/RootReducer';
+import React, { useState } from 'react';
+import MinuteCandle from './chart_kinds/MinuteCandle';
+import DayCandle from './chart_kinds/DayCandle';
+import WeekCandle from './chart_kinds/WeekCandle';
+import MonthCandle from './chart_kinds/MonthCandle';
 
-import { MainChartStyled } from './MainChartStyle';
+import { MainChartSt } from './MainChartStyle';
 import './MainChart.scss';
 
-function candleArray(prev: any){
-    console.log(Object.values(prev).length);
-}
-
+//chart kinds select redux modulization
 function MainChart() {
-    const minuteCandle = useSelector((state: RootState) => state.minute_candle.minuteCandle);
-    const dayCande = useSelector((state: RootState) => state.day_candle.dayCandle);
-    const weekCandle = useSelector((state: RootState) => state.week_candle.weekCandle);
-    const monthCandle = useSelector((state: RootState) => state.month_candle.monthCandle);
-
-    useEffect(() => {
-        // if(minuteCandle.data) candleArray(minuteCandle.data);
-        // if(dayCande.data) candleArray(dayCande.data);
-        // if(weekCandle.data) candleArray(weekCandle.data);
-        // if(monthCandle.data) candleArray(monthCandle.data);
-    }, [dayCande, minuteCandle, monthCandle, weekCandle])
+    const [chartSelect, setChartSelect] = useState(0);
+    
+    const minuteClick = () => {
+        setChartSelect(0);
+    }
+    const dayClick = () => {
+        setChartSelect(1);
+    }
+    const weekClick = () => {
+        setChartSelect(2);
+    }
+    const monthClick = () => {
+        setChartSelect(3);
+    }
 
     return (
-        <MainChartStyled className="main-chart-container">
-            Chart출력
-        </MainChartStyled>
+        <MainChartSt.Container className="main-chart-container">
+            <MainChartSt.Header>
+                <button
+                    onClick={minuteClick}
+                >분</button>
+                <button
+                    onClick={dayClick}
+                >일</button>
+                <button
+                    onClick={weekClick}
+                >주</button>
+                <button
+                    onClick={monthClick}
+                >월</button>
+            </MainChartSt.Header>
+            <div>
+                {chartSelect === 0 && <MinuteCandle/>}
+                {chartSelect === 1 && <DayCandle/>}
+                {chartSelect === 2 && <WeekCandle/>}
+                {chartSelect === 3 && <MonthCandle/>}
+            </div>
+        </MainChartSt.Container>
     )
 }
 
