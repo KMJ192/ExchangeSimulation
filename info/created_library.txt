@@ -17,7 +17,9 @@ npm install axios @types/axios --save
 npm install styled-components @types/styled-components
 
 //redux
-npm install redux react-redux redux-thunk @types/redux-thunk
+npm install redux react-redux --save
+npm install redux-thunk @types/redux-thunk --save
+npm install redux-saga @types/redux-saga --save
 //redux ation을 더 깨끗하게 만들어주는 라이브러리
 npm install typesafe-actions
 
@@ -81,22 +83,3 @@ npm install --save-dev eslint-plugin-nestjs
 //web socket
 //npm install --save ws @types/ws
 npm i -s @nestjs/websockets @nestjs/platform-ws
-
-
-
-// dispatch(getMinuteCandleAsync.request({
-//     marketCode: "KRW-BTC",
-//     time: "2020-01-01T00:00:00Z"
-// }));
-// dispatch(getDayCandleAsync.request({
-//     marketCode: "KRW-BTC",
-//     time: "2020-01-01T00:00:00Z"
-// }));
-// dispatch(getWeekCandleAsync.request({
-//     marketCode: "KRW-BTC",
-//     time: "2020-01-01T00:00:00Z"
-// }));
-// dispatch(getMonthCandleAsync.request({
-//     marketCode: "KRW-BTC",
-//     time: "2020-01-01T00:00:00Z"
-// }));
