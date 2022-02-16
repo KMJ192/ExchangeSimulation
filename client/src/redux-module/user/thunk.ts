@@ -5,20 +5,21 @@ import { UserProfile } from "./types";
 
 //redux thunk 작성
 export function getUserThunk() {
-    return async (dispatch : Dispatch) => {
-        const { request, success, failure } = getUserProfile;
-        dispatch(request());
-        try{
-            const userProfile = await requestUserProfile();
-            dispatch(success(userProfile));
-        }catch(e: any){
-            dispatch(failure(e));
-        }
-    }    
+  return async (dispatch: Dispatch) => {
+    const { request, success, failure } = getUserProfile;
+    dispatch(request());
+    try {
+      const userProfile = await requestUserProfile();
+      dispatch(success(userProfile));
+    } catch (e: any) {
+      dispatch(failure(e));
+    }
+  };
 }
 
 async function requestUserProfile() {
-    return await axios.get<UserProfile>("/user")
-        .then(response => response.data)
-        .catch(err => err);
+  return await axios
+    .get<UserProfile>("/user")
+    .then((response) => response.data)
+    .catch((err) => err);
 }
